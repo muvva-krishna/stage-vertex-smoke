@@ -742,6 +742,51 @@ class TestRunMatrixDriver(unittest.TestCase):
             self.assertEqual(len(state["cells"]), 0)  # dry-run runs nothing
             self.assertNotIn("chat/completions", proc.stdout + proc.stderr)
 
+    def test_execute_offline_loopback_no_cap(self):
+        import os as _os
+
+        from debev.matrix import run_matrix
+        from debev.model_runner import LoopbackTransport
+        with tempfile.TemporaryDirectory() as tmp:
+            tasks_root = self._fixture_task(tmp, "t1")
+            plan = self._mini_plan(["t1"])
+            for m in plan["models"]:
+                m["provider"] = {"kind": "openai-compatible",
+                                 "base_url": "http://127.0.0.1:9",
+                                 "env_key": "DEBEV_TEST_EXEC"}
+            plan["budgeting"] = {
+                "assumed_max_input_tokens_per_attempt": 1000,
+                "assumed_max_output_tokens_per_attempt": 500,
+                "max_model_turns_per_attempt": 2,
+                "max_retries_per_cell": 0,
+                "spend_cap": {"currency": "USD", "amount": 0.01},
+                "prices": {m["model_id"]: {"input_per_1k": 1.0, "output_per_1k": 2.0,
+                                           "currency": "USD", "source": "user-supplied"}
+                           for m in plan["models"]}}
+            plan_path = Path(tmp) / "plan.json"
+            plan_path.write_text(json.dumps(plan))
+            _os.environ["DEBEV_TEST_EXEC"] = "fake-not-a-key"
+            try:
+                script = [json.dumps({"actions": [
+                    {"op": "finish", "diagnosis": "loopback",
+                     "verification_summary": "loopback"}]})]
+                rc = run_matrix(
+                    plan_path, tasks_root, Path(tmp) / "runs", Path(tmp) / "state.json",
+                    "execute", authorize_spend=True, fresh=True, no_spend_cap=True,
+                    transport_factory=lambda m: LoopbackTransport(list(script)))
+                self.assertEqual(rc, 0)
+                state = json.loads((Path(tmp) / "state.json").read_text())
+                self.assertEqual(len(state["cells"]), 10)  # 1 task x 5 conds x 2 models
+                self.assertTrue(all(c["status"] == "done" for c in state["cells"].values()))
+                # resume skips everything
+                rc2 = run_matrix(
+                    plan_path, tasks_root, Path(tmp) / "runs", Path(tmp) / "state.json",
+                    "execute", authorize_spend=True, fresh=False, no_spend_cap=True,
+                    transport_factory=lambda m: LoopbackTransport(list(script)))
+                self.assertEqual(rc2, 0)
+            finally:
+                del _os.environ["DEBEV_TEST_EXEC"]
+
     def test_resume_skips_done_cells(self):
         from debev.matrix import cell_key, expand_matrix, load_state, save_state
         with tempfile.TemporaryDirectory() as tmp:

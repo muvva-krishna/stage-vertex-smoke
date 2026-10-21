@@ -571,6 +571,7 @@ def cmd_run_matrix(args) -> int:
         fresh=args.fresh,
         smoke_task=Path(args.smoke_task) if args.smoke_task else None,
         live=args.live,
+        no_spend_cap=args.no_spend_cap,
     )
 
 
@@ -700,6 +701,10 @@ def build_parser() -> argparse.ArgumentParser:
                     help="smoke mode target: validated draft task dir (default: plumbing fixture)")
     rm.add_argument("--live", action="store_true",
                     help="smoke mode only: use the real provider transport (billed) instead of loopback")
+    rm.add_argument("--no-spend-cap", action="store_true",
+                    help="execute mode only: user explicitly waives the total spend cap "
+                         "(per-attempt token/turn/retry caps still bound worst case; "
+                         "requires --authorize-spend)")
     rm.set_defaults(func=cmd_run_matrix)
 
     g2 = sub.add_parser("report", help="generate pilot report over runs/")

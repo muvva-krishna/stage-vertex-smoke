@@ -175,7 +175,7 @@ def run_matrix(plan_path: Path, tasks_root: Path, runs_root: Path,
                authorize_spend: bool = False, fresh: bool = False,
                transport_factory: Callable[[dict], Any] | None = None,
                smoke_task: Path | None = None,
-               live: bool = False) -> int:
+               live: bool = False, no_spend_cap: bool = False) -> int:
     """Execute the matrix. transport_factory(model_entry) overrides provider
     transport (loopback for smoke/tests). Returns process exit code."""
     from .cli import _run_once
@@ -198,12 +198,24 @@ def run_matrix(plan_path: Path, tasks_root: Path, runs_root: Path,
         print("ABORTED: fail-closed preflight (no cells run)")
         return 1
     if mode == "execute":
+        if not authorize_spend:
+            print("REFUSED: execute mode makes paid provider calls; re-run with "
+                  "--authorize-spend plus an explicit spend cap (protocol stop rule).")
+            return 2
         cap_issues = check_spend_cap(plan)
-        for i in cap_issues:
-            print(f"  {i.level.upper()}: {i.message}")
-        if any(i.level == "error" for i in cap_issues):
-            print("ABORTED: spend cap missing or below worst case")
-            return 1
+        if no_spend_cap:
+            est = cost_upper_bound(plan)
+            worst = {m: c.get("upper_bound") for m, c in
+                     (est.get("per_model", {}) or {}).items() if c.get("computable")}
+            print(f"  --no-spend-cap: user explicitly waived the total cap. "
+                  f"Worst case {worst} still bounds spend via per-attempt "
+                  f"token/turn/retry caps. Running spend is ledgered per cell.")
+        else:
+            for i in cap_issues:
+                print(f"  {i.level.upper()}: {i.message}")
+            if any(i.level == "error" for i in cap_issues):
+                print("ABORTED: spend cap missing or below worst case")
+                return 1
         for m in plan["models"]:
             prov = m.get("provider", {}) or {}
             if prov.get("kind", "openai-compatible") == "openai-compatible":
@@ -262,6 +274,8 @@ def run_matrix(plan_path: Path, tasks_root: Path, runs_root: Path,
 
     # execute
     cap = (budgeting.get("spend_cap", {}) or {}).get("amount", 0)
+    if no_spend_cap:
+        print("  spend ledger active (no total cap; per-attempt caps bound worst case)")
     retries_allowed = int(budgeting.get("max_retries_per_cell", 0))
     limits = plan.get("limits", {}) or {}
     failed = 0
@@ -271,7 +285,8 @@ def run_matrix(plan_path: Path, tasks_root: Path, runs_root: Path,
             print(f"  [resume-skip] {key}")
             continue
         model = _model_entry(plan, cell["model"])
-        if _spend_total(state) + _cell_upper_bound(plan, cell["model"]) > float(cap):
+        if not no_spend_cap and \
+                _spend_total(state) + _cell_upper_bound(plan, cell["model"]) > float(cap):
             print(f"  STOP: spend cap would be exceeded by next cell "
                   f"(spent {_spend_total(state)} of {cap})")
             save_state(state_path, state)
