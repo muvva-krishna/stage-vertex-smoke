@@ -81,17 +81,24 @@ def validate_plan(plan: dict, tasks_root: str | Path | None = None) -> list[Plan
                     issues.append(PlanIssue(
                         "error", f"model tier {m.get('tier', '?')}: {k} missing or placeholder"))
             prov = m.get("provider", {}) or {}
-            if prov.get("kind", "openai-compatible") != "openai-compatible":
+            kind = prov.get("kind", "openai-compatible")
+            if kind == "openai-compatible":
+                if not prov.get("base_url") or str(prov.get("base_url", "")).startswith("TODO"):
+                    issues.append(PlanIssue(
+                        "error", f"model tier {m.get('tier', '?')}: provider.base_url missing or placeholder"))
+                if not prov.get("env_key") or str(prov.get("env_key", "")).startswith("TODO"):
+                    issues.append(PlanIssue(
+                        "error", f"model tier {m.get('tier', '?')}: provider.env_key missing or "
+                        "placeholder (name of the environment variable holding the credential)"))
+            elif kind == "vertex-ai":
+                for k in ("project", "location"):
+                    if not prov.get(k) or str(prov.get(k, "")).startswith("TODO"):
+                        issues.append(PlanIssue(
+                            "error", f"model tier {m.get('tier', '?')}: provider.{k} missing "
+                            "or placeholder (ADC supplies the credential; nothing secret goes here)"))
+            else:
                 issues.append(PlanIssue(
-                    "error", f"model tier {m.get('tier', '?')}: only provider kind "
-                    "'openai-compatible' is supported"))
-            if not prov.get("base_url") or str(prov.get("base_url", "")).startswith("TODO"):
-                issues.append(PlanIssue(
-                    "error", f"model tier {m.get('tier', '?')}: provider.base_url missing or placeholder"))
-            if not prov.get("env_key") or str(prov.get("env_key", "")).startswith("TODO"):
-                issues.append(PlanIssue(
-                    "error", f"model tier {m.get('tier', '?')}: provider.env_key missing or "
-                    "placeholder (name of the environment variable holding the credential)"))
+                    "error", f"model tier {m.get('tier', '?')}: unsupported provider kind {kind!r}"))
     conds = plan.get("conditions", [])
     if list(conds) != list(EXPECTED_CONDITIONS):
         issues.append(PlanIssue(

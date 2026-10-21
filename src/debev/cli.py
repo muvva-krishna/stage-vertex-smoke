@@ -248,7 +248,8 @@ def _run_once(
                             {"kind": "error", "text": f"runner raised {type(err).__name__}: {err}"[:500]})
         from .runners import AttemptResult as _AR
         result = _AR(diagnosis=f"runner ended with {type(err).__name__}",
-                     verification_summary="no verification performed")
+                     verification_summary="no verification performed",
+                     provider_usage=dict(getattr(runner, "usage", {}) or {}))
     else:
         result = box.get("result")
         if result is None:  # watchdog fired and thread never returned
@@ -569,6 +570,7 @@ def cmd_run_matrix(args) -> int:
         authorize_spend=args.authorize_spend,
         fresh=args.fresh,
         smoke_task=Path(args.smoke_task) if args.smoke_task else None,
+        live=args.live,
     )
 
 
@@ -696,6 +698,8 @@ def build_parser() -> argparse.ArgumentParser:
                     help="ignore existing state and restart (completed cells re-run)")
     rm.add_argument("--smoke-task", default=None,
                     help="smoke mode target: validated draft task dir (default: plumbing fixture)")
+    rm.add_argument("--live", action="store_true",
+                    help="smoke mode only: use the real provider transport (billed) instead of loopback")
     rm.set_defaults(func=cmd_run_matrix)
 
     g2 = sub.add_parser("report", help="generate pilot report over runs/")

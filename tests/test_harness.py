@@ -568,7 +568,9 @@ class TestModelRunnerBoundary(unittest.TestCase):
             # string-shell command rejected, attempt ended fail-closed
             self.assertTrue(any(e["type"] == "agent_note" and
                                 e["data"].get("kind") == "error" for e in rec.events))
-            self.assertEqual(result.provider_usage["calls"], 1)
+            # string-shell command rejected (graceful: model gets next turn),
+            # then loopback script exhausts and finishes on turn 2
+            self.assertEqual(result.provider_usage["calls"], 2)
 
     def test_no_credential_in_outputs(self):
         import os
@@ -590,6 +592,27 @@ class TestModelRunnerBoundary(unittest.TestCase):
                 self.assertNotIn("SUPERSECRET123", blob)
         finally:
             del os.environ["DEBEV_TEST_KEY_X"]
+
+    def test_rejected_file_action_is_graceful(self):
+        from debev.model_runner import LoopbackTransport, ModelAgentRunner
+        from debev.trajectory import TrajectoryRecorder
+        script = [json.dumps({"actions": [
+            {"op": "read", "path": "nope-missing.txt"},
+            {"op": "finish", "diagnosis": "d", "verification_summary": "v"}]}),
+            json.dumps({"actions": [
+                {"op": "finish", "diagnosis": "recovered",
+                 "verification_summary": "recovered"}]})]
+        with tempfile.TemporaryDirectory() as tmp:
+            ctx = self._ctx(tmp)
+            rec = TrajectoryRecorder(run_id="r", task_id="t", condition="symptom_only")
+            runner = ModelAgentRunner(model_id="m", model_version="v",
+                                      transport=LoopbackTransport(script), max_turns=3)
+            result = runner.run(ctx, rec)
+            self.assertTrue(any(e["type"] == "agent_note" and
+                                e["data"].get("kind") == "error" for e in rec.events))
+            self.assertTrue(any(e["type"] == "model_reply" for e in rec.events))
+            self.assertEqual(result.diagnosis, "recovered")
+            self.assertEqual(result.provider_usage["calls"], 2)
 
     def test_freeze_violation_refuses(self):
         from debev.model_runner import LoopbackTransport, ModelAgentRunner

@@ -1,0 +1,78 @@
+{
+  "plan_version": "1.0.0",
+  "study": "which-realistic-debugging-evidence-packet-works-best",
+  "tasks": ["slot_01", "slot_02", "slot_03"],
+  "models": [
+    {
+      "tier": "TIER_A",
+      "model_id": "gemini-2.5-flash",
+      "model_version": "publisher-default-2026-10-21",
+      "temperature": 0.0,
+      "settings": {},
+      "provider": {
+        "kind": "vertex-ai",
+        "project": "gen-lang-client-0430700811",
+        "location": "global"
+      }
+    },
+    {
+      "tier": "TIER_B",
+      "model_id": "gemini-2.5-flash-lite",
+      "model_version": "publisher-default-2026-10-21",
+      "temperature": 0.0,
+      "settings": {},
+      "provider": {
+        "kind": "vertex-ai",
+        "project": "gen-lang-client-0430700811",
+        "location": "global"
+      }
+    }
+  ],
+  "harness": {
+    "name": "debev-AgentRunner",
+    "version": "0.1.0",
+    "tool_policy": "One shared ModelAgentRunner loop and toolkit for both tiers. Record any unavoidable per-model differences in run metadata; never compare different harnesses and attribute the result to model choice."
+  },
+  "conditions": ["symptom_only", "repro_log", "state_snapshot", "code_note", "combined"],
+  "repetitions": 2,
+  "seed": 0,
+  "randomize": true,
+  "limits": {
+    "max_tool_calls": 60,
+    "max_wall_seconds": 1800,
+    "max_evidence_tokens": 2000,
+    "per_command_timeout": 120
+  },
+  "budgeting": {
+    "assumed_max_input_tokens_per_attempt": 20000,
+    "assumed_max_output_tokens_per_attempt": 5000,
+    "max_model_turns_per_attempt": 10,
+    "max_retries_per_cell": 1,
+    "spend_cap": {
+      "currency": "USD",
+      "amount": 1.0
+    },
+    "prices": {
+      "gemini-2.5-flash": {
+        "input_per_1k": 0.00015,
+        "output_per_1k": 0.00125,
+        "currency": "USD",
+        "source": "user-supplied",
+        "price_source_url": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+        "price_verified": "2026-10-21"
+      },
+      "gemini-2.5-flash-lite": {
+        "input_per_1k": 0.00005,
+        "output_per_1k": 0.0002,
+        "currency": "USD",
+        "source": "user-supplied",
+        "price_source_url": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+        "price_verified": "2026-10-21"
+      }
+    }
+  },
+  "provenance": {
+    "price_note": "Prices transcribed from the official Vertex pricing page fetched 2026-10-21 (global, standard tier, short context; identical values in both context columns for these two models). Model IDs are publisher aliases frozen by date; record the alias caveat in reports.",
+    "cap_note": "Spend cap USD 1.00 authorizes live smoke attempts only. The 60-attempt matrix worst case (~USD 6.75) exceeds it, so execute mode refuses until the user raises the cap explicitly."
+  }
+}

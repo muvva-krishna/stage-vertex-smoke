@@ -22,6 +22,7 @@ VALID_EVENT_TYPES = (
     "command",
     "test_run",
     "verification",
+    "model_reply",
     "timeout",
     "limit_exceeded",
     "agent_note",

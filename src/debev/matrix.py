@@ -122,16 +122,32 @@ def _model_entry(plan: dict, model_id: str) -> dict:
 
 def _build_runner(model: dict, budgeting: dict,
                   transport_factory: Callable[[dict], Any] | None):
-    from .model_runner import LoopbackTransport, ModelAgentRunner, OpenAICompatibleTransport
+    from .model_runner import (LoopbackTransport, ModelAgentRunner,
+                               OpenAICompatibleTransport, VertexTransport)
 
     max_turns = int(budgeting.get("max_model_turns_per_attempt", 20))
     if transport_factory is not None:
         transport = transport_factory(model)
     else:
         prov = model.get("provider", {}) or {}
-        transport = OpenAICompatibleTransport(
-            base_url=prov["base_url"], model=model["model_id"],
-            env_key=prov["env_key"])
+        kind = prov.get("kind", "openai-compatible")
+        if kind == "vertex-ai":
+            for k in ("project", "location"):
+                if not prov.get(k):
+                    raise ValueError(f"vertex-ai provider needs {k!r}")
+            transport = VertexTransport(
+                project=prov["project"], location=prov["location"],
+                model=model["model_id"],
+                temperature=float(model.get("temperature", 0.0)))
+        elif kind == "openai-compatible":
+            for k in ("base_url", "env_key"):
+                if not prov.get(k):
+                    raise ValueError(f"openai-compatible provider needs {k!r}")
+            transport = OpenAICompatibleTransport(
+                base_url=prov["base_url"], model=model["model_id"],
+                env_key=prov["env_key"])
+        else:
+            raise ValueError(f"unsupported provider kind {kind!r}")
     return ModelAgentRunner(
         model_id=model["model_id"], model_version=model["model_version"],
         temperature=float(model.get("temperature", 0.0)),
@@ -158,7 +174,8 @@ def run_matrix(plan_path: Path, tasks_root: Path, runs_root: Path,
                state_path: Path, mode: str,
                authorize_spend: bool = False, fresh: bool = False,
                transport_factory: Callable[[dict], Any] | None = None,
-               smoke_task: Path | None = None) -> int:
+               smoke_task: Path | None = None,
+               live: bool = False) -> int:
     """Execute the matrix. transport_factory(model_entry) overrides provider
     transport (loopback for smoke/tests). Returns process exit code."""
     from .cli import _run_once
@@ -188,11 +205,21 @@ def run_matrix(plan_path: Path, tasks_root: Path, runs_root: Path,
             print("ABORTED: spend cap missing or below worst case")
             return 1
         for m in plan["models"]:
-            key = (m.get("provider", {}) or {}).get("env_key", "")
-            if not os.environ.get(key):
-                print(f"  ERROR: credential env var {key!r} for tier {m['tier']} "
-                      "is not set (provide via environment, never in the repo)")
-                return 1
+            prov = m.get("provider", {}) or {}
+            if prov.get("kind", "openai-compatible") == "openai-compatible":
+                key = prov.get("env_key", "")
+                if not os.environ.get(key):
+                    print(f"  ERROR: credential env var {key!r} for tier {m['tier']} "
+                          "is not set (provide via environment, never in the repo)")
+                    return 1
+            else:
+                try:
+                    from .model_runner import adc_access_token
+                    adc_access_token()
+                except Exception as e:
+                    print(f"  ERROR: ADC unavailable for tier {m['tier']} ({e}); "
+                          "run gcloud auth application-default login first")
+                    return 1
 
     state = load_state(state_path) if not fresh else {"plan_hash": None, "cells": {}, "spend": {}, "currency": None}
     phash = plan_hash(plan)
@@ -208,7 +235,7 @@ def run_matrix(plan_path: Path, tasks_root: Path, runs_root: Path,
 
     if mode == "smoke":
         return _smoke(plan, tasks_root, runs_root, transport_factory,
-                      smoke_task=smoke_task)
+                      smoke_task=smoke_task, live=live, live_turns=8)
     cells = expand_matrix(plan)
     print(f"== matrix: {len(cells)} cells ==")
 
@@ -328,12 +355,14 @@ def _stamp_tier(run_dir: Path, tier: str, model_id: str) -> None:
 
 def _smoke(plan: dict, tasks_root: Path, runs_root: Path,
            transport_factory: Callable[[dict], Any] | None,
-           smoke_task: Path | None = None) -> int:
-    """One plumbing-only attempt through the real model loop (loopback).
+           smoke_task: Path | None = None,
+           live: bool = False, live_turns: int = 8) -> int:
+    """One plumbing-only attempt through the real model loop.
 
-    Default target is the plumbing fixture; smoke_task points at a
-    validated draft task instead. Loopback transport either way: no
-    provider calls, no cost, output never a model result.
+    Default transport is loopback (no provider calls, no cost). With
+    live=True the plan's first model entry drives via its real provider
+    transport, capped at live_turns turns; usage/cost are recorded and the
+    output is still labeled plumbing-only, never a benchmark result.
     """
     from .cli import _run_once, audit_task_dir
     from .config import RunConfig, compute_environment_hash
@@ -363,22 +392,46 @@ def _smoke(plan: dict, tasks_root: Path, runs_root: Path,
              "detail": "loopback smoke on draft task (plumbing-only)"},
             {"op": "finish", "diagnosis": "loopback smoke (plumbing-only)",
              "verification_summary": "loopback smoke (plumbing-only)"}]})]
-    print(f"== smoke: loopback model loop on {label} ({target}) ==")
+    model = plan["models"][0]
     rc, messages = audit_task_dir(target)
     for m in messages:
         print(f"  audit {label}: {m}")
     if rc != 0:
         print(f"SMOKE ABORTED: {label} audit failed")
         return 1
-    model = plan["models"][0]
-    transport = LoopbackTransport(script) if transport_factory is None \
-        else transport_factory(model)
     from .model_runner import ModelAgentRunner
-    runner = ModelAgentRunner(
-        model_id=model["model_id"], model_version=model["model_version"],
-        temperature=float(model.get("temperature", 0.0)),
-        settings=dict(model.get("settings", {}) or {}),
-        transport=transport, max_turns=5)
+    if live:
+        run_id = run_id + "-live"
+        print(f"== smoke: LIVE provider attempt ({model['model_id']}) on {label} "
+              f"({target}), max {live_turns} turns ==")
+        budgeting = plan.get("budgeting", {}) or {}
+        prices = (budgeting.get("prices", {}) or {}).get(model["model_id"])
+        if not prices or prices.get("source") != "user-supplied":
+            print("SMOKE ABORTED: live smoke needs user-supplied prices for "
+                  f"{model['model_id']} to bound the attempt")
+            return 1
+        worst_1 = (int(budgeting.get("assumed_max_input_tokens_per_attempt", 0)) / 1000
+                   * float(prices["input_per_1k"])
+                   + int(budgeting.get("assumed_max_output_tokens_per_attempt", 0)) / 1000
+                   * float(prices["output_per_1k"])) * live_turns
+        cap = (budgeting.get("spend_cap", {}) or {}).get("amount") or 0
+        print(f"  1-cell worst case at {live_turns} turns: {worst_1:.4f} "
+              f"{prices.get('currency', '?')} (cap: {cap})")
+        if worst_1 > float(cap):
+            print("SMOKE ABORTED: worst case exceeds spend cap")
+            return 1
+        runner = _build_runner(model, budgeting, transport_factory)
+        runner.max_turns = live_turns
+        runner_name = f"model:{model['model_id']}(live-smoke)"
+    else:
+        transport = LoopbackTransport(script) if transport_factory is None \
+            else transport_factory(model)
+        runner = ModelAgentRunner(
+            model_id=model["model_id"], model_version=model["model_version"],
+            temperature=float(model.get("temperature", 0.0)),
+            settings=dict(model.get("settings", {}) or {}),
+            transport=transport, max_turns=5)
+        runner_name = "model-loopback(smoke)"
     config = RunConfig(model=model["model_id"], model_version=model["model_version"],
                        harness="debev-smoke", temperature=0.0, seed=0,
                        environment_hash=compute_environment_hash())

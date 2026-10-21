@@ -34,6 +34,8 @@ Field order is not significant. Times are wall-clock seconds since `run_start`.
   claim (`result` in {`PASS`, `FAIL`, `ERROR`, `INCONCLUSIVE`}).
   Free-form/self-reported: recorded for **human** grading of reporting
   accuracy, but NEVER earns machine verification credit on its own.
+- `model_reply`: `{chars, text}` — the model provider's raw reply text
+  (truncated), recorded for auditability of what the agent actually said.
 - `timeout`: `{kind, ...}` — `kind` in {`command`, `test`, `attempt`}: a
   per-command timeout (`TIMEOUT`, mapped to `INCONCLUSIVE` for tests) or
   the attempt wall-clock watchdog firing.
