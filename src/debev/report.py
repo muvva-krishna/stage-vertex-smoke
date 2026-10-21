@@ -46,19 +46,22 @@ def summarize_trajectory(events: list[dict]) -> dict[str, Any]:
 
 
 def build_report(run_records: list[dict]) -> dict[str, Any]:
-    """run_records: list of {run_id, task_id, condition, score, efficiency,
-    trajectory_summary, failure_labels:[{label, event_seqs, basis}], replayed}."""
+    """run_records: list of {run_id, task_id, condition, model, tier, score,
+    efficiency, trajectory_summary, failure_labels:[...], replayed}."""
     by_cell: dict[tuple, list[dict]] = defaultdict(list)
     for r in run_records:
-        by_cell[(r["task_id"], r["condition"])].append(r)
+        by_cell[(r["task_id"], r["condition"], r.get("model", "?"))].append(r)
     cells = []
-    for (task_id, condition), attempts in sorted(by_cell.items()):
+    for (task_id, condition, model), attempts in sorted(by_cell.items()):
         passes = sum(1 for a in attempts if a.get("score", {}).get("passed"))
         tok = [a.get("evidence_tokens") for a in attempts]
+        tiers = sorted({a.get("tier", "?") for a in attempts})
         cells.append(
             {
                 "task_id": task_id,
                 "condition": condition,
+                "model": model,
+                "tier": tiers[0] if len(tiers) == 1 else tiers,
                 "attempts": len(attempts),
                 "passes": passes,
                 "pass_rate": round(passes / len(attempts), 3) if attempts else 0.0,
@@ -94,17 +97,18 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         "## Outcomes by task x condition",
         "",
-        "| task | condition | attempts | passes | pass_rate | totals | evid_tokens | replayed |",
-        "|---|---|---|---|---|---|---|---|",
+        "| task | condition | model | attempts | passes | pass_rate | totals | evid_tokens | replayed |",
+        "|---|---|---|---|---|---|---|---|---|---|",
     ]
     for c in report["cells"]:
         lines.append(
-            f"| {c['task_id']} | {c['condition']} | {c['attempts']} | {c['passes']} "
+            f"| {c['task_id']} | {c['condition']} | {c.get('model', '?')} | {c['attempts']} | {c['passes']} "
             f"| {c['pass_rate']} | {c['totals']} | {c['evidence_tokens']} | {c['replayed']} |"
         )
     lines += ["", "## Runs (trajectory summaries + failure labels)", ""]
     for r in report["runs"]:
-        lines.append(f"### {r['run_id']} ({r['task_id']} / {r['condition']})")
+        lines.append(f"### {r['run_id']} ({r['task_id']} / {r['condition']} / "
+                     f"{r.get('model', '?')}:{r.get('tier', '?')})")
         if r.get("replayed"):
             lines.append("- REPLAYED fixture data; not a model result.")
         lines.append(f"- runner: {r.get('runner')}; isolation: {r.get('isolation')}; "

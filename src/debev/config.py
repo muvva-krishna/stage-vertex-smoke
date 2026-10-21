@@ -16,6 +16,7 @@ class RunConfig:
     harness: str = "debev-0.1.0"
     temperature: float | None = None
     seed: int | None = None
+    model_settings: dict = field(default_factory=dict)  # frozen per-model settings
     max_tool_calls: int = 60
     max_wall_seconds: int = 1800
     max_evidence_tokens: int = 2000

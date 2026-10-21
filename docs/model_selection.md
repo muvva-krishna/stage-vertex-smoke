@@ -15,9 +15,17 @@ Do not hard-code provider names or model picks in the harness.
       (deterministic settings preferred; record whatever is used).
 - [ ] Estimate cost from **user-supplied prices only**: fill
       `plan.budgeting.prices` (`input_per_1k`, `output_per_1k`, `currency`,
-      `source: "user-supplied"`) and `assumed_max_tokens_per_attempt`, then
-      run `debev plan-matrix --plan …` for the upper bound. Never guess
-      current prices. Run the full matrix only when the estimate is accepted.
+      `source: "user-supplied"`) plus separate
+      `assumed_max_input_tokens_per_attempt` /
+      `assumed_max_output_tokens_per_attempt`, `max_model_turns_per_attempt`,
+      and `max_retries_per_cell`, then run `debev plan-matrix --plan …` for
+      the worst-case bound (caps × turns × (1 + retries) × cells). Never
+      guess current prices. Run the full matrix only when the estimate is
+      accepted.
+- [ ] Set an explicit `spend_cap` (`currency` + `amount`) at or above the
+      worst case. Execution refuses to start below it and stops before
+      exceeding it. Credentials go in the named environment variables only —
+      never in the plan, repo, logs, or metadata.
 - [ ] Lower-cost option: 3 tasks × 5 conditions × 2 models × **2 reps = 60
       attempts** (docs: fewer repetitions increase uncertainty). Full plan:
       3 × 5 × 2 × **3 = 90 attempts**.

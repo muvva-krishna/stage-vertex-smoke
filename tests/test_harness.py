@@ -264,9 +264,15 @@ class TestMatrixPlanning(unittest.TestCase):
         plan = {"plan_version": "1.0.0", "study": "s",
                 "tasks": ["slot_01", "slot_02", "slot_03"],
                 "models": [{"tier": "TIER_A", "model_id": "m-a", "model_version": "v1",
-                            "temperature": 0.0, "settings": {}},
+                            "temperature": 0.0, "settings": {},
+                            "provider": {"kind": "openai-compatible",
+                                         "base_url": "http://127.0.0.1:9",
+                                         "env_key": "DEBEV_TEST_KEY_A"}},
                            {"tier": "TIER_B", "model_id": "m-b", "model_version": "v1",
-                            "temperature": 0.0, "settings": {}}],
+                            "temperature": 0.0, "settings": {},
+                            "provider": {"kind": "openai-compatible",
+                                         "base_url": "http://127.0.0.1:9",
+                                         "env_key": "DEBEV_TEST_KEY_B"}}],
                 "harness": {"name": "h", "version": "0.1.0", "tool_policy": "shared"},
                 "conditions": ["symptom_only", "repro_log", "state_snapshot",
                                "code_note", "combined"],
@@ -317,13 +323,42 @@ class TestMatrixPlanning(unittest.TestCase):
     def test_cost_needs_user_prices(self):
         from debev.experiment import cost_upper_bound
         self.assertFalse(cost_upper_bound(self._plan())["computable"])
-        priced = self._plan(budgeting={
+        legacy = self._plan(budgeting={
             "assumed_max_tokens_per_attempt": 50000,
+            "prices": {"m-a": {"input_per_1k": 1.0, "output_per_1k": 2.0,
+                               "currency": "USD", "source": "user-supplied"}}})
+        legacy_cost = cost_upper_bound(legacy)
+        self.assertFalse(legacy_cost["computable"])
+        self.assertIn("ambiguous", legacy_cost["reason"])
+        priced = self._plan(budgeting={
+            "assumed_max_input_tokens_per_attempt": 40000,
+            "assumed_max_output_tokens_per_attempt": 10000,
+            "max_model_turns_per_attempt": 2,
+            "max_retries_per_cell": 1,
             "prices": {"m-a": {"input_per_1k": 1.0, "output_per_1k": 2.0,
                                "currency": "USD", "source": "user-supplied"}}})
         cost = cost_upper_bound(priced)
         self.assertTrue(cost["per_model"]["m-a"]["computable"])
+        # (40*1 + 10*2) * 2 turns * 2 tries * 45 cells = 10800
+        self.assertEqual(cost["per_model"]["m-a"]["upper_bound"], 10800.0)
         self.assertFalse(cost["per_model"]["m-b"]["computable"])
+
+    def test_spend_cap_gates_execution(self):
+        from debev.experiment import check_spend_cap
+        no_cap = self._plan()
+        self.assertTrue(any(i.level == "error" for i in check_spend_cap(no_cap)))
+        priced = self._plan(budgeting={
+            "assumed_max_input_tokens_per_attempt": 40000,
+            "assumed_max_output_tokens_per_attempt": 10000,
+            "max_model_turns_per_attempt": 1,
+            "max_retries_per_cell": 0,
+            "spend_cap": {"currency": "USD", "amount": 1.0},
+            "prices": {"m-a": {"input_per_1k": 1.0, "output_per_1k": 2.0,
+                               "currency": "USD", "source": "user-supplied"},
+                       "m-b": {"input_per_1k": 1.0, "output_per_1k": 2.0,
+                               "currency": "USD", "source": "user-supplied"}}})
+        errs = [i for i in check_spend_cap(priced) if i.level == "error"]
+        self.assertTrue(any("exceeds spend cap" in i.message for i in errs))
 
     def test_plan_matrix_cli_dry_run(self):
         import tempfile as _tf
@@ -490,6 +525,223 @@ class TestReplayE2E(unittest.TestCase):
             self.assertEqual(report["n_runs"], 1)
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
+
+
+class TestModelRunnerBoundary(unittest.TestCase):
+    def _ctx(self, tmp):
+        from debev.conditions import load_condition
+        from debev.runners import AttemptContext
+        ev = load_condition(FIXTURE / "evidence", "symptom_only", 2000)
+        ws = Path(tmp) / "ws"
+        ws.mkdir()
+        (ws / "a.txt").write_text("hello")
+        return AttemptContext(run_id="r", task_id="t", condition="symptom_only",
+                              workspace_dir=ws, evidence=ev, allowed_tools=[],
+                              limits={"max_tool_calls": 20, "max_wall_seconds": 60})
+
+    def test_loopback_actions_go_through_toolkit_only(self):
+        import sys as _sys
+
+        from debev.model_runner import LoopbackTransport, ModelAgentRunner
+        from debev.trajectory import TrajectoryRecorder
+        script = [json.dumps({"actions": [
+            {"op": "read", "path": "a.txt"},
+            {"op": "exec", "cmd": [_sys.executable, "-c", "print(1)"]},
+            {"op": "test", "name": "t1",
+             "cmd": [_sys.executable, "-c", "raise SystemExit(0)"]},
+            {"op": "write", "path": "sub/b.txt", "content": "wrote"},
+            {"op": "exec", "cmd": "rm -rf /"},  # string cmd must be rejected
+            {"op": "finish", "diagnosis": "loopback",
+             "verification_summary": "loopback"}]})]
+        with tempfile.TemporaryDirectory() as tmp:
+            ctx = self._ctx(tmp)
+            rec = TrajectoryRecorder(run_id="r", task_id="t", condition="symptom_only")
+            runner = ModelAgentRunner(model_id="m", model_version="v",
+                                      transport=LoopbackTransport(script), max_turns=3)
+            result = runner.run(ctx, rec)
+            kinds = [e["type"] for e in rec.events]
+            self.assertIn("file_read", kinds)
+            self.assertIn("command", kinds)
+            self.assertTrue(any(e["type"] == "test_run" and
+                                e["data"].get("via") == "toolkit" for e in rec.events))
+            self.assertTrue((Path(tmp) / "ws" / "sub" / "b.txt").is_file())
+            # string-shell command rejected, attempt ended fail-closed
+            self.assertTrue(any(e["type"] == "agent_note" and
+                                e["data"].get("kind") == "error" for e in rec.events))
+            self.assertEqual(result.provider_usage["calls"], 1)
+
+    def test_no_credential_in_outputs(self):
+        import os
+
+        from debev.model_runner import LoopbackTransport, ModelAgentRunner
+        from debev.trajectory import TrajectoryRecorder
+        os.environ["DEBEV_TEST_KEY_X"] = "sk-test-SUPERSECRET123"
+        try:
+            script = [json.dumps({"actions": [
+                {"op": "exec", "cmd": ["env"]},
+                {"op": "finish", "diagnosis": "d", "verification_summary": "v"}]})]
+            with tempfile.TemporaryDirectory() as tmp:
+                ctx = self._ctx(tmp)
+                rec = TrajectoryRecorder(run_id="r", task_id="t", condition="symptom_only")
+                runner = ModelAgentRunner(model_id="m", model_version="v",
+                                          transport=LoopbackTransport(script))
+                runner.run(ctx, rec)
+                blob = "\n".join(json.dumps(e) for e in rec.events)
+                self.assertNotIn("SUPERSECRET123", blob)
+        finally:
+            del os.environ["DEBEV_TEST_KEY_X"]
+
+    def test_freeze_violation_refuses(self):
+        from debev.model_runner import LoopbackTransport, ModelAgentRunner
+        runner = ModelAgentRunner(model_id="m-a", model_version="v1",
+                                  transport=LoopbackTransport([]))
+        with self.assertRaises(ValueError):
+            runner._check_frozen("m-a", "v2")
+        with self.assertRaises(ValueError):
+            runner._check_frozen("m-other", "v1")
+        runner._check_frozen("m-a", "v1")  # exact match OK
+
+
+class TestRunMatrixDriver(unittest.TestCase):
+    def _mini_tasks(self, tmp):
+        tasks_root = Path(tmp) / "tasks"
+        for tid in ("t1", "t2"):
+            d = tasks_root / tid
+            (d / "repo").mkdir(parents=True, exist_ok=True)
+            (d / "evidence").mkdir(parents=True, exist_ok=True)
+            (d / "evaluator").mkdir(parents=True, exist_ok=True)
+            if not (d / "manifest.json").is_file():
+                (d / "manifest.json").write_text(json.dumps({
+                    "task_id": tid,
+                    "conditions": ["symptom_only", "repro_log", "state_snapshot",
+                                   "code_note", "combined"]}))
+        return tasks_root
+
+    def _full_manifest(self, tid):
+        return {
+            "schema_version": "1.0.0", "task_id": tid, "title": f"test {tid}",
+            "repo_snapshot": {"kind": "test", "ref": tid, "provenance": "test"},
+            "task_instructions_ref": "instructions.md",
+            "allowed_tools": ["read", "write", "exec", "test"],
+            "conditions": ["symptom_only", "repro_log", "state_snapshot",
+                           "code_note", "combined"],
+            "resource_limits": {"max_tool_calls": 60, "max_wall_seconds": 600,
+                                "max_evidence_tokens": 2000},
+            "oracle": {"entry_point": "oracle.py", "type": "script-groups"},
+            "rubric_version": "1.0.0",
+            "provenance": {"author": "test", "created": "test", "source": "test"}}
+
+    def _fixture_task(self, tmp, tid):
+        """A runnable audit-passing task cloned from the plumbing fixture."""
+        import shutil as _shutil
+        tasks_root = Path(tmp) / "tasks"
+        d = tasks_root / tid
+        if d.exists():
+            _shutil.rmtree(d)
+        _shutil.copytree(FIXTURE, d)
+        (d / "manifest.json").write_text(json.dumps(self._full_manifest(tid)))
+        (d / "instructions.md").write_text("test instructions")
+        return tasks_root
+
+    def _mini_plan(self, tasks):
+        return {
+            "plan_version": "1.0.0", "study": "ministudy", "tasks": tasks,
+            "models": [
+                {"tier": "TIER_A", "model_id": "mm-a", "model_version": "v1",
+                 "temperature": 0.0, "settings": {},
+                 "provider": {"kind": "openai-compatible",
+                              "base_url": "http://127.0.0.1:9",
+                              "env_key": "DEBEV_TEST_KEY_A"}},
+                {"tier": "TIER_B", "model_id": "mm-b", "model_version": "v1",
+                 "temperature": 0.0, "settings": {},
+                 "provider": {"kind": "openai-compatible",
+                              "base_url": "http://127.0.0.1:9",
+                              "env_key": "DEBEV_TEST_KEY_B"}}],
+            "harness": {"name": "h", "version": "0.1.0", "tool_policy": "shared"},
+            "conditions": ["symptom_only", "repro_log", "state_snapshot",
+                           "code_note", "combined"],
+            "repetitions": 1, "seed": 3, "randomize": True,
+            "limits": {"max_tool_calls": 60, "max_wall_seconds": 1800,
+                       "max_evidence_tokens": 2000},
+            "budgeting": {"assumed_max_input_tokens_per_attempt": 1000,
+                          "assumed_max_output_tokens_per_attempt": 500,
+                          "max_model_turns_per_attempt": 2,
+                          "max_retries_per_cell": 0,
+                          "spend_cap": {"currency": "USD", "amount": 100.0},
+                          "prices": {
+                              "mm-a": {"input_per_1k": 1.0, "output_per_1k": 2.0,
+                                       "currency": "USD", "source": "user-supplied"},
+                              "mm-b": {"input_per_1k": 1.0, "output_per_1k": 2.0,
+                                       "currency": "USD", "source": "user-supplied"}}},
+            "provenance": {}}
+
+    def _run_cli_matrix(self, tmp, plan, mode, extra=()):
+        plan_path = Path(tmp) / "plan.json"
+        plan_path.write_text(json.dumps(plan))
+        proc = subprocess.run(
+            [sys.executable, "-m", "debev.cli", "run-matrix",
+             "--plan", str(plan_path), "--mode", mode,
+             "--tasks-root", str(Path(tmp) / "tasks"),
+             "--runs-root", str(Path(tmp) / "runs"),
+             "--state", str(Path(tmp) / "state.json")] + list(extra),
+            capture_output=True, text=True, cwd=ROOT,
+            env={"PATH": "/usr/bin:/bin", "PYTHONPATH": str(SRC)},
+        )
+        return proc
+
+    def test_execute_refused_without_authorize_spend(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self._mini_tasks(tmp)
+            proc = self._run_cli_matrix(tmp, self._mini_plan(["t1", "t2"]), "execute")
+            self.assertNotEqual(proc.returncode, 0)
+            self.assertIn("--authorize-spend", proc.stdout)
+
+    def test_execute_fail_closed_on_audit(self):
+        # t2 is an empty shell (no reference_solution) -> audit fails closed
+        with tempfile.TemporaryDirectory() as tmp:
+            self._fixture_task(tmp, "t1")
+            self._mini_tasks(tmp)
+            proc = self._run_cli_matrix(
+                tmp, self._mini_plan(["t1", "t2"]), "execute",
+                extra=("--authorize-spend",))
+            self.assertNotEqual(proc.returncode, 0)
+            self.assertIn("ABORTED", proc.stdout + proc.stderr)
+
+    def test_dry_run_plans_without_provider_calls(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self._fixture_task(tmp, "t1")
+            plan = self._mini_plan(["t1"])
+            proc = self._run_cli_matrix(tmp, plan, "dry-run")
+            self.assertEqual(proc.returncode, 0, msg=proc.stdout + proc.stderr)
+            self.assertIn("10 cells planned", proc.stdout)  # 1 task x 5 conds x 2 models x 1 rep
+            self.assertIn("0 provider calls", proc.stdout)
+            state = json.loads((Path(tmp) / "state.json").read_text())
+            self.assertEqual(len(state["cells"]), 0)  # dry-run runs nothing
+            self.assertNotIn("chat/completions", proc.stdout + proc.stderr)
+
+    def test_resume_skips_done_cells(self):
+        from debev.matrix import cell_key, expand_matrix, load_state, save_state
+        with tempfile.TemporaryDirectory() as tmp:
+            plan = self._mini_plan(["t1"])
+            cells = expand_matrix(plan)
+            self.assertEqual(len(cells), 10)  # 1 task x 5 conds x 2 models x 1 rep
+            state_path = Path(tmp) / "state.json"
+            state = {"plan_hash": "h", "cells": {
+                cell_key(cells[0]): {"status": "done", "run_id": "x", "attempts": 1}},
+                "spend": {}, "currency": None}
+            save_state(state_path, state)
+            reloaded = load_state(state_path)
+            self.assertEqual(reloaded["cells"][cell_key(cells[0])]["status"], "done")
+
+    def test_smoke_loopback_marks_plumbing_only(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self._fixture_task(tmp, "t1")
+            proc = self._run_cli_matrix(tmp, self._mini_plan(["t1"]), "smoke")
+            self.assertEqual(proc.returncode, 0, msg=proc.stdout + proc.stderr)
+            self.assertIn("SMOKE PASSED", proc.stdout)
+            self.assertIn("plumbing-only", proc.stdout)
+            meta = json.loads((Path(tmp) / "runs" / "smoke-loopback" / "run_meta.json").read_text())
+            self.assertTrue(meta.get("plumbing_only"))
 
 
 if __name__ == "__main__":

@@ -12,6 +12,30 @@ packet changes** (see `src/debev/conditions.py`):
 4. `code_note` — symptom + code-path/investigation note.
 5. `combined` — symptom + all three evidence artifacts.
 
+## Matrix execution (frozen plan → resumable runs)
+
+- `run-matrix --mode dry-run`: expands the matrix, assigns deterministic
+  run IDs/paths, simulates resume against existing state, prints the cost
+  preflight. Zero provider calls.
+- `run-matrix --mode smoke`: audits the plumbing fixture, runs one
+  plumbing-only attempt through the real `ModelAgentRunner` loop with a
+  labeled loopback transport, and verifies toolkit mediation
+  (reads/writes/tests observed, fixture labeling present). Zero provider
+  calls; output is never a model result.
+- `run-matrix --mode execute --authorize-spend`: runs each planned cell
+  once (plus bounded retries on transient provider failures only), skipping
+  cells already `done` in `results/matrix_state.json`. Fail-closed
+  preflight: invalid manifests, failing audits, missing credentials,
+  missing/uncovering spend cap, or a changed plan hash all abort before any
+  paid call. Spend is ledgered per model from provider-reported usage;
+  execution stops before the cap would be exceeded. Both tiers use the same
+  `ModelAgentRunner` loop and toolkit — model settings are frozen per plan
+  cell and substitution is refused.
+- Aggregation (`report`) groups by task × condition × model; human
+  diagnosis/reporting fields stay PENDING unless graded with `debev grade`.
+  Never invent human grades or present unlabelled model grades as ground
+  truth.
+
 ## What the design can and cannot claim
 
 Conditions differ in **size as well as content**: `combined` carries roughly

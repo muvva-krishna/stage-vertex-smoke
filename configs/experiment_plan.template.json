@@ -8,14 +8,24 @@
       "model_id": "TODO: exact stronger coding model ID",
       "model_version": "TODO: freeze exact version/snapshot date before running",
       "temperature": 0.0,
-      "settings": {}
+      "settings": {},
+      "provider": {
+        "kind": "openai-compatible",
+        "base_url": "TODO: provider chat-completions base URL",
+        "env_key": "TODO: ENV_VAR_NAME_HOLDING_KEY (credential lives only in the environment)"
+      }
     },
     {
       "tier": "TIER_B",
       "model_id": "TODO: exact smaller/cheaper or local model ID",
       "model_version": "TODO: freeze exact version/snapshot date before running",
       "temperature": 0.0,
-      "settings": {}
+      "settings": {},
+      "provider": {
+        "kind": "openai-compatible",
+        "base_url": "TODO: provider chat-completions base URL",
+        "env_key": "TODO: ENV_VAR_NAME_HOLDING_KEY (credential lives only in the environment)"
+      }
     }
   ],
   "harness": {
@@ -34,7 +44,14 @@
     "per_command_timeout": 120
   },
   "budgeting": {
-    "assumed_max_tokens_per_attempt": null,
+    "assumed_max_input_tokens_per_attempt": null,
+    "assumed_max_output_tokens_per_attempt": null,
+    "max_model_turns_per_attempt": 20,
+    "max_retries_per_cell": 1,
+    "spend_cap": {
+      "currency": null,
+      "amount": null
+    },
     "prices": {}
   },
   "provenance": {}

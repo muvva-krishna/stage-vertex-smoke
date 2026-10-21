@@ -166,6 +166,7 @@ def _run_once(
             "runner": runner_name,
             "seed": config.seed,
             "temperature": config.temperature,
+            "model_settings": config.model_settings,
             "condition": condition,
             "evidence_files": sorted(evidence.artifacts.keys()),
             "evidence_tokens": evidence.evidence_tokens,
@@ -301,7 +302,7 @@ def _run_once(
         "tests_run": sum(1 for e in events if e["type"] == "test_run"),
         "verifications": sum(1 for e in events if e["type"] == "verification"),
         "evidence_tokens": evidence.evidence_tokens,
-        "model_tokens": None,  # recorded by the agent harness when available
+        "model_tokens": dict(result.provider_usage) or None,  # provider-reported; None when N/A
         "wall_clock_s": wall_s,
         "retries": 0,
     }
@@ -321,6 +322,7 @@ def _run_once(
                 "oracle_isolation": oracle_result.isolation,
                 "sandbox_available": detect_isolation(),
                 "efficiency": efficiency,
+                "provider_usage": dict(result.provider_usage),
                 "trajectory": "trajectory.jsonl",
                 "harness_commit": harness_commit(PILOT_ROOT),
                 "harness_dirty": harness_dirty(PILOT_ROOT),
@@ -433,26 +435,25 @@ def _stage_task(task_dir: Path, dest_root: Path, overlay: Path | None = None) ->
     return ws
 
 
-def cmd_audit_task(args) -> int:
-    """Task-quality audit: oracle must FAIL on broken start, PASS on the
-    human-authored reference solution, and still FAIL on partial-fix probes."""
+def audit_task_dir(task_dir: Path) -> tuple[int, list[str]]:
+    """Task-quality audit returning (rc, messages) for reuse by run-matrix."""
     from .oracle import OracleResult  # noqa: F401
 
-    task_dir = Path(args.task_dir)
+    messages: list[str] = []
     manifest = load_manifest(task_dir / "manifest.json")
     issues = validate_manifest(manifest)
     errors = [i for i in issues if i.level == "error"]
     if errors:
-        print("manifest INVALID:")
+        messages.append("manifest INVALID:")
         for i in errors:
-            print(f"  ERROR: {i.message}")
-        return 1
+            messages.append(f"  ERROR: {i.message}")
+        return 1, messages
     eval_src = task_dir / "evaluator"
     ref = eval_src / "reference_solution"
     if not ref.is_dir():
-        print("FAIL: evaluator/reference_solution/ overlay missing "
-              "(human-authored fixed files that overlay the repo)")
-        return 1
+        messages.append("FAIL: evaluator/reference_solution/ overlay missing "
+                        "(human-authored fixed files that overlay the repo)")
+        return 1, messages
     entry = manifest.get("oracle", {}).get("entry_point", "oracle.py")
     failures: list[str] = []
     with tempfile.TemporaryDirectory(prefix="debev-audit-") as tmp:
@@ -463,14 +464,14 @@ def cmd_audit_task(args) -> int:
         # 1. broken start must FAIL
         ws_broken = _stage_task(task_dir, tmp_p / "broken")
         res_broken = run_oracle_script(ws_broken, eval_stage, entry)
-        print(f"broken-start oracle: passed={res_broken.passed} "
-              f"groups={[g.group for g in res_broken.groups]}")
+        messages.append(f"broken-start oracle: passed={res_broken.passed} "
+                        f"groups={[g.group for g in res_broken.groups]}")
         if res_broken.passed:
             failures.append("oracle PASSES on the broken starting state (must FAIL)")
         # 2. reference solution must PASS
         ws_fixed = _stage_task(task_dir, tmp_p / "fixed", overlay=ref)
         res_fixed = run_oracle_script(ws_fixed, eval_stage, entry)
-        print(f"reference-solution oracle: passed={res_fixed.passed}")
+        messages.append(f"reference-solution oracle: passed={res_fixed.passed}")
         if not res_fixed.passed:
             failures.append("oracle FAILS on the human-authored reference solution (must PASS)")
         # 3. partial fixes must still FAIL (else the oracle is overfit/insensitive)
@@ -479,18 +480,27 @@ def cmd_audit_task(args) -> int:
             for probe in sorted(p for p in partials.iterdir() if p.is_dir()):
                 ws_part = _stage_task(task_dir, tmp_p / f"partial-{probe.name}", overlay=probe)
                 res_part = run_oracle_script(ws_part, eval_stage, entry)
-                print(f"partial-fix {probe.name}: passed={res_part.passed} (want False)")
+                messages.append(f"partial-fix {probe.name}: passed={res_part.passed} (want False)")
                 if res_part.passed:
                     failures.append(f"partial fix {probe.name!r} PASSES the oracle (must FAIL)")
         else:
-            print("note: no evaluator/partial_fixes/ probes; consider adding at least one")
+            messages.append("note: no evaluator/partial_fixes/ probes; consider adding at least one")
     if failures:
-        print("AUDIT FAILED:")
+        messages.append("AUDIT FAILED:")
         for f in failures:
-            print(f"  - {f}")
-        return 1
-    print("AUDIT PASSED")
-    return 0
+            messages.append(f"  - {f}")
+        return 1, messages
+    messages.append("AUDIT PASSED")
+    return 0, messages
+
+
+def cmd_audit_task(args) -> int:
+    """Task-quality audit: oracle must FAIL on broken start, PASS on the
+    human-authored reference solution, and still FAIL on partial-fix probes."""
+    rc, messages = audit_task_dir(Path(args.task_dir))
+    for m in messages:
+        print(m)
+    return rc
 
 
 def cmd_export_otel(args) -> int:
@@ -523,11 +533,12 @@ def cmd_plan_matrix(args) -> int:
         print(f"  tier {m['tier']}: {m['model_id']} ({m['model_version']}) -> {n} cells")
     cost = cost_upper_bound(plan)
     if cost.get("computable"):
+        print(f"  worst-case assumptions: {cost.get('assumptions')}")
         for mid, c in cost["per_model"].items():
             print(f"  cost upper bound {mid}: {c}")
     else:
         print(f"  cost: not computable ({cost.get('reason')}); "
-              "supply user prices + token assumption before any paid calls")
+              "supply user prices + input/output token caps before any paid calls")
     print("  WARNING: 3 tasks support no population-level claims, "
           "however many repetitions run.")
     if args.write:
@@ -546,6 +557,20 @@ def cmd_plan_matrix(args) -> int:
     return 0
 
 
+def cmd_run_matrix(args) -> int:
+    from .matrix import run_matrix
+
+    return run_matrix(
+        plan_path=Path(args.plan),
+        tasks_root=Path(args.tasks_root or (PILOT_ROOT / "tasks")),
+        runs_root=Path(args.runs_root),
+        state_path=Path(args.state),
+        mode=args.mode,
+        authorize_spend=args.authorize_spend,
+        fresh=args.fresh,
+    )
+
+
 def cmd_report(args) -> int:
     runs_root = Path(args.runs_root)
     records = []
@@ -562,11 +587,14 @@ def cmd_report(args) -> int:
         meta = json.loads(meta_path.read_text())
         score = json.loads(score_path.read_text())
         events = read_jsonl(traj_path) if traj_path.is_file() else []
+        cfg = meta.get("config", {}) or {}
         records.append(
             {
                 "run_id": meta["run_id"],
                 "task_id": meta["task_id"],
                 "condition": meta["condition"],
+                "model": meta.get("model_id", cfg.get("model", "?")),
+                "tier": meta.get("tier", "?"),
                 "score": score,
                 "efficiency": meta.get("efficiency", {}),
                 "evidence_tokens": meta.get("evidence_tokens"),
@@ -654,6 +682,18 @@ def build_parser() -> argparse.ArgumentParser:
     pm.add_argument("--tasks-root", default=None)
     pm.add_argument("--write", default=None, help="write plan artifact JSON (labeled planned:true)")
     pm.set_defaults(func=cmd_plan_matrix)
+
+    rm = sub.add_parser("run-matrix", help="execute a frozen plan: dry-run (offline) | smoke (loopback) | execute (paid)")
+    rm.add_argument("--plan", required=True)
+    rm.add_argument("--mode", required=True, choices=["dry-run", "smoke", "execute"])
+    rm.add_argument("--tasks-root", default=None)
+    rm.add_argument("--runs-root", default="results/runs")
+    rm.add_argument("--state", default="results/matrix_state.json")
+    rm.add_argument("--authorize-spend", action="store_true",
+                    help="REQUIRED for execute: confirms explicit instruction for paid calls")
+    rm.add_argument("--fresh", action="store_true",
+                    help="ignore existing state and restart (completed cells re-run)")
+    rm.set_defaults(func=cmd_run_matrix)
 
     g2 = sub.add_parser("report", help="generate pilot report over runs/")
     g2.add_argument("--runs-root", default="results/runs")

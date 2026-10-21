@@ -127,6 +127,9 @@ available — the recorded `isolation` level states what was actually used.
 | `debev grade --run-dir … --diagnosis-pts … --reporting-pts … --grader …` | persist a human grade |
 | `debev audit-task --task-dir …` | oracle soundness check (broken FAIL / reference PASS / partials FAIL) |
 | `debev plan-matrix --plan … [--write …]` | validate + print the experiment matrix (no agents, no APIs); optional `planned:true` artifact |
+| `debev run-matrix --plan … --mode dry-run` | offline: expansion, run IDs/paths, resume simulation, cost preflight. No provider calls, no cost |
+| `debev run-matrix --plan … --mode smoke` | one plumbing-only loopback attempt through the real model loop. No provider calls, no cost |
+| `debev run-matrix --plan … --mode execute --authorize-spend` | **paid provider calls.** Refuses without the flag, a covering spend cap, passing audits, and set credentials |
 | `debev export-otel --run-dir … --out …` | OTLP JSON trace export |
 | `debev report --runs-root … --out …` | pilot report (Markdown + JSON sidecar) |
 
@@ -145,6 +148,13 @@ cost estimation from user-supplied prices; no paid calls in this stage):
 export PYTHONPATH=src
 python3 -m debev.cli plan-matrix --plan configs/experiment_plan.template.json
 ```
+
+Only `run-matrix --mode execute` can incur API cost, and it refuses without
+all three: `--authorize-spend`, a `spend_cap` covering the printed worst
+case, and credential env vars set (names from the plan; values never enter
+the repo, logs, or run metadata). `dry-run` and `smoke` make zero provider
+calls. Cost bounds use your per-1k input/output prices × per-attempt token
+caps × max turns × (1 + retries); see `docs/model_selection.md`.
 
 ## Resource limits (enforced, not just recorded)
 

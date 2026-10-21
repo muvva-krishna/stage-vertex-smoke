@@ -97,6 +97,8 @@ class AttemptResult:
     verification_summary: str = ""  # short user-visible verification summary
     extra_events: list[dict[str, Any]] = field(default_factory=list)
     replayed: bool = False
+    provider_usage: dict[str, Any] = field(default_factory=dict)
+    # ^ provider-reported {input_tokens, output_tokens, calls}; empty when N/A
 
 
 class AgentRunner(ABC):
