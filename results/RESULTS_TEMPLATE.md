@@ -10,10 +10,10 @@
 - Tasks: slot_01 / slot_02 / slot_03 (see `tasks/README.md`)
 - Repetitions per cell / seed / run order:
 
-## Outcomes by task x condition
+## Outcomes by task x condition x model
 
-| task | condition | attempts | passes | pass_rate | totals | evid_tokens | replayed |
-|---|---|---|---|---|---|---|---|
+| task | condition | model | attempts | passes | pass_rate | totals | evid_tokens | replayed |
+|---|---|---|---|---|---|---|---|---|
 | (fill from report JSON `cells`; evid_tokens shows packet size per attempt — report it alongside pass rates, never as an afterthought) | | | | | | | |
 
 ## Per-run notes (trajectory summaries + failure labels)

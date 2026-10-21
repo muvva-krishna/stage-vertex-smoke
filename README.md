@@ -135,6 +135,7 @@ available — the recorded `isolation` level states what was actually used.
 | `debev run-matrix --plan … --mode dry-run` | offline: expansion, run IDs/paths, resume simulation, cost preflight. No provider calls, no cost |
 | `debev run-matrix --plan … --mode smoke` | one plumbing-only loopback attempt through the real model loop. No provider calls, no cost |
 | `debev run-matrix --plan … --mode execute --authorize-spend` | **paid provider calls.** Refuses without the flag, a covering spend cap, passing audits, and set credentials |
+| `debev run-matrix --plan … --mode execute --authorize-spend --no-spend-cap` | same, but the user explicitly waives the total cap (per-attempt token/turn/retry caps still bound worst case; spend ledgered per cell) |
 | `debev export-otel --run-dir … --out …` | OTLP JSON trace export |
 | `debev report --runs-root … --out …` | pilot report (Markdown + JSON sidecar) |
 
