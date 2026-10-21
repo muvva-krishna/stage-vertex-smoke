@@ -75,8 +75,11 @@ retro-fit it onto this five-condition pilot.
 
 ## Analysis plan (prewritten before any model runs)
 
-- **Primary outcome:** functional repair pass rate, tabulated by
+- **Primary outcome:** full-oracle repair pass rate (functional AND
+  compatibility groups green), tabulated by
   task × condition × model (per-task tables; raw attempt counts shown).
+  Functional-only passes are reported separately and are never called
+  task passes.
 - **Paired comparisons:** each evidence condition compared against
   `symptom_only` *within the same task and model* (paired by repetition
   order where applicable). Report raw differences only.

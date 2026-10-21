@@ -16,8 +16,10 @@ Efficiency is reported separately and never affects the total.
 - **Functional correctness (50, machine).** Oracle groups map to required
   behaviors. With per-group weights `w`: `50 × Σw(passed) / Σw(all)`;
   unweighted: `50 × passed / total`. Scored on behavior, never on textual
-  similarity to a reference patch. Correctness pass = all functional groups
-  PASS (this is also the primary pilot outcome).
+  similarity to a reference patch. Functional pass = all functional groups
+  PASS. The primary pilot outcome is the FULL-oracle pass (functional +
+  compatibility groups green); a functional-only pass with a compat failure
+  is an incomplete repair, not a task pass.
 - **Root-cause diagnosis (20, human).** Graded after the human authors the
   task rubric. Must allow valid alternative explanations/fixes. Until then
   the harness records `0.0` with `PENDING HUMAN GRADE` — never an invented

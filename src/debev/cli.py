@@ -592,6 +592,11 @@ def cmd_report(args) -> int:
         score = json.loads(score_path.read_text())
         events = read_jsonl(traj_path) if traj_path.is_file() else []
         cfg = meta.get("config", {}) or {}
+        groups = (meta.get("oracle", {}) or {}).get("groups", []) or []
+        func = [g for g in groups if not g.get("group", "").startswith("compat:")]
+        comp = [g for g in groups if g.get("group", "").startswith("compat:")]
+        full_passed = bool(func) and all(g.get("passed") for g in func) \
+            and all(g.get("passed") for g in comp)
         records.append(
             {
                 "run_id": meta["run_id"],
@@ -600,6 +605,7 @@ def cmd_report(args) -> int:
                 "model": meta.get("model_id", cfg.get("model", "?")),
                 "tier": meta.get("tier", "?"),
                 "score": score,
+                "full_passed": full_passed,
                 "efficiency": meta.get("efficiency", {}),
                 "evidence_tokens": meta.get("evidence_tokens"),
                 "isolation": meta.get("oracle_isolation", meta.get("sandbox_available")),

@@ -114,7 +114,9 @@ available — the recorded `isolation` level states what was actually used.
 - Rubric: 100 pts = 50 functional (machine) + 20 diagnosis (**human**,
   placeholder) + 15 compatibility (machine) + 10 constraints (machine) +
   5 verification/reporting (mixed). See `docs/rubric.md` for partial-credit
-  rules. Efficiency is reported separately; correctness pass rate is primary.
+  rules. Efficiency is reported separately; the full-oracle pass rate
+  (functional + compatibility groups green) is primary. Functional-only
+  passes are never called task passes.
 - Failure taxonomy: `missed_evidence`, `misread_evidence`,
   `wrong_causal_hypothesis`, `incomplete_repair`, `regression`,
   `constraint_violation`, `inadequate_verification`, `inaccurate_final_report`

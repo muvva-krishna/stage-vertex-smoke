@@ -12,7 +12,7 @@
 
 ## Outcomes by task x condition x model
 
-| task | condition | model | attempts | passes | pass_rate | totals | evid_tokens | replayed |
+| task | condition | model | attempts | funct_pass | full_pass | totals | evid_tokens | replayed |
 |---|---|---|---|---|---|---|---|---|
 | (fill from report JSON `cells`; evid_tokens shows packet size per attempt — report it alongside pass rates, never as an afterthought) | | | | | | | |
 

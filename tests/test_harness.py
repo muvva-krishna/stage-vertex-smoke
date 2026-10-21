@@ -856,5 +856,26 @@ class TestRunMatrixDriver(unittest.TestCase):
         return plan_path
 
 
+    def test_report_distinguishes_full_vs_functional(self):
+        from debev.report import build_report
+        base = {"task_id": "t", "condition": "c", "model": "m", "tier": "T",
+                "efficiency": {}, "evidence_tokens": 10, "trajectory_summary": {},
+                "failure_labels": [], "replayed": False}
+        recs = [
+            dict(base, run_id="a", score={"passed": True, "total": 50.0}, full_passed=True),
+            dict(base, run_id="b", score={"passed": True, "total": 70.0}, full_passed=False),
+            dict(base, run_id="c", score={"passed": False, "total": 10.0}, full_passed=False),
+        ]
+        rep = build_report(recs)
+        cell = rep["cells"][0]
+        self.assertEqual(cell["functional_passes"], 2)
+        self.assertEqual(cell["full_passes"], 1)
+        self.assertNotIn("passes", cell)  # ambiguous key retired
+        md = __import__("debev.report", fromlist=["render_markdown"]).render_markdown(rep)
+        self.assertIn("funct_pass", md)
+        self.assertIn("full_pass", md)
+        self.assertIn("NOT a task pass", md)
+
+
 if __name__ == "__main__":
     unittest.main()

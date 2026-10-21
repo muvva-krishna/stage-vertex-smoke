@@ -47,13 +47,22 @@ def summarize_trajectory(events: list[dict]) -> dict[str, Any]:
 
 def build_report(run_records: list[dict]) -> dict[str, Any]:
     """run_records: list of {run_id, task_id, condition, model, tier, score,
-    efficiency, trajectory_summary, failure_labels:[...], replayed}."""
+    full_passed, efficiency, trajectory_summary, failure_labels:[...], replayed}.
+
+    Terminology (see docs/evaluation_protocol.md):
+    - functional_passes: attempts whose required FUNCTIONAL groups all pass
+      (TaskScore.passed). A functional-only pass is NOT a task pass.
+    - full_passes: attempts whose functional AND compatibility groups all
+      pass (non-vacuous: at least one functional group reported). This is
+      the primary complete-repair outcome.
+    """
     by_cell: dict[tuple, list[dict]] = defaultdict(list)
     for r in run_records:
         by_cell[(r["task_id"], r["condition"], r.get("model", "?"))].append(r)
     cells = []
     for (task_id, condition, model), attempts in sorted(by_cell.items()):
-        passes = sum(1 for a in attempts if a.get("score", {}).get("passed"))
+        fpasses = sum(1 for a in attempts if a.get("score", {}).get("passed"))
+        full = sum(1 for a in attempts if a.get("full_passed"))
         tok = [a.get("evidence_tokens") for a in attempts]
         tiers = sorted({a.get("tier", "?") for a in attempts})
         cells.append(
@@ -63,8 +72,10 @@ def build_report(run_records: list[dict]) -> dict[str, Any]:
                 "model": model,
                 "tier": tiers[0] if len(tiers) == 1 else tiers,
                 "attempts": len(attempts),
-                "passes": passes,
-                "pass_rate": round(passes / len(attempts), 3) if attempts else 0.0,
+                "functional_passes": fpasses,
+                "functional_pass_rate": round(fpasses / len(attempts), 3) if attempts else 0.0,
+                "full_passes": full,
+                "full_pass_rate": round(full / len(attempts), 3) if attempts else 0.0,
                 "totals": [a.get("score", {}).get("total") for a in attempts],
                 "evidence_tokens": tok,
                 "replayed": any(a.get("replayed") for a in attempts),
@@ -95,15 +106,18 @@ def render_markdown(report: dict[str, Any]) -> str:
         "read pass rates as 'which realistic packet works best', not as",
         "evidence-type attribution. See `evidence_tokens` per cell.",
         "",
-        "## Outcomes by task x condition",
+        "## Outcomes by task x condition x model",
         "",
-        "| task | condition | model | attempts | passes | pass_rate | totals | evid_tokens | replayed |",
-        "|---|---|---|---|---|---|---|---|---|---|",
+        "functional = functional groups all pass (NOT a task pass). "
+        "full = functional + compatibility groups all pass (complete repair).",
+        "",
+        "| task | condition | model | attempts | funct_pass | full_pass | totals | evid_tokens | replayed |",
+        "|---|---|---|---|---|---|---|---|---|",
     ]
     for c in report["cells"]:
         lines.append(
-            f"| {c['task_id']} | {c['condition']} | {c.get('model', '?')} | {c['attempts']} | {c['passes']} "
-            f"| {c['pass_rate']} | {c['totals']} | {c['evidence_tokens']} | {c['replayed']} |"
+            f"| {c['task_id']} | {c['condition']} | {c.get('model', '?')} | {c['attempts']} | {c['functional_passes']} "
+            f"| {c['full_passes']} | {c['totals']} | {c['evidence_tokens']} | {c['replayed']} |"
         )
     lines += ["", "## Runs (trajectory summaries + failure labels)", ""]
     for r in report["runs"]:
@@ -116,6 +130,13 @@ def render_markdown(report: dict[str, Any]) -> str:
         hg = r.get("human_grade")
         lines.append("- human grade: " + (
             f"graded by {hg.get('grader')}" if hg else "PENDING (not a zero)"))
+        if r.get("full_passed"):
+            lines.append("- outcome: FULL PASS (functional + compatibility groups green)")
+        elif (r.get("score", {}) or {}).get("passed"):
+            lines.append("- outcome: FUNCTIONAL-ONLY (compat failed; not a task pass)")
+        else:
+            lines.append("- outcome: FAIL (a functional group failed or the oracle "
+                         "reported no groups)")
         ts = r.get("trajectory_summary", {})
         lines.append(f"- events: {ts.get('n_events')}; evidence opened: {ts.get('evidence_opened')}")
         lines.append(f"- tests: {ts.get('tests')}")

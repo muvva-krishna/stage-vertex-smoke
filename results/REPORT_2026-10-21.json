@@ -9,8 +9,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         10.0,
         10.0
@@ -27,8 +29,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         12.5,
         12.5
@@ -45,8 +49,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 4,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         37.5,
         37.5,
@@ -67,8 +73,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         12.5,
         12.5
@@ -85,8 +93,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         10.0,
         37.5
@@ -103,8 +113,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         12.5,
         12.5
@@ -121,8 +133,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 4,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         37.5,
         12.5,
@@ -143,8 +157,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         10.0,
         10.0
@@ -161,8 +177,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 3,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         37.5,
         37.5,
@@ -181,8 +199,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         27.5,
         27.5
@@ -199,8 +219,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 3,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         27.5,
         10.0,
@@ -219,8 +241,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         20.0,
         20.0
@@ -237,8 +261,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         20.0,
         27.5
@@ -255,8 +281,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 2,
-      "pass_rate": 1.0,
+      "functional_passes": 2,
+      "functional_pass_rate": 1.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         70.0,
         70.0
@@ -273,8 +301,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         12.5,
         25.0
@@ -291,8 +321,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         12.5,
         12.5
@@ -309,8 +341,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 3,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         25.0,
         10.0,
@@ -329,8 +363,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 2,
-      "pass_rate": 1.0,
+      "functional_passes": 2,
+      "functional_pass_rate": 1.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         70.0,
         70.0
@@ -347,8 +383,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 3,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         17.5,
         10.0,
@@ -367,8 +405,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 2,
-      "pass_rate": 1.0,
+      "functional_passes": 2,
+      "functional_pass_rate": 1.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         70.0,
         70.0
@@ -385,8 +425,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         12.5,
         12.5
@@ -403,8 +445,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         37.5,
         37.5
@@ -421,8 +465,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         12.5,
         12.5
@@ -439,8 +485,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         12.5,
         12.5
@@ -457,8 +505,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 4,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         37.5,
         12.5,
@@ -479,8 +529,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         37.5,
         37.5
@@ -497,8 +549,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 3,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         12.5,
         37.5,
@@ -517,8 +571,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         10.0,
         10.0
@@ -535,8 +591,10 @@
       "model": "gemini-2.5-flash",
       "tier": "TIER_A",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         12.5,
         12.5
@@ -553,8 +611,10 @@
       "model": "gemini-2.5-flash-lite",
       "tier": "TIER_B",
       "attempts": 2,
-      "passes": 0,
-      "pass_rate": 0.0,
+      "functional_passes": 0,
+      "functional_pass_rate": 0.0,
+      "full_passes": 0,
+      "full_pass_rate": 0.0,
       "totals": [
         10.0,
         10.0
@@ -617,6 +677,7 @@
         "total": 10.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 9,
         "tests_run": 0,
@@ -708,6 +769,7 @@
         "total": 10.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 14,
         "tests_run": 0,
@@ -822,6 +884,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 25,
         "tests_run": 1,
@@ -936,6 +999,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 25,
         "tests_run": 1,
@@ -1050,6 +1114,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 9,
         "tests_run": 0,
@@ -1143,6 +1208,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 8,
         "tests_run": 0,
@@ -1236,6 +1302,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 1,
         "tests_run": 0,
@@ -1322,6 +1389,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 9,
         "tests_run": 0,
@@ -1415,6 +1483,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 33,
         "tests_run": 1,
@@ -1523,6 +1592,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 33,
         "tests_run": 1,
@@ -1631,6 +1701,7 @@
         "total": 10.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 23,
         "tests_run": 0,
@@ -1756,6 +1827,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 7,
         "tests_run": 0,
@@ -1845,6 +1917,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 24,
         "tests_run": 1,
@@ -1958,6 +2031,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 24,
         "tests_run": 1,
@@ -2071,6 +2145,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 7,
         "tests_run": 0,
@@ -2160,6 +2235,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 23,
         "tests_run": 4,
@@ -2292,6 +2368,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 1,
         "tests_run": 0,
@@ -2376,6 +2453,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 7,
         "tests_run": 0,
@@ -2465,6 +2543,7 @@
         "total": 10.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 20,
         "tests_run": 0,
@@ -2568,6 +2647,7 @@
         "total": 10.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 20,
         "tests_run": 0,
@@ -2671,6 +2751,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 1,
         "tests_run": 0,
@@ -2754,6 +2835,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 7,
         "tests_run": 0,
@@ -2841,6 +2923,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 9,
         "tests_run": 0,
@@ -2928,6 +3011,7 @@
         "total": 27.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 45,
         "tests_run": 6,
@@ -3081,6 +3165,7 @@
         "total": 27.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 45,
         "tests_run": 6,
@@ -3234,6 +3319,7 @@
         "total": 27.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 34,
         "tests_run": 9,
@@ -3425,6 +3511,7 @@
         "total": 10.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 10,
         "tests_run": 0,
@@ -3524,6 +3611,7 @@
         "total": 10.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 9,
         "tests_run": 0,
@@ -3615,6 +3703,7 @@
         "total": 20.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 14,
         "tests_run": 2,
@@ -3727,6 +3816,7 @@
         "total": 20.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 14,
         "tests_run": 2,
@@ -3839,6 +3929,7 @@
         "total": 20.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 24,
         "tests_run": 1,
@@ -3961,6 +4052,7 @@
         "total": 27.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 24,
         "tests_run": 2,
@@ -4107,6 +4199,7 @@
         "total": 70.0,
         "passed": true
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 14,
         "tests_run": 2,
@@ -4220,6 +4313,7 @@
         "total": 70.0,
         "passed": true
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 14,
         "tests_run": 2,
@@ -4333,6 +4427,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 15,
         "tests_run": 2,
@@ -4449,6 +4544,7 @@
         "total": 25.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 17,
         "tests_run": 0,
@@ -4556,6 +4652,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 9,
         "tests_run": 1,
@@ -4659,6 +4756,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 9,
         "tests_run": 1,
@@ -4762,6 +4860,7 @@
         "total": 25.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 7,
         "tests_run": 0,
@@ -4851,6 +4950,7 @@
         "total": 10.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 13,
         "tests_run": 0,
@@ -4942,6 +5042,7 @@
         "total": 20.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 29,
         "tests_run": 4,
@@ -5069,6 +5170,7 @@
         "total": 70.0,
         "passed": true
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 13,
         "tests_run": 1,
@@ -5174,6 +5276,7 @@
         "total": 70.0,
         "passed": true
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 13,
         "tests_run": 1,
@@ -5279,6 +5382,7 @@
         "total": 17.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 14,
         "tests_run": 0,
@@ -5387,6 +5491,7 @@
         "total": 10.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 9,
         "tests_run": 0,
@@ -5482,6 +5587,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 13,
         "tests_run": 2,
@@ -5595,6 +5701,7 @@
         "total": 70.0,
         "passed": true
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 12,
         "tests_run": 2,
@@ -5703,6 +5810,7 @@
         "total": 70.0,
         "passed": true
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 12,
         "tests_run": 2,
@@ -5811,6 +5919,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 12,
         "tests_run": 2,
@@ -5913,6 +6022,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 17,
         "tests_run": 4,
@@ -6046,6 +6156,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 9,
         "tests_run": 0,
@@ -6151,6 +6262,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 9,
         "tests_run": 0,
@@ -6256,6 +6368,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 25,
         "tests_run": 8,
@@ -6412,6 +6525,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 18,
         "tests_run": 3,
@@ -6522,6 +6636,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 23,
         "tests_run": 2,
@@ -6684,6 +6799,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 23,
         "tests_run": 2,
@@ -6846,6 +6962,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 1,
         "tests_run": 0,
@@ -6930,6 +7047,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 18,
         "tests_run": 5,
@@ -7047,6 +7165,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 4,
         "tests_run": 0,
@@ -7133,6 +7252,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 11,
         "tests_run": 3,
@@ -7240,6 +7360,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 10,
         "tests_run": 0,
@@ -7345,6 +7466,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 10,
         "tests_run": 0,
@@ -7450,6 +7572,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 15,
         "tests_run": 5,
@@ -7567,6 +7690,7 @@
         "total": 37.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 7,
         "tests_run": 0,
@@ -7662,6 +7786,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 12,
         "tests_run": 1,
@@ -7770,6 +7895,7 @@
         "total": 10.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 23,
         "tests_run": 0,
@@ -7932,6 +8058,7 @@
         "total": 10.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 23,
         "tests_run": 0,
@@ -8094,6 +8221,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 33,
         "tests_run": 9,
@@ -8285,6 +8413,7 @@
         "total": 12.5,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 10,
         "tests_run": 2,
@@ -8391,6 +8520,7 @@
         "total": 10.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 15,
         "tests_run": 0,
@@ -8521,6 +8651,7 @@
         "total": 10.0,
         "passed": false
       },
+      "full_passed": false,
       "efficiency": {
         "tool_calls": 15,
         "tests_run": 0,
