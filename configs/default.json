@@ -1,0 +1,17 @@
+{
+  "model": "not-configured",
+  "model_version": "not-configured",
+  "harness": "debev-0.1.0",
+  "temperature": 0.0,
+  "seed": 0,
+  "max_tool_calls": 60,
+  "max_wall_seconds": 1800,
+  "max_evidence_tokens": 2000,
+  "repetitions": 1,
+  "randomize_order": true,
+  "dependency_versions": {
+    "python": "3.10+",
+    "debev": "0.1.0"
+  },
+  "environment_hash": ""
+}

@@ -1,0 +1,7 @@
+{"data": {"fixture_marker": "plumbing-only", "note": "REPLAYED fixture events; not a model run"}, "type": "agent_note"}
+{"data": {"file": "symptom.md"}, "type": "evidence_access"}
+{"data": {"file": "repro_log.md"}, "type": "evidence_access"}
+{"data": {"path": "counter.py"}, "type": "file_read"}
+{"data": {"cmd": "python3 -c \"from counter import add; print(add(1, 2))\"", "rc": 0, "output": "4"}, "type": "command"}
+{"data": {"content": "def add(a, b):\n    \"\"\"Return a + b.\"\"\"\n    return a + b\n\n\ndef format_total(a, b):\n    return f\"{a}+{b}={add(a, b)}\"\n", "path": "counter.py"}, "type": "file_write"}
+{"data": {"name": "oracle:addition", "result": "PASS"}, "type": "test_run"}
