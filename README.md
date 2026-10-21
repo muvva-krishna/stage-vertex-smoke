@@ -10,12 +10,40 @@ repairs a realistic software failure, **which bounded evidence artifacts**
 help it diagnose and fix the problem — and when does extra evidence waste
 effort or mislead?
 
-This repo is the **harness + rubric + task slots**, not a benchmark claim.
-It is a three-task pilot scaffold with careful task infrastructure,
-controlled evidence conditions, executable ground truth, trajectory capture,
-and failure analysis. See `docs/related_work.md` for how it connects to
+This repo is the **harness + rubric + a completed pilot run**, not a benchmark
+claim. It contains three AI-authored synthetic tasks, five evidence-packet
+conditions, executable ground truth, trajectory capture, and failure analysis.
+The packet conditions vary in size as well as content, so this run does not
+isolate evidence type. See `docs/related_work.md` for how it connects to
 DDBench, TRAIL, SWT-Bench, ConcurBugBench, and coding-agent-bench — and what
 was deliberately *not* copied.
+
+## Completed pilot (2026-10-21)
+
+The 60-cell exploratory matrix used three AI-authored tasks, five packet
+conditions, two Gemini model IDs, and two repetitions. The stored results
+contain 53 completed cells and seven provider failures after retry; those
+failures are reported separately, not scored as model outcomes. There are 71
+attempt directories because retries are retained.
+
+- **No complete repairs passed the oracle.** Six runs fixed the functional
+  behavior on `slot_02` with `gemini-2.5-flash-lite`, but all regressed the
+  pinned CLI `--help` interface. They are incomplete repairs, not task passes.
+- Four completed attempts crashed the oracle after breaking imports and are
+  marked unscored. They are not successes or scored failures.
+- The 10-turn cap was reached in 29 of 53 final attempts. The traces do not
+  establish that the cap caused the failures.
+- Recorded provider spend was **$0.201**. The run used the explicit
+  no-global-spend-cap option; per-attempt limits were configured. The seven
+  provider errors retain only their exception type, so their underlying cause
+  is unknown.
+- Human diagnosis and reporting grades remain pending. Tasks and solutions
+  were AI-authored, with provenance recorded in `docs/autonomous_authoring.md`.
+
+Read the [full report](results/REPORT_2026-10-21.md),
+[analysis](results/ANALYSIS_2026-10-21.md), and
+[run ledger](results/matrix_state.json). This is a pipeline-validation pilot,
+not evidence that one packet, model tier, or agent protocol is better.
 
 ## Setup
 
@@ -38,20 +66,18 @@ chain-of-thought), a 100-point rubric with explicit human-grade
 placeholders, and a report generator. Full module map in the architecture
 doc.
 
-## Task authoring (human-authored, original)
+## Task provenance and future authoring
 
-Real tasks live in `tasks/slot_01|02|03/`. Follow `docs/task_authoring_spec.md`.
-The checklist covers realistic multi-file instructions, pinned repo
-snapshots, four evidence files within a shared token budget, evaluator-only
-ground truth (oracle, reference patch, hidden assertions, accepted
-diagnosis), constraints, and provenance. Suggested domain for one slot: a
-deterministic Python CLI maintenance problem such as safe recovery after an
-interrupted configuration migration.
+The current tasks live in `tasks/slot_01|02|03/` and are AI-authored synthetic
+tasks; they are not human-authored benchmark material. Their provenance is
+documented in `docs/autonomous_authoring.md` and each task's `PROVENANCE.md`.
+For future tasks, follow `docs/task_authoring_spec.md`: use realistic
+multi-file instructions, pinned repo snapshots, bounded evidence packets,
+evaluator-only ground truth (oracle, reference patch, hidden assertions,
+accepted diagnosis), constraints, and provenance.
 
-> The final task prompts, reference patches, hidden assertions, and accepted
-> diagnoses are **yours to author** and must be human-written and original.
-> This repo ships only placeholders. `debev validate` rejects manifests that
-> embed answers.
+Any future claim of human-authored tasks requires human authorship and review.
+`debev validate` rejects manifests that embed answers.
 
 ## Running a replay (dry-run plumbing check, no model involved)
 
@@ -141,16 +167,16 @@ available — the recorded `isolation` level states what was actually used.
 | `debev export-otel --run-dir … --out …` | OTLP JSON trace export |
 | `debev report --runs-root … --out …` | pilot report (Markdown + JSON sidecar) |
 
-## Experiment design (two model tiers, one harness)
+## Experiment design and completed matrix
 
-The planned study is **3 tasks × 5 conditions × 2 models × 3 reps = 90
-attempts** (exploratory; three tasks support no population claims), with a
-60-attempt (2-rep) option when cost requires it. Both tiers — one stronger
-coding model, one smaller/cheaper or local model — run through the **same**
-agent harness and tool interface, so the model is the variable. See
-`configs/experiment_plan.template.json` (placeholders only — freeze exact
-model versions before running) and `docs/model_selection.md` (checklist +
-cost estimation from user-supplied prices; no paid calls in this stage):
+The completed exploratory matrix was **3 tasks × 5 conditions × 2 Gemini
+model IDs × 2 reps = 60 planned cells**. Both models used the same
+`ModelAgentRunner` loop and toolkit, but the run does not support a tier
+comparison: seven provider failures affected `gemini-2.5-flash`, the sample
+has only three AI-authored tasks, and no full repair passed. The 90-attempt
+template remains a planning option, not a completed experiment. See
+`configs/experiment_plan.template.json` and `docs/model_selection.md` for
+the reusable planning and cost-estimation workflow:
 
 ```bash
 export PYTHONPATH=src
@@ -163,8 +189,6 @@ case, and credential env vars set (names from the plan; values never enter
 the repo, logs, or run metadata). `dry-run` and `smoke` make zero provider
 calls. Cost bounds use your per-1k input/output prices × per-attempt token
 caps × max turns × (1 + retries); see `docs/model_selection.md`.
-
-## Resource limits (enforced, not just recorded)
 
 ## Resource limits (enforced, not just recorded)
 
@@ -198,8 +222,9 @@ evidence-type attribution. See `docs/evaluation_protocol.md`.
   toolkit; self-reported `verification` events, bare shell commands, and the
   evaluator's oracle run earn nothing (self-reports are kept for human
   grading of reporting accuracy).
-- No paid model APIs are called anywhere; the default runner is a no-op, the
-  bundled runners are local deterministic probes, and replay data is
-  synthetic fixture data.
+- Offline `dry-run`, `smoke`, and fixture replay make no provider calls. The
+  completed pilot did use paid Gemini APIs; its recorded spend and run details
+  are in the results above. A future `execute` run can incur cost and is
+  guarded by explicit authorization and the configured spend policy.
 - DDBench's official code/data URL could not be verified (see
   `docs/related_work.md`); nothing was reused from it.
