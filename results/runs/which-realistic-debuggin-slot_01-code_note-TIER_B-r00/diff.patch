@@ -1,0 +1,7 @@
++++ ADDED TASK_INSTRUCTIONS.md (39 lines)
++++ ADDED __pycache__/migrate.cpython-314.pyc (102 lines)
++++ ADDED __pycache__/state.cpython-314.pyc (192 lines)
+~~~ MODIFIED cli.py (28 -> 31 lines)
++++ ADDED evidence/code_note.md (9 lines)
++++ ADDED evidence/symptom.md (16 lines)
+~~~ MODIFIED state.py (23 -> 130 lines)

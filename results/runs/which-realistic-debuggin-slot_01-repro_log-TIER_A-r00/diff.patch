@@ -1,0 +1,8 @@
++++ ADDED TASK_INSTRUCTIONS.md (39 lines)
++++ ADDED __pycache__/migrate.cpython-314.pyc (135 lines)
++++ ADDED __pycache__/state.cpython-314.pyc (43 lines)
++++ ADDED config.json (1 lines)
++++ ADDED config.json.migration.json (6 lines)
++++ ADDED evidence/repro_log.md (26 lines)
++++ ADDED evidence/symptom.md (16 lines)
+~~~ MODIFIED migrate.py (64 -> 102 lines)

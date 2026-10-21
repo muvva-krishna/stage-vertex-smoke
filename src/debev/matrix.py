@@ -348,7 +348,7 @@ def _run_cell_with_retries(plan: dict, cell: dict, model: dict,
         if _cell_ok(runs_root / run_id) or not _cell_transient_failure(runs_root, run_id):
             return True, run_id, attempt + 1, usage
         print(f"  transient provider failure in {run_id}; retrying "
-              f"({attempt + 1}/{retries_allowed})")
+              f"(attempt {attempt + 1} of {1 + retries_allowed})")
     return False, run_id, 1 + retries_allowed, usage
 
 

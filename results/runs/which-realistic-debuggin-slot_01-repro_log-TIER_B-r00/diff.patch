@@ -1,0 +1,5 @@
++++ ADDED TASK_INSTRUCTIONS.md (39 lines)
++++ ADDED __pycache__/migrate.cpython-314.pyc (141 lines)
++++ ADDED evidence/repro_log.md (26 lines)
++++ ADDED evidence/symptom.md (16 lines)
+~~~ MODIFIED migrate.py (64 -> 94 lines)

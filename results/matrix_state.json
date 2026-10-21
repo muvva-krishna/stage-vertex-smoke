@@ -1,0 +1,320 @@
+{
+  "plan_hash": "sha256:ea8bc42aa95c64c890c1479fc9c8ba633b25d7f4d54b5be5bb9defbc3197fecc",
+  "cells": {
+    "slot_01|code_note|gemini-2.5-flash|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-code_note-TIER_A-r00",
+      "attempts": 1
+    },
+    "slot_02|code_note|gemini-2.5-flash|1": {
+      "status": "failed",
+      "run_id": "which-realistic-debuggin-slot_02-code_note-TIER_A-r01-try01",
+      "attempts": 2
+    },
+    "slot_02|state_snapshot|gemini-2.5-flash|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-state_snapshot-TIER_A-r01",
+      "attempts": 1
+    },
+    "slot_02|combined|gemini-2.5-flash|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-combined-TIER_A-r00",
+      "attempts": 1
+    },
+    "slot_03|repro_log|gemini-2.5-flash|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-repro_log-TIER_A-r00-try01",
+      "attempts": 2
+    },
+    "slot_03|symptom_only|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-symptom_only-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_03|repro_log|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-repro_log-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_01|repro_log|gemini-2.5-flash|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-repro_log-TIER_A-r01",
+      "attempts": 1
+    },
+    "slot_01|repro_log|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-repro_log-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_03|state_snapshot|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-state_snapshot-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_03|code_note|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-code_note-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_03|combined|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-combined-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_02|symptom_only|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-symptom_only-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_02|repro_log|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-repro_log-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_02|state_snapshot|gemini-2.5-flash|0": {
+      "status": "failed",
+      "run_id": "which-realistic-debuggin-slot_02-state_snapshot-TIER_A-r00-try01",
+      "attempts": 2
+    },
+    "slot_03|combined|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-combined-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_01|symptom_only|gemini-2.5-flash|0": {
+      "status": "failed",
+      "run_id": "which-realistic-debuggin-slot_01-symptom_only-TIER_A-r00-try01",
+      "attempts": 2
+    },
+    "slot_01|symptom_only|gemini-2.5-flash|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-symptom_only-TIER_A-r01",
+      "attempts": 1
+    },
+    "slot_03|symptom_only|gemini-2.5-flash|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-symptom_only-TIER_A-r01",
+      "attempts": 1
+    },
+    "slot_02|combined|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-combined-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_01|code_note|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-code_note-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_01|code_note|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-code_note-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_03|state_snapshot|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-state_snapshot-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_03|repro_log|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-repro_log-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_02|symptom_only|gemini-2.5-flash|0": {
+      "status": "failed",
+      "run_id": "which-realistic-debuggin-slot_02-symptom_only-TIER_A-r00-try01",
+      "attempts": 2
+    },
+    "slot_02|code_note|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-code_note-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_01|state_snapshot|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-state_snapshot-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_03|repro_log|gemini-2.5-flash|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-repro_log-TIER_A-r01-try01",
+      "attempts": 2
+    },
+    "slot_01|state_snapshot|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-state_snapshot-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_01|symptom_only|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-symptom_only-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_01|combined|gemini-2.5-flash|1": {
+      "status": "failed",
+      "run_id": "which-realistic-debuggin-slot_01-combined-TIER_A-r01-try01",
+      "attempts": 2
+    },
+    "slot_03|combined|gemini-2.5-flash|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-combined-TIER_A-r01",
+      "attempts": 1
+    },
+    "slot_02|symptom_only|gemini-2.5-flash|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-symptom_only-TIER_A-r01",
+      "attempts": 1
+    },
+    "slot_01|repro_log|gemini-2.5-flash|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-repro_log-TIER_A-r00",
+      "attempts": 1
+    },
+    "slot_03|symptom_only|gemini-2.5-flash|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-symptom_only-TIER_A-r00",
+      "attempts": 1
+    },
+    "slot_03|state_snapshot|gemini-2.5-flash|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-state_snapshot-TIER_A-r01-try01",
+      "attempts": 2
+    },
+    "slot_01|state_snapshot|gemini-2.5-flash|1": {
+      "status": "failed",
+      "run_id": "which-realistic-debuggin-slot_01-state_snapshot-TIER_A-r01-try01",
+      "attempts": 2
+    },
+    "slot_02|code_note|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-code_note-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_03|code_note|gemini-2.5-flash|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-code_note-TIER_A-r01",
+      "attempts": 1
+    },
+    "slot_02|combined|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-combined-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_01|repro_log|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-repro_log-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_03|symptom_only|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-symptom_only-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_01|combined|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-combined-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_01|state_snapshot|gemini-2.5-flash|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-state_snapshot-TIER_A-r00-try01",
+      "attempts": 2
+    },
+    "slot_03|code_note|gemini-2.5-flash|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-code_note-TIER_A-r00",
+      "attempts": 1
+    },
+    "slot_01|code_note|gemini-2.5-flash|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-code_note-TIER_A-r01",
+      "attempts": 1
+    },
+    "slot_02|combined|gemini-2.5-flash|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-combined-TIER_A-r01",
+      "attempts": 1
+    },
+    "slot_02|symptom_only|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-symptom_only-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_02|state_snapshot|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-state_snapshot-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_01|combined|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-combined-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_02|repro_log|gemini-2.5-flash|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-repro_log-TIER_A-r01",
+      "attempts": 1
+    },
+    "slot_02|state_snapshot|gemini-2.5-flash-lite|1": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-state_snapshot-TIER_B-r01",
+      "attempts": 1
+    },
+    "slot_02|code_note|gemini-2.5-flash|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-code_note-TIER_A-r00",
+      "attempts": 1
+    },
+    "slot_01|combined|gemini-2.5-flash|0": {
+      "status": "failed",
+      "run_id": "which-realistic-debuggin-slot_01-combined-TIER_A-r00-try01",
+      "attempts": 2
+    },
+    "slot_01|symptom_only|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_01-symptom_only-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_02|repro_log|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-repro_log-TIER_B-r00",
+      "attempts": 1
+    },
+    "slot_03|combined|gemini-2.5-flash|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-combined-TIER_A-r00",
+      "attempts": 1
+    },
+    "slot_03|state_snapshot|gemini-2.5-flash|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-state_snapshot-TIER_A-r00",
+      "attempts": 1
+    },
+    "slot_02|repro_log|gemini-2.5-flash|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_02-repro_log-TIER_A-r00",
+      "attempts": 1
+    },
+    "slot_03|code_note|gemini-2.5-flash-lite|0": {
+      "status": "done",
+      "run_id": "which-realistic-debuggin-slot_03-code_note-TIER_B-r00",
+      "attempts": 1
+    }
+  },
+  "spend": {
+    "gemini-2.5-flash": {
+      "input_tokens": 332300,
+      "output_tokens": 52281,
+      "cost": 0.115,
+      "currency": "USD"
+    },
+    "gemini-2.5-flash-lite": {
+      "input_tokens": 445750,
+      "output_tokens": 319788,
+      "cost": 0.086,
+      "currency": "USD"
+    }
+  },
+  "currency": "USD"
+}

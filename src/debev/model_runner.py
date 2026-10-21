@@ -312,8 +312,12 @@ class ModelAgentRunner(AgentRunner):
             try:
                 text, usage = self.transport.complete(messages)
             except Exception as e:  # noqa: BLE001 — fail closed, score as-is
+                # Transport errors are token-free by construction (see
+                # OpenAICompatibleTransport/VertexTransport), so the message
+                # is safe to record; it distinguishes rate limits, ADC
+                # outages, and malformed responses during analysis.
                 recorder.record("agent_note", {"kind": "error",
-                    "text": f"provider call failed: {type(e).__name__}"[:300]})
+                    "text": f"provider call failed: {e}"[:300]})
                 break
             self.usage["input_tokens"] += usage.get("input_tokens", 0)
             self.usage["output_tokens"] += usage.get("output_tokens", 0)

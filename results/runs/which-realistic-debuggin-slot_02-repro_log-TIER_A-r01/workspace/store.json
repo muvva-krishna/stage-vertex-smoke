@@ -1,0 +1,41 @@
+{
+  "rows": [
+    {
+      "name": "Alice",
+      "email": "A@x.com"
+    },
+    {
+      "name": "Bob",
+      "email": " b@x.com "
+    },
+    {
+      "name": "Charlie",
+      "email": "C@X.COM"
+    },
+    {
+      "name": "David",
+      "email": "david@example.com"
+    },
+    {
+      "name": "Eve",
+      "email": " eve@example.com"
+    },
+    {
+      "name": "Frank",
+      "email": "frank@test.org"
+    },
+    {
+      "name": "Grace",
+      "email": "grace@example.com"
+    }
+  ],
+  "seen": [
+    "a@x.com",
+    "b@x.com",
+    "c@x.com",
+    "david@example.com",
+    "eve@example.com",
+    "frank@test.org",
+    "grace@example.com"
+  ]
+}

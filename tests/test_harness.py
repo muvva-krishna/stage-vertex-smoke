@@ -624,6 +624,27 @@ class TestModelRunnerBoundary(unittest.TestCase):
             runner._check_frozen("m-other", "v1")
         runner._check_frozen("m-a", "v1")  # exact match OK
 
+    def test_provider_error_text_never_carries_secrets(self):
+        from unittest import mock
+
+        from debev.model_runner import ModelAgentRunner, VertexTransport
+        from debev.trajectory import TrajectoryRecorder
+        with tempfile.TemporaryDirectory() as tmp:
+            ctx = self._ctx(tmp)
+            rec = TrajectoryRecorder(run_id="r", task_id="t", condition="symptom_only")
+            runner = ModelAgentRunner(model_id="m", model_version="v",
+                                      transport=VertexTransport("p", "global", "m"),
+                                      max_turns=1)
+            with mock.patch("debev.model_runner.adc_access_token",
+                             return_value="tok-SUPERSECRET"), \
+                 mock.patch("urllib.request.urlopen",
+                            side_effect=Exception("HTTP 429 QUOTA_EXCEEDED")):
+                result = runner.run(ctx, rec)
+            blob = "\n".join(json.dumps(e) for e in rec.events)
+            self.assertNotIn("SUPERSECRET", blob)
+            self.assertIn("429", blob)  # cause preserved for analysis
+            self.assertEqual(result.provider_usage["calls"], 0)
+
 
 class TestRunMatrixDriver(unittest.TestCase):
     def _mini_tasks(self, tmp):

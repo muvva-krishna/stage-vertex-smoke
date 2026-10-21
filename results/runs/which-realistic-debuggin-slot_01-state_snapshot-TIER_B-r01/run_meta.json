@@ -1,0 +1,103 @@
+{
+  "run_id": "which-realistic-debuggin-slot_01-state_snapshot-TIER_B-r01",
+  "task_id": "slot_01",
+  "condition": "state_snapshot",
+  "replayed": false,
+  "runner": "model:gemini-2.5-flash-lite",
+  "config": {
+    "model": "gemini-2.5-flash-lite",
+    "model_version": "publisher-default-2026-10-21",
+    "harness": "debev-AgentRunner-0.1.0",
+    "temperature": 0.0,
+    "seed": 0,
+    "model_settings": {},
+    "max_tool_calls": 60,
+    "max_wall_seconds": 1800,
+    "max_evidence_tokens": 2000,
+    "repetitions": 1,
+    "randomize_order": true,
+    "dependency_versions": {},
+    "environment_hash": "sha256:4038aeb99b097401"
+  },
+  "evidence_tokens": 125,
+  "token_counts": {
+    "symptom.md": 69,
+    "state_snapshot.md": 56
+  },
+  "oracle": {
+    "passed": false,
+    "groups": [
+      {
+        "group": "clean_run",
+        "passed": false,
+        "detail": "fresh v1 migrates fully"
+      },
+      {
+        "group": "resume_completes",
+        "passed": false,
+        "detail": "interrupted resume converges ( -> )"
+      },
+      {
+        "group": "idempotent_rerun",
+        "passed": false,
+        "detail": "rerun is a no-op"
+      },
+      {
+        "group": "compat:cli_steps",
+        "passed": false,
+        "detail": "--steps lists both steps"
+      }
+    ],
+    "returncode": 1,
+    "isolation": "bwrap-sandbox"
+  },
+  "oracle_isolation": "bwrap-sandbox",
+  "sandbox_available": "bwrap-sandbox",
+  "efficiency": {
+    "tool_calls": 20,
+    "tests_run": 0,
+    "verifications": 0,
+    "evidence_tokens": 125,
+    "model_tokens": {
+      "input_tokens": 16234,
+      "output_tokens": 2272,
+      "calls": 10
+    },
+    "wall_clock_s": 20.51,
+    "retries": 0
+  },
+  "provider_usage": {
+    "input_tokens": 16234,
+    "output_tokens": 2272,
+    "calls": 10
+  },
+  "trajectory": "trajectory.jsonl",
+  "harness_commit": "6970b083aecdba8af08df65368f5787a243a1883",
+  "harness_dirty": true,
+  "manifest_sha256": "sha256:03016128ebb0baef61b034b035022890120351d62f1a429e7eb7c2b256609ea3",
+  "evidence_sha256": {
+    "code_note.md": "sha256:ec07394646dacd7902d4dbea7138c57992fbb5bc1187e6c46402a4698a469831",
+    "repro_log.md": "sha256:4ed8eac47ab4d2681c0f59d6d1b43e17284e4f7ca5f3c91acabc15baff737b1a",
+    "state_snapshot.md": "sha256:c89d825618625c6fe4864f6508a1b8261442db9583b5d15a2c956b96e06c59a1",
+    "symptom.md": "sha256:d8954747df16828e4f625f0f41170a0849343ab9f046c6c8d1a3763bdabc75be"
+  },
+  "oracle_sha256": {
+    "accepted_diagnosis.md": "sha256:72a986639557fa3f72408c032b76efeecb996f9ee3456c4e07a944035d12bcc2",
+    "oracle.py": "sha256:5c6bb3f27a5371dfdbb0c5c1c9a2489b17c52b413bea02f7dd7cf9a2bb44ca46",
+    "partial_fixes/mark-after-save-at-end/migrate.py": "sha256:16cd82754963a096965ccb9bf408982cbbd1819080c55b95c37a128ab005fe8b",
+    "reference_solution/migrate.py": "sha256:5fd6ebd3067b204077c8b653a361c2be8401e7c1422e39f1b901d716181e4c39"
+  },
+  "limits": {
+    "max_tool_calls": 60,
+    "max_wall_seconds": 600,
+    "tool_calls_used": 19,
+    "elapsed_s": 22.18,
+    "tool_limit_reached": false,
+    "wall_limit_reached": false,
+    "per_command_timeout": 60
+  },
+  "runner_orphaned": false,
+  "trust": "custom runner code runs in-process and is trusted; confinement (workspace-only paths, scrubbed env, recorded sandbox) applies to toolkit-mediated file/command actions only",
+  "tier": "TIER_B",
+  "model_id": "gemini-2.5-flash-lite"
+}

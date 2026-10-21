@@ -1,0 +1,44 @@
+{
+  "task_id": "slot_03",
+  "condition": "repro_log",
+  "run_id": "which-realistic-debuggin-slot_03-repro_log-TIER_B-r01",
+  "components": [
+    {
+      "component": "functional_correctness",
+      "points": 12.5,
+      "max_points": 50,
+      "grade_mode": "machine",
+      "detail": "fresh_hit=PASS; expired_miss=FAIL; prune_expired_only=FAIL"
+    },
+    {
+      "component": "root_cause_diagnosis",
+      "points": 0.0,
+      "max_points": 20,
+      "grade_mode": "human",
+      "detail": "PENDING HUMAN GRADE (placeholder)"
+    },
+    {
+      "component": "compatibility_regression",
+      "points": 15.0,
+      "max_points": 15,
+      "grade_mode": "machine",
+      "detail": "cli_put=PASS; entry_schema=PASS"
+    },
+    {
+      "component": "constraint_compliance",
+      "points": 10.0,
+      "max_points": 10,
+      "grade_mode": "machine",
+      "detail": "no_evaluator_files_in_workspace=PASS; no_reference_patch_file=PASS"
+    },
+    {
+      "component": "verification_reporting",
+      "points": 0.0,
+      "max_points": 5,
+      "grade_mode": "mixed",
+      "detail": "machine portion: no executed agent check observed; human accuracy grade pending"
+    }
+  ],
+  "total": 37.5,
+  "passed": false
+}

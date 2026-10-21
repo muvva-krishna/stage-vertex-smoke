@@ -1,0 +1,93 @@
+{
+  "run_id": "which-realistic-debuggin-slot_03-code_note-TIER_A-r00",
+  "task_id": "slot_03",
+  "condition": "code_note",
+  "replayed": false,
+  "runner": "model:gemini-2.5-flash",
+  "config": {
+    "model": "gemini-2.5-flash",
+    "model_version": "publisher-default-2026-10-21",
+    "harness": "debev-AgentRunner-0.1.0",
+    "temperature": 0.0,
+    "seed": 0,
+    "model_settings": {},
+    "max_tool_calls": 60,
+    "max_wall_seconds": 1800,
+    "max_evidence_tokens": 2000,
+    "repetitions": 1,
+    "randomize_order": true,
+    "dependency_versions": {},
+    "environment_hash": "sha256:4038aeb99b097401"
+  },
+  "evidence_tokens": 149,
+  "token_counts": {
+    "symptom.md": 85,
+    "code_note.md": 64
+  },
+  "oracle": {
+    "passed": false,
+    "groups": [
+      {
+        "group": "fresh_hit",
+        "passed": false,
+        "detail": "read inside TTL hits"
+      },
+      {
+        "group": "expired_miss",
+        "passed": false,
+        "detail": "read 200s after 100s TTL misses ()"
+      }
+    ],
+    "returncode": 1,
+    "isolation": "bwrap-sandbox"
+  },
+  "oracle_isolation": "bwrap-sandbox",
+  "sandbox_available": "bwrap-sandbox",
+  "efficiency": {
+    "tool_calls": 12,
+    "tests_run": 2,
+    "verifications": 2,
+    "evidence_tokens": 149,
+    "model_tokens": {
+      "input_tokens": 4215,
+      "output_tokens": 1359,
+      "calls": 3
+    },
+    "wall_clock_s": 14.31,
+    "retries": 0
+  },
+  "provider_usage": {
+    "input_tokens": 4215,
+    "output_tokens": 1359,
+    "calls": 3
+  },
+  "trajectory": "trajectory.jsonl",
+  "harness_commit": "6970b083aecdba8af08df65368f5787a243a1883",
+  "harness_dirty": true,
+  "manifest_sha256": "sha256:183ec850a68de0b71f09b6a196c8da63140a76e87c66a18bf5795f1f835fae94",
+  "evidence_sha256": {
+    "code_note.md": "sha256:cbef9a529b819e59bc1f59e53086342d5a15e17389975b189099d78d166c4ee5",
+    "repro_log.md": "sha256:0b75eccb5140a1e357c23286e061c0271e0b9e39a1b7892b906832d713af2e8d",
+    "state_snapshot.md": "sha256:824d064fba4d9a2723e8e7495f4452329116f50d48b37716b8d5ed1d699d30c4",
+    "symptom.md": "sha256:570661d967b3df8a375a78b0e208656df224b8d4a6a473ed5f1f40d69a05d7d5"
+  },
+  "oracle_sha256": {
+    "accepted_diagnosis.md": "sha256:c90e16633aa840eff52f02284b421c45db4eba42521629a61ef986fc5caf28b9",
+    "oracle.py": "sha256:27c8b87a00e7117dd71ee466d853654fabf1e2e68a413ad6aed1e023a1ff80d4",
+    "partial_fixes/prune-still-buggy/cache.py": "sha256:3c54465d26070b6fdf9dbc07901cc2487276fbc345e0569b2b4b6c54462acfa7",
+    "reference_solution/cache.py": "sha256:01a2bcb0e3cff34d84368b74198c06f9d3a77ee4b2b1e4fe621b3b1fd6804ce3"
+  },
+  "limits": {
+    "max_tool_calls": 60,
+    "max_wall_seconds": 600,
+    "tool_calls_used": 9,
+    "elapsed_s": 15.04,
+    "tool_limit_reached": false,
+    "wall_limit_reached": false,
+    "per_command_timeout": 60
+  },
+  "runner_orphaned": false,
+  "trust": "custom runner code runs in-process and is trusted; confinement (workspace-only paths, scrubbed env, recorded sandbox) applies to toolkit-mediated file/command actions only",
+  "tier": "TIER_A",
+  "model_id": "gemini-2.5-flash"
+}

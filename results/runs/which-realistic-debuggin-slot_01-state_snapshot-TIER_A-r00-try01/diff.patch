@@ -1,0 +1,7 @@
++++ ADDED TASK_INSTRUCTIONS.md (39 lines)
+~~~ MODIFIED cli.py (28 -> 51 lines)
++++ ADDED evidence/state_snapshot.md (20 lines)
++++ ADDED evidence/symptom.md (16 lines)
+~~~ MODIFIED migrate.py (64 -> 146 lines)
++++ ADDED run_tests.sh (75 lines)
+~~~ MODIFIED state.py (23 -> 45 lines)
