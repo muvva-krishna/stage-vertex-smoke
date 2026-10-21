@@ -15,7 +15,6 @@ from __future__ import annotations
 
 import json
 import shutil
-import subprocess
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -34,6 +33,62 @@ class AttemptContext:
     evidence: EvidencePacket
     allowed_tools: list[str]
     limits: dict[str, Any]
+    tracker: Any = None  # LimitsTracker, attached by the harness per attempt
+
+
+class ToolBudgetExceeded(Exception):
+    """Raised when no further tool calls are allowed in this attempt."""
+
+    def __init__(self, kind: str, detail: str = ""):
+        super().__init__(f"{kind}: {detail}")
+        self.kind = kind  # "tool_calls" or "wall_clock"
+
+
+class LimitsTracker:
+    """Per-attempt enforcement of tool-call and wall-clock budgets.
+
+    Cooperative for in-process runners: every toolkit operation calls
+    `use_tool()` first, which raises ToolBudgetExceeded past the budget.
+    This cannot preempt a runner stuck in pure computation without tool
+    calls — see cli._run_once notes on the subprocess boundary.
+    """
+
+    def __init__(self, max_tool_calls: int = 60, max_wall_seconds: int = 1800):
+        import time as _time
+
+        self.max_tool_calls = max_tool_calls
+        self.max_wall_seconds = max_wall_seconds
+        self.tool_calls = 0
+        self._t0 = _time.time()
+        self._time = _time
+        self.tool_limit_reached = False
+        self.wall_limit_reached = False
+
+    def elapsed(self) -> float:
+        return self._time.time() - self._t0
+
+    def remaining_wall(self) -> float:
+        return self.max_wall_seconds - self.elapsed()
+
+    def use_tool(self, op: str) -> int:
+        if self.elapsed() >= self.max_wall_seconds:
+            self.wall_limit_reached = True
+            raise ToolBudgetExceeded("wall_clock", f"op {op!r} after deadline")
+        if self.tool_calls >= self.max_tool_calls:
+            self.tool_limit_reached = True
+            raise ToolBudgetExceeded("tool_calls", f"op {op!r} over budget")
+        self.tool_calls += 1
+        return self.tool_calls
+
+    def status(self) -> dict[str, Any]:
+        return {
+            "max_tool_calls": self.max_tool_calls,
+            "max_wall_seconds": self.max_wall_seconds,
+            "tool_calls_used": self.tool_calls,
+            "elapsed_s": round(self.elapsed(), 2),
+            "tool_limit_reached": self.tool_limit_reached,
+            "wall_limit_reached": self.wall_limit_reached,
+        }
 
 
 @dataclass

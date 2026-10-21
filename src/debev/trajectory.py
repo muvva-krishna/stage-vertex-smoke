@@ -8,6 +8,7 @@ Captured event types (see docs/trajectory_schema.md):
 from __future__ import annotations
 
 import json
+import threading
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -21,6 +22,8 @@ VALID_EVENT_TYPES = (
     "command",
     "test_run",
     "verification",
+    "timeout",
+    "limit_exceeded",
     "agent_note",
     "diff",
     "run_end",
@@ -37,6 +40,7 @@ class TrajectoryRecorder:
     _events: list[dict[str, Any]] = field(default_factory=list)
     _seq: int = 0
     _t0: float = field(default_factory=time.time)
+    _lock: threading.Lock = field(default_factory=threading.Lock, repr=False)
 
     def record(self, event_type: str, data: dict[str, Any] | None = None) -> dict:
         if event_type not in VALID_EVENT_TYPES:
@@ -48,22 +52,24 @@ class TrajectoryRecorder:
                     f"refusing to record private reasoning field {banned!r}; "
                     "only observable tool activity and short user-visible summaries"
                 )
-        self._seq += 1
-        event = {
-            "seq": self._seq,
-            "t_wall_s": round(time.time() - self._t0, 3),
-            "type": event_type,
-            "run_id": self.run_id,
-            "task_id": self.task_id,
-            "condition": self.condition,
-            "data": data,
-        }
-        self._events.append(event)
+        with self._lock:
+            self._seq += 1
+            event = {
+                "seq": self._seq,
+                "t_wall_s": round(time.time() - self._t0, 3),
+                "type": event_type,
+                "run_id": self.run_id,
+                "task_id": self.task_id,
+                "condition": self.condition,
+                "data": data,
+            }
+            self._events.append(event)
         return event
 
     @property
     def events(self) -> list[dict[str, Any]]:
-        return list(self._events)
+        with self._lock:
+            return list(self._events)
 
     def write_jsonl(self, path: str | Path) -> Path:
         path = Path(path)

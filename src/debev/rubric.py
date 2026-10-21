@@ -95,10 +95,10 @@ def score_machine_portion(
     """Score the machine-graded portion. Human-graded components are 0.0 with
     an explicit 'pending human grade' marker (never invented).
 
-    verification_ran must reflect STRUCTURED agent verification (a
-    `verification` event or a `test_run` with a PASS/FAIL/ERROR/INCONCLUSIVE
-    result) — never a bare shell command, and never the evaluator's own
-    oracle run. The caller computes it; see cli._agent_verification_ran.
+    verification_ran must reflect an EXECUTED agent check (a `test_run`
+    with an explicit verdict produced through the toolkit) — never a
+    self-reported `verification` event, a bare shell command, or the
+    evaluator's own oracle run. The caller computes it; see cli._agent_verification_ran.
     """
     functional_weights = functional_weights or {}
 
@@ -131,10 +131,10 @@ def score_machine_portion(
         )
     v_pts = 2.5 if verification_ran else 0.0
     v_detail = (
-        "machine portion: structured agent verification observed "
-        "(verification event or test_run with a verdict; oracle run excluded)"
+        "machine portion: executed agent check observed "
+        "(toolkit test_run with a verdict; self-reports and oracle run excluded)"
         if verification_ran
-        else "machine portion: no structured agent verification observed; "
+        else "machine portion: no executed agent check observed; "
         "human accuracy grade pending"
     )
     comps = [
@@ -183,8 +183,8 @@ def apply_human_grade(
             c["points"] = round(diagnosis_pts, 2)
             c["detail"] = f"human-graded by {grader}: {rationale[:500]}" or f"human-graded by {grader}"
         if c["component"] == "verification_reporting" and reporting_pts is not None:
-            # machine half is 2.5 iff structured agent verification ran.
-            machine_half = 2.5 if "structured agent verification observed" in c.get("detail", "") else 0.0
+            # machine half is 2.5 iff an executed agent check ran.
+            machine_half = 2.5 if "executed agent check observed" in c.get("detail", "") else 0.0
             c["points"] = round(machine_half + reporting_pts, 2)
             c["detail"] = (
                 f"machine {machine_half}/2.5 + human {reporting_pts}/2.5 by {grader}: "

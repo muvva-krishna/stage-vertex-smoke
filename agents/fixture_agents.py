@@ -67,10 +67,10 @@ class ScriptedFixtureRepairRunner(AgentRunner):
             'def add(a, b):\n    """Return a + b."""\n    return a + b\n\n\n'
             'def format_total(a, b):\n    return f"{a}+{b}={add(a, b)}"\n',
         )
-        out = tk.exec([sys.executable, "-c", "from counter import add; print(add(1, 2))"])
-        ok = out["rc"] == 0 and out["stdout"].strip() == "3"
-        tk.verify("scripted-repro-check", "PASS" if ok else "FAIL",
-                  f"add(1,2) -> {out['stdout'].strip()!r} (scripted, fixture-only)")
+        check = tk.test("scripted-repro-check",
+                        [sys.executable, "-c", "from counter import add; assert add(1, 2) == 3"])
+        tk.verify("scripted-repro-claim", check,
+                  "executed repro check via toolkit (scripted, fixture-only)")
         return AttemptResult(
             diagnosis="SCRIPTED fixture repair (not a model output): removed +1",
             verification_summary="SCRIPTED fixture verification (not a model output)",

@@ -57,20 +57,24 @@ def _constraint_checks(workspace: Path) -> list[dict]:
 
 
 def _agent_verification_ran(events: list[dict]) -> bool:
-    """Structured agent verification only.
+    """Executed agent checks only.
 
-    True iff the trajectory holds a `verification` event or a `test_run`
-    with an explicit verdict (PASS/FAIL/ERROR/INCONCLUSIVE). Bare shell
-    commands (ls, cat, …) never count, and the evaluator's own oracle run
-    is recorded separately and never counts as agent verification.
+    True iff the trajectory holds a `test_run` with an explicit verdict
+    (PASS/FAIL/ERROR/INCONCLUSIVE) that was EXECUTED through the toolkit
+    (`via: toolkit`, not replayed). A free-form/self-reported `verification`
+    event alone never earns machine credit — it is the agent's final claim,
+    kept for human grading of reporting accuracy. Bare shell commands never
+    count, and the evaluator's own oracle run never counts.
     """
     for e in events:
-        if e.get("type") == "verification":
-            return True
-        if e.get("type") == "test_run" and e.get("data", {}).get("result") in (
-            "PASS", "FAIL", "ERROR", "INCONCLUSIVE",
-        ):
-            return True
+        if e.get("type") != "test_run":
+            continue
+        d = e.get("data", {})
+        if d.get("result") not in ("PASS", "FAIL", "ERROR", "INCONCLUSIVE"):
+            continue
+        if d.get("via") != "toolkit" or d.get("replayed"):
+            continue
+        return True
     return False
 
 
@@ -169,6 +173,7 @@ def _run_once(
             "budget": evidence.budget,
             "replayed": replayed,
             "environment_hash": config.environment_hash,
+            "t_epoch": time.time(),
         },
     )
     # Materialize the selected evidence into the workspace and log access.
@@ -192,9 +197,63 @@ def _run_once(
         allowed_tools=list(manifest.get("allowed_tools", [])),
         limits=dict(manifest.get("resource_limits", {})),
     )
+    from .runners import LimitsTracker
+    from .toolkit import ToolBudgetExceeded
+
+    tracker = LimitsTracker(
+        max_tool_calls=int(ctx.limits.get("max_tool_calls", 60)),
+        max_wall_seconds=int(ctx.limits.get("max_wall_seconds", 1800)),
+    )
+    ctx.tracker = tracker
+    per_command_timeout = ctx.limits.get("per_command_timeout", 120)
+
+    # Run the agent on a daemon thread under a wall-clock watchdog.
+    # Cooperative boundary: toolkit calls enforce the budget, and
+    # per-command timeouts are hard (subprocess). An in-process runner
+    # stuck in pure computation without tool calls CANNOT be forcibly
+    # terminated from here — a hard kill requires an out-of-process
+    # runner boundary (documented in docs/evaluation_protocol.md).
+    import threading
+
+    box: dict = {}
     t0 = time.time()
-    result = runner.run(ctx, recorder)
+
+    def _target():
+        try:
+            box["result"] = runner.run(ctx, recorder)
+        except Exception as e:  # noqa: BLE001 — recorded, then scored as-is
+            box["error"] = e
+
+    thread = threading.Thread(target=_target, daemon=True)
+    thread.start()
+    thread.join(timeout=max(0.0, tracker.remaining_wall()))
+    orphaned = False
+    if thread.is_alive():
+        tracker.wall_limit_reached = True
+        recorder.record("timeout", {"kind": "attempt",
+                                    "max_wall_seconds": tracker.max_wall_seconds})
+        thread.join(timeout=5)
+        orphaned = thread.is_alive()
+        if orphaned:
+            recorder.record("limit_exceeded",
+                            {"kind": "wall_clock", "op": "runner-thread-still-alive"})
     wall_s = round(time.time() - t0, 2)
+    if "error" in box:
+        err = box["error"]
+        if isinstance(err, ToolBudgetExceeded):
+            pass  # toolkit already recorded the limit_exceeded event
+        else:
+            recorder.record("agent_note",
+                            {"kind": "error", "text": f"runner raised {type(err).__name__}: {err}"[:500]})
+        from .runners import AttemptResult as _AR
+        result = _AR(diagnosis=f"runner ended with {type(err).__name__}",
+                     verification_summary="no verification performed")
+    else:
+        result = box.get("result")
+        if result is None:  # watchdog fired and thread never returned
+            from .runners import AttemptResult as _AR
+            result = _AR(diagnosis="wall-clock deadline exceeded",
+                         verification_summary="no verification performed")
     if result.diagnosis:
         recorder.record("agent_note", {"kind": "diagnosis", "text": result.diagnosis[:2000]})
     if result.verification_summary:
@@ -204,7 +263,9 @@ def _run_once(
     diff_text = diff_workspace(workspace, baseline)
     (run_dir / "diff.patch").write_text(diff_text + "\n", encoding="utf-8")
     recorder.record("diff", {"summary": diff_text[:4000]})
-    recorder.record("run_end", {"wall_s": wall_s, "replayed": replayed})
+    recorder.record("run_end", {"wall_s": wall_s, "replayed": replayed,
+                                "limits": tracker.status(),
+                                "runner_orphaned": orphaned})
     traj_path = run_dir / "trajectory.jsonl"
     recorder.write_jsonl(traj_path)
 
@@ -266,6 +327,12 @@ def _run_once(
                 "manifest_sha256": sha256_file(task_dir / "manifest.json"),
                 "evidence_sha256": hash_tree(task_dir / "evidence") if (task_dir / "evidence").is_dir() else {},
                 "oracle_sha256": hash_tree(task_dir / "evaluator") if (task_dir / "evaluator").is_dir() else {},
+                "limits": dict(tracker.status(), per_command_timeout=per_command_timeout),
+                "runner_orphaned": orphaned,
+                "trust": ("custom runner code runs in-process and is trusted; "
+                          "confinement (workspace-only paths, scrubbed env, "
+                          "recorded sandbox) applies to toolkit-mediated "
+                          "file/command actions only"),
             },
             indent=2,
         )
@@ -432,6 +499,53 @@ def cmd_export_otel(args) -> int:
     return 0
 
 
+def cmd_plan_matrix(args) -> int:
+    from .experiment import (cost_upper_bound, expand_matrix, load_plan,
+                             matrix_count, plan_hash, validate_plan)
+
+    plan = load_plan(args.plan)
+    tasks_root = Path(args.tasks_root or (PILOT_ROOT / "tasks"))
+    issues = validate_plan(plan, tasks_root=tasks_root)
+    for i in issues:
+        print(f"{i.level.upper()}: {i.message}")
+    if any(i.level == "error" for i in issues):
+        print("PLAN INVALID — fix errors before running anything")
+        return 1
+    cells = expand_matrix(plan)
+    total = matrix_count(plan)
+    print(f"plan {plan.get('study')}: {len(plan['tasks'])} tasks x "
+          f"{len(plan['conditions'])} conditions x {len(plan['models'])} models x "
+          f"{plan['repetitions']} reps = {total} attempts")
+    print(f"order: {'randomized seed ' + str(plan.get('seed')) if plan.get('randomize') else 'fixed'}; "
+          f"repetitions are repeated attempts at the same cell, not independent tasks")
+    for m in plan["models"]:
+        n = sum(1 for c in cells if c["model"] == m["model_id"])
+        print(f"  tier {m['tier']}: {m['model_id']} ({m['model_version']}) -> {n} cells")
+    cost = cost_upper_bound(plan)
+    if cost.get("computable"):
+        for mid, c in cost["per_model"].items():
+            print(f"  cost upper bound {mid}: {c}")
+    else:
+        print(f"  cost: not computable ({cost.get('reason')}); "
+              "supply user prices + token assumption before any paid calls")
+    print("  WARNING: 3 tasks support no population-level claims, "
+          "however many repetitions run.")
+    if args.write:
+        out = Path(args.write)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        artifact = {
+            "planned": True,
+            "note": "Planned cells only — never experimental results.",
+            "plan_hash": plan_hash(plan),
+            "plan": plan,
+            "cells": cells,
+            "total": total,
+        }
+        out.write_text(json.dumps(artifact, indent=2) + "\n", encoding="utf-8")
+        print(f"wrote plan artifact -> {out}")
+    return 0
+
+
 def cmd_report(args) -> int:
     runs_root = Path(args.runs_root)
     records = []
@@ -534,6 +648,12 @@ def build_parser() -> argparse.ArgumentParser:
     e.add_argument("--run-dir", required=True)
     e.add_argument("--out", required=True)
     e.set_defaults(func=cmd_export_otel)
+
+    pm = sub.add_parser("plan-matrix", help="print/validate the experiment matrix (no agents, no APIs)")
+    pm.add_argument("--plan", required=True, help="path to experiment plan JSON")
+    pm.add_argument("--tasks-root", default=None)
+    pm.add_argument("--write", default=None, help="write plan artifact JSON (labeled planned:true)")
+    pm.set_defaults(func=cmd_plan_matrix)
 
     g2 = sub.add_parser("report", help="generate pilot report over runs/")
     g2.add_argument("--runs-root", default="results/runs")

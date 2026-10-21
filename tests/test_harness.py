@@ -82,14 +82,275 @@ class TestVerificationScoring(unittest.TestCase):
         events = [{"type": "command", "data": {"cmd": "ls -la", "rc": 0}}]
         self.assertFalse(_agent_verification_ran(events))
 
-    def test_structured_verification_counts(self):
+    def test_self_reported_verification_earns_nothing(self):
         from debev.cli import _agent_verification_ran
-        self.assertTrue(_agent_verification_ran(
-            [{"type": "verification", "data": {"name": "x", "result": "FAIL"}}]))
-        self.assertTrue(_agent_verification_ran(
+        self.assertFalse(_agent_verification_ran(
+            [{"type": "verification", "data": {"name": "x", "result": "PASS"}}]))
+
+    def test_unmarked_test_run_earns_nothing(self):
+        from debev.cli import _agent_verification_ran
+        self.assertFalse(_agent_verification_ran(
             [{"type": "test_run", "data": {"name": "x", "result": "PASS"}}]))
         self.assertFalse(_agent_verification_ran(
-            [{"type": "test_run", "data": {"name": "x"}}]))
+            [{"type": "test_run",
+              "data": {"name": "x", "result": "PASS", "via": "toolkit",
+                       "replayed": True}}]))
+
+    def test_toolkit_executed_check_counts(self):
+        from debev.cli import _agent_verification_ran
+        self.assertTrue(_agent_verification_ran(
+            [{"type": "test_run",
+              "data": {"name": "x", "result": "FAIL", "via": "toolkit"}}]))
+        self.assertTrue(_agent_verification_ran(
+            [{"type": "test_run",
+              "data": {"name": "x", "result": "INCONCLUSIVE", "via": "toolkit"}}]))
+
+
+class TestLimits(unittest.TestCase):
+    def test_tool_budget_stops_calls_and_records_event(self):
+        from debev.conditions import load_condition
+        from debev.runners import AttemptContext, LimitsTracker
+        from debev.toolkit import Toolkit, ToolBudgetExceeded
+        from debev.trajectory import TrajectoryRecorder
+
+        ev = load_condition(FIXTURE / "evidence", "symptom_only", 2000)
+        with tempfile.TemporaryDirectory() as tmp:
+            ctx = AttemptContext(run_id="r", task_id="t", condition="symptom_only",
+                                 workspace_dir=Path(tmp), evidence=ev,
+                                 allowed_tools=[], limits={"max_tool_calls": 2,
+                                                           "max_wall_seconds": 60})
+            rec = TrajectoryRecorder(run_id="r", task_id="t", condition="symptom_only")
+            tk = Toolkit(ctx, rec, LimitsTracker(2, 60))
+            tk.exec(["true"])
+            tk.exec(["true"])
+            with self.assertRaises(ToolBudgetExceeded):
+                tk.exec(["true"])
+            kinds = [e["type"] for e in rec.events]
+            self.assertIn("limit_exceeded", kinds)
+            self.assertEqual(tk.tracker.tool_calls, 2)
+            self.assertTrue(tk.tracker.tool_limit_reached)
+
+    def test_wall_deadline_blocks_tool_use(self):
+        import time as _time
+
+        from debev.conditions import load_condition
+        from debev.runners import AttemptContext, LimitsTracker
+        from debev.toolkit import Toolkit, ToolBudgetExceeded
+        from debev.trajectory import TrajectoryRecorder
+
+        ev = load_condition(FIXTURE / "evidence", "symptom_only", 2000)
+        with tempfile.TemporaryDirectory() as tmp:
+            ctx = AttemptContext(run_id="r", task_id="t", condition="symptom_only",
+                                 workspace_dir=Path(tmp), evidence=ev,
+                                 allowed_tools=[], limits={})
+            rec = TrajectoryRecorder(run_id="r", task_id="t", condition="symptom_only")
+            tracker = LimitsTracker(60, 1800)
+            tracker._t0 -= 2000  # pretend the deadline passed long ago
+            tk = Toolkit(ctx, rec, tracker)
+            with self.assertRaises(ToolBudgetExceeded) as cm:
+                tk.read("x")
+            self.assertEqual(cm.exception.kind, "wall_clock")
+            self.assertTrue(tracker.wall_limit_reached)
+
+    def test_command_timeout_is_inconclusive(self):
+        from debev.conditions import load_condition
+        from debev.runners import AttemptContext, LimitsTracker
+        from debev.toolkit import Toolkit
+        from debev.trajectory import TrajectoryRecorder
+
+        ev = load_condition(FIXTURE / "evidence", "symptom_only", 2000)
+        with tempfile.TemporaryDirectory() as tmp:
+            ctx = AttemptContext(run_id="r", task_id="t", condition="symptom_only",
+                                 workspace_dir=Path(tmp), evidence=ev,
+                                 allowed_tools=[], limits={})
+            rec = TrajectoryRecorder(run_id="r", task_id="t", condition="symptom_only")
+            tk = Toolkit(ctx, rec, LimitsTracker(60, 60))
+            result = tk.test("sleep-check", ["sleep", "30"], timeout=1)
+            self.assertEqual(result, "INCONCLUSIVE")
+            kinds = [e["type"] for e in rec.events]
+            self.assertIn("timeout", kinds)
+
+
+class TestSandboxGuarantees(unittest.TestCase):
+    def test_no_credential_inheritance(self):
+        import os
+
+        from debev.sandbox import run_command
+        os.environ["DEBEV_TEST_SECRET"] = "s3cret"
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                res = run_command(["env"], Path(tmp), timeout=30)
+                self.assertNotIn("DEBEV_TEST_SECRET", res.stdout)
+                self.assertNotIn("s3cret", res.stdout)
+        finally:
+            del os.environ["DEBEV_TEST_SECRET"]
+
+    def test_oracle_mount_is_read_only_under_bwrap(self):
+        from debev.sandbox import detect_isolation, run_command
+        if detect_isolation() != "bwrap-sandbox":
+            self.skipTest("bwrap unavailable; ro-mount guarantee needs bwrap")
+        with tempfile.TemporaryDirectory() as tmp:
+            ws = Path(tmp) / "ws"
+            ws.mkdir()
+            (ws / "f.txt").write_text("x")
+            res = run_command(
+                [sys.executable, "-c",
+                 "open('/workspace/f.txt','a').write('y')"],
+                Path(tmp), timeout=30,
+                extra_mounts=[(str(ws), "/workspace", "ro")],
+            )
+            self.assertNotEqual(res.returncode, 0)
+            self.assertEqual((ws / "f.txt").read_text(), "x")
+
+
+class TestOtelDeterminism(unittest.TestCase):
+    def _export_twice(self):
+        from debev.otel_export import export_otlp, validate_otlp
+        events = [
+            {"seq": 1, "t_wall_s": 0.0, "type": "run_start", "run_id": "r1",
+             "task_id": "t", "condition": "symptom_only",
+             "data": {"t_epoch": 1700000000.0}},
+            {"seq": 2, "t_wall_s": 1.5, "type": "command", "run_id": "r1",
+             "task_id": "t", "condition": "symptom_only",
+             "data": {"cmd": "ls", "rc": 0}},
+        ]
+        meta = {"run_id": "r1", "task_id": "t", "condition": "symptom_only"}
+        first = export_otlp(events, meta)
+        validate_otlp(first)
+        return first, export_otlp(events, meta)
+
+    def test_stable_ids_and_absolute_time(self):
+        first, second = self._export_twice()
+        self.assertEqual(first, second)
+        spans = first["resourceSpans"][0]["scopeSpans"][0]["spans"]
+        self.assertEqual(spans[1]["startTimeUnixNano"], str(1700000000_000_000_000 + 1_500_000_000))
+        tids = {s["traceId"] for s in spans}
+        self.assertEqual(len(tids), 1)
+        attrs = dict((a["key"], a.get("value", {})) for a in spans[0]["attributes"])
+        self.assertEqual(attrs["debev.time_basis"]["stringValue"], "absolute")
+
+    def test_ids_stable_across_processes(self):
+        code = (
+            "import json,sys; sys.path.insert(0,'src');"
+            "from debev.otel_export import export_otlp;"
+            "events=[{'seq':1,'t_wall_s':0.0,'type':'run_start','run_id':'rx',"
+            "'task_id':'t','condition':'c','data':{}}];"
+            "print(export_otlp(events,{'run_id':'rx'})"
+            "['resourceSpans'][0]['scopeSpans'][0]['spans'][0]['traceId'])"
+        )
+        outs = set()
+        for _ in range(2):
+            proc = subprocess.run(
+                [sys.executable, "-c", code], capture_output=True, text=True, cwd=ROOT,
+                env={"PATH": "/usr/bin:/bin", "PYTHONPATH": str(SRC)},
+            )
+            self.assertEqual(proc.returncode, 0, msg=proc.stderr)
+            outs.add(proc.stdout.strip())
+        self.assertEqual(len(outs), 1)  # no PYTHONHASHSEED dependence
+
+    def test_relative_basis_without_epoch(self):
+        from debev.otel_export import export_otlp
+        events = [{"seq": 1, "t_wall_s": 2.0, "type": "command", "run_id": "r",
+                   "task_id": "t", "condition": "c", "data": {}}]
+        doc = export_otlp(events, {"run_id": "r"})
+        spans = doc["resourceSpans"][0]["scopeSpans"][0]["spans"]
+        self.assertEqual(spans[0]["startTimeUnixNano"], str(2_000_000_000))
+        attrs = {a["key"]: a.get("value", {}) for a in spans[0]["attributes"]}
+        self.assertEqual(attrs["debev.time_basis"]["stringValue"], "relative")
+
+
+class TestMatrixPlanning(unittest.TestCase):
+    def _plan(self, **over):
+        plan = {"plan_version": "1.0.0", "study": "s",
+                "tasks": ["slot_01", "slot_02", "slot_03"],
+                "models": [{"tier": "TIER_A", "model_id": "m-a", "model_version": "v1",
+                            "temperature": 0.0, "settings": {}},
+                           {"tier": "TIER_B", "model_id": "m-b", "model_version": "v1",
+                            "temperature": 0.0, "settings": {}}],
+                "harness": {"name": "h", "version": "0.1.0", "tool_policy": "shared"},
+                "conditions": ["symptom_only", "repro_log", "state_snapshot",
+                               "code_note", "combined"],
+                "repetitions": 3, "seed": 7, "randomize": True,
+                "limits": {"max_tool_calls": 60, "max_wall_seconds": 1800,
+                           "max_evidence_tokens": 2000},
+                "budgeting": {}, "provenance": {}}
+        plan.update(over)
+        return plan
+
+    def test_default_matrix_is_90(self):
+        from debev.experiment import expand_matrix, matrix_count
+        plan = self._plan()
+        self.assertEqual(matrix_count(plan), 90)
+        cells = expand_matrix(plan)
+        self.assertEqual(len(cells), 90)
+        # every model covers every task x condition
+        for m in ("m-a", "m-b"):
+            got = {(c["task"], c["condition"]) for c in cells if c["model"] == m}
+            self.assertEqual(len(got), 15)
+        # repetitions are same-cell repeats, not distinct tasks
+        reps = {(c["task"], c["condition"], c["model"]) for c in cells}
+        self.assertEqual(len(reps), 30)
+
+    def test_order_deterministic_by_seed(self):
+        from debev.experiment import expand_matrix
+        self.assertEqual(expand_matrix(self._plan()), expand_matrix(self._plan()))
+
+    def test_plan_validation(self):
+        import tempfile as _tf
+        from debev.experiment import validate_plan
+        two_models = [
+            {"tier": "TIER_A", "model_id": "TODO-pick-me", "model_version": "v1",
+             "temperature": 0.0, "settings": {}},
+            {"tier": "TIER_B", "model_id": "m-b", "model_version": "v1",
+             "temperature": 0.0, "settings": {}},
+        ]
+        bad = self._plan(models=two_models)
+        errs = [i for i in validate_plan(bad) if i.level == "error"]
+        self.assertTrue(any("placeholder" in i.message for i in errs))
+        dup = self._plan(tasks=["slot_01", "slot_01"])
+        self.assertTrue(any(i.level == "error" for i in validate_plan(dup)))
+        with _tf.TemporaryDirectory() as tmp:
+            errs2 = [i for i in validate_plan(self._plan(), tasks_root=tmp)
+                     if i.level == "error"]
+            self.assertTrue(any("missing" in i.message for i in errs2))
+
+    def test_cost_needs_user_prices(self):
+        from debev.experiment import cost_upper_bound
+        self.assertFalse(cost_upper_bound(self._plan())["computable"])
+        priced = self._plan(budgeting={
+            "assumed_max_tokens_per_attempt": 50000,
+            "prices": {"m-a": {"input_per_1k": 1.0, "output_per_1k": 2.0,
+                               "currency": "USD", "source": "user-supplied"}}})
+        cost = cost_upper_bound(priced)
+        self.assertTrue(cost["per_model"]["m-a"]["computable"])
+        self.assertFalse(cost["per_model"]["m-b"]["computable"])
+
+    def test_plan_matrix_cli_dry_run(self):
+        import tempfile as _tf
+        with _tf.TemporaryDirectory() as tmp:
+            # Build a temp tasks root with matching manifests (real slots
+            # are placeholders and must NOT validate as runnable tasks).
+            tasks_root = Path(tmp) / "tasks"
+            for tid in ("slot_01", "slot_02", "slot_03"):
+                d = tasks_root / tid
+                d.mkdir(parents=True)
+                (d / "manifest.json").write_text(json.dumps({
+                    "task_id": tid, "conditions": ["symptom_only", "repro_log",
+                    "state_snapshot", "code_note", "combined"]}))
+            plan_path = Path(tmp) / "plan.json"
+            plan_path.write_text(json.dumps(self._plan()))
+            proc = subprocess.run(
+                [sys.executable, "-m", "debev.cli", "plan-matrix",
+                 "--plan", str(plan_path), "--tasks-root", str(tasks_root),
+                 "--write", str(Path(tmp) / "exp.json")],
+                capture_output=True, text=True, cwd=ROOT,
+                env={"PATH": "/usr/bin:/bin", "PYTHONPATH": str(SRC)},
+            )
+            self.assertEqual(proc.returncode, 0, msg=proc.stdout + proc.stderr)
+            self.assertIn("90 attempts", proc.stdout)
+            artifact = json.loads((Path(tmp) / "exp.json").read_text())
+            self.assertTrue(artifact["planned"])
+            self.assertEqual(artifact["total"], 90)
 
 
 class TestHumanGrade(unittest.TestCase):

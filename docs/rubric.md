@@ -40,9 +40,10 @@ Efficiency is reported separately and never affects the total.
 ## Machine vs human summary
 
 - Machine-graded: functional (50), compatibility (15), constraint (10),
-  verification-ran half (2.5 — structured `verification`/`test_run` events
-  only; bare commands and the evaluator's oracle run never count).
-  Implemented in `src/debev/rubric.py`.
+  verification-ran half (2.5 — only `test_run` events with an explicit
+  verdict executed through the toolkit count; self-reported `verification`
+  events, bare commands, and the evaluator's oracle run never count).
+  Implemented in `src/debev/rubric.py` (`cli._agent_verification_ran`).
 - Human-graded: diagnosis (20), reporting-accuracy half (2.5). Until graded,
   components read `0.0` with a `PENDING HUMAN GRADE` marker — reports render
   this as **"PENDING (not a zero)"**, so an ungraded run is never confused

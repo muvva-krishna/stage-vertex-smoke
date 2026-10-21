@@ -126,8 +126,39 @@ available — the recorded `isolation` level states what was actually used.
 | `debev score --run-dir …` | print stored score |
 | `debev grade --run-dir … --diagnosis-pts … --reporting-pts … --grader …` | persist a human grade |
 | `debev audit-task --task-dir …` | oracle soundness check (broken FAIL / reference PASS / partials FAIL) |
+| `debev plan-matrix --plan … [--write …]` | validate + print the experiment matrix (no agents, no APIs); optional `planned:true` artifact |
 | `debev export-otel --run-dir … --out …` | OTLP JSON trace export |
 | `debev report --runs-root … --out …` | pilot report (Markdown + JSON sidecar) |
+
+## Experiment design (two model tiers, one harness)
+
+The planned study is **3 tasks × 5 conditions × 2 models × 3 reps = 90
+attempts** (exploratory; three tasks support no population claims), with a
+60-attempt (2-rep) option when cost requires it. Both tiers — one stronger
+coding model, one smaller/cheaper or local model — run through the **same**
+agent harness and tool interface, so the model is the variable. See
+`configs/experiment_plan.template.json` (placeholders only — freeze exact
+model versions before running) and `docs/model_selection.md` (checklist +
+cost estimation from user-supplied prices; no paid calls in this stage):
+
+```bash
+export PYTHONPATH=src
+python3 -m debev.cli plan-matrix --plan configs/experiment_plan.template.json
+```
+
+## Resource limits (enforced, not just recorded)
+
+## Resource limits (enforced, not just recorded)
+
+- `max_tool_calls` per attempt: hard — further toolkit calls raise
+  `ToolBudgetExceeded` after a `limit_exceeded` event is recorded.
+- `max_wall_seconds` per attempt: watchdog thread + cooperative toolkit
+  checks; `timeout`/`limit_exceeded` events and `runner_orphaned` flag on
+  expiry. In-process runners stuck in pure computation cannot be forcibly
+  killed (documented boundary — hard kills need an out-of-process runner).
+- `per_command_timeout`: hard subprocess timeout; tests map it to
+  `INCONCLUSIVE`, never to a pass.
+- `run_meta.json → limits` records budgets and whether each was reached.
 
 ## What the experiment claims
 
@@ -145,9 +176,10 @@ evidence-type attribution. See `docs/evaluation_protocol.md`.
   agent code.
 - Evidence-token counting is a documented whitespace approximation, not a
   model tokenizer.
-- Machine verification credit requires structured `verification`/`test_run`
-  events; bare shell commands earn nothing, and the evaluator's oracle run
-  never counts as agent verification.
+- Machine verification credit requires an executed `test_run` through the
+  toolkit; self-reported `verification` events, bare shell commands, and the
+  evaluator's oracle run earn nothing (self-reports are kept for human
+  grading of reporting accuracy).
 - No paid model APIs are called anywhere; the default runner is a no-op, the
   bundled runners are local deterministic probes, and replay data is
   synthetic fixture data.

@@ -49,7 +49,35 @@ retro-fit it onto this five-condition pilot.
 - Agent tool access is fixed per task (`allowed_tools`); the oracle,
   evaluator directory, and answer data are never agent-accessible.
 
-## Reporting rules
+## Analysis plan (prewritten before any model runs)
+
+- **Primary outcome:** functional repair pass rate, tabulated by
+  task × condition × model (per-task tables; raw attempt counts shown).
+- **Paired comparisons:** each evidence condition compared against
+  `symptom_only` *within the same task and model* (paired by repetition
+  order where applicable). Report raw differences only.
+- **Secondary outcomes:** diagnosis rubric points, compatibility/regression
+  points, constraint adherence, verification accuracy (human), plus tool
+  calls, tokens where available, and wall time — each reported separately.
+- **Model × evidence-condition comparison:** descriptive only (e.g. whether
+  the weaker tier gains pass rate while the stronger tier gains efficiency,
+  as DDBench observed). No causal attribution beyond the observed cells.
+- **Scale warning (repeat in every report):** three tasks are too few for
+  population-level claims about coding agents, regardless of how many
+  repeated attempts run. Repetitions show within-cell stability, not breadth.
+- **Packet-size statement:** the five conditions compare realistic packets
+  of different sizes; they do not isolate evidence content from evidence
+  quantity. Length-matched or neutral-context controls are a possible
+  *later study*, never a retrofitted claim on this matrix.
+- **No significance claims or confidence intervals** unless a method
+  appropriate to three tasks is chosen and fully explained. Default: none.
+- **Blind human grading** of diagnosis/report summaries (model and condition
+  hidden where practical); record grader, blinding, and exceptions.
+- **Stop rule:** do not run the model matrix until (a) all three tasks pass
+  `audit-task`, and (b) an agent/tooling smoke check reproduces real tool
+  actions in a trajectory on a fixture or draft task.
+
+## Reporting rules (existing, retained)
 
 - Correctness pass rate is the primary outcome. Efficiency (tool calls,
   tests run, tokens where available, wall-clock, retries) is reported
@@ -71,8 +99,8 @@ retro-fit it onto this five-condition pilot.
 
 - Each attempt gets an isolated `workspace/` copy; evaluator checks run in
   `evaluator/` outside it. Agent commands and oracle runs execute with a
-  scrubbed environment (small allowlist, no secrets forwarded) via
-  `src/debev/sandbox.py`.
+  scrubbed environment (small allowlist — credentials are never inherited
+  by task commands) via `src/debev/sandbox.py`.
 - If `bwrap` (bubblewrap) is installed *and* passes a live usability probe,
   subprocesses are confined so only the working directory is visible
   read-write (interpreter libraries read-only). Otherwise the setup is
@@ -83,3 +111,30 @@ retro-fit it onto this five-condition pilot.
   `sandbox_available`). Reports must state the recorded level — never claim
   a container boundary that was not used. For untrusted agent code, run on
   a host with `bwrap` (or a real container) and record that in the config.
+
+## Runner trust and sandbox scope (read before connecting an agent)
+
+- **Trusted:** custom `AgentRunner` code (loaded from `--runner`) runs
+  in-process with full harness privileges — treat it like harness code, not
+  like model output. Review it before use.
+- **Confined:** actions mediated by `debev.toolkit` — file reads/writes are
+  path-checked to the run workspace; spawned commands get a scrubbed
+  environment (no credentials) and the recorded sandbox. A custom runner
+  that shells out on its own bypasses all of this; runners must use the
+  toolkit for confinement.
+- **Evaluator files** are never mounted in the agent's sandbox (bwrap binds
+  only the workspace plus read-only interpreter libraries). The oracle
+  mounts the workspace read-only, so under bwrap it can read but not modify
+  agent files.
+- **Fallback is not a boundary:** `fs-separation` keeps honest agents out of
+  evaluator files; it does not stop a process that reaches for parent paths
+  and must never be presented as a security boundary.
+- **Limits:** per-attempt tool-call budgets are hard (further toolkit calls
+  raise after recording `limit_exceeded`); per-command timeouts are hard
+  (subprocess); the attempt wall clock is enforced cooperatively (toolkit
+  checks) plus a watchdog that marks `timeout`/`limit_exceeded` and records
+  `runner_orphaned` if the thread survives. An in-process runner stuck in
+  pure computation without tool calls cannot be forcibly terminated — a hard
+  kill requires an out-of-process runner boundary. `run_meta.json → limits`
+  records the configured budgets and whether each was reached: do not report
+  a limit as enforced unless the metadata shows the mechanism above.

@@ -1,0 +1,41 @@
+{
+  "plan_version": "1.0.0",
+  "study": "which-realistic-debugging-evidence-packet-works-best",
+  "tasks": ["slot_01", "slot_02", "slot_03"],
+  "models": [
+    {
+      "tier": "TIER_A",
+      "model_id": "TODO: exact stronger coding model ID",
+      "model_version": "TODO: freeze exact version/snapshot date before running",
+      "temperature": 0.0,
+      "settings": {}
+    },
+    {
+      "tier": "TIER_B",
+      "model_id": "TODO: exact smaller/cheaper or local model ID",
+      "model_version": "TODO: freeze exact version/snapshot date before running",
+      "temperature": 0.0,
+      "settings": {}
+    }
+  ],
+  "harness": {
+    "name": "debev-AgentRunner",
+    "version": "0.1.0",
+    "tool_policy": "One shared harness and tool interface for both tiers. Record any unavoidable per-model differences in run metadata; never compare different harnesses and attribute the result to model choice."
+  },
+  "conditions": ["symptom_only", "repro_log", "state_snapshot", "code_note", "combined"],
+  "repetitions": 3,
+  "seed": 0,
+  "randomize": true,
+  "limits": {
+    "max_tool_calls": 60,
+    "max_wall_seconds": 1800,
+    "max_evidence_tokens": 2000,
+    "per_command_timeout": 120
+  },
+  "budgeting": {
+    "assumed_max_tokens_per_attempt": null,
+    "prices": {}
+  },
+  "provenance": {}
+}

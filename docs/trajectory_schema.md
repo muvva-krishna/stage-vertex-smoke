@@ -26,13 +26,19 @@ Field order is not significant. Times are wall-clock seconds since `run_start`.
 - `file_read`: `{path}` — agent read of a workspace file.
 - `file_write`: `{path}` (+ optional `bytes`) — agent write in the workspace.
 - `command`: `{cmd, rc, output?}` — shell command executed by/for the agent.
-- `test_run`: `{name, result}` — `result` in {`PASS`, `FAIL`, `ERROR`,
-  `INCONCLUSIVE`}. A test the agent (or its harness) actually executed.
-- `verification`: `{name, result, detail}` — the agent's explicit structured
-  verification claim (`result` in {`PASS`, `FAIL`, `ERROR`, `INCONCLUSIVE`}).
-  This is what earns the machine half of the verification/reporting rubric
-  points. Bare shell commands never count, and the evaluator's own oracle
-  run is recorded separately and never counts as agent verification.
+- `test_run`: `{name, result, via?, ...}` — `result` in {`PASS`, `FAIL`,
+  `ERROR`, `INCONCLUSIVE`}. A test the agent (or its harness) actually
+  executed. Only `test_run` events executed through the toolkit
+  (`via: "toolkit"`, not replayed) earn **machine** verification credit.
+- `verification`: `{name, result, detail}` — the agent's explicit final
+  claim (`result` in {`PASS`, `FAIL`, `ERROR`, `INCONCLUSIVE`}).
+  Free-form/self-reported: recorded for **human** grading of reporting
+  accuracy, but NEVER earns machine verification credit on its own.
+- `timeout`: `{kind, ...}` — `kind` in {`command`, `test`, `attempt`}: a
+  per-command timeout (`TIMEOUT`, mapped to `INCONCLUSIVE` for tests) or
+  the attempt wall-clock watchdog firing.
+- `limit_exceeded`: `{kind, op}` — `kind` in {`tool_calls`, `wall_clock`}:
+  the per-attempt budget stopped further tool calls.
 - `agent_note`: `{kind, text}` — `kind` in {`diagnosis`, `verification`}.
   Short user-visible summaries only. **Private chain-of-thought, hidden
   reasoning, and system prompts are never collected**; the recorder rejects

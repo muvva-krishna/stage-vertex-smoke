@@ -1,6 +1,8 @@
 # Task authoring spec (human-authored tasks)
 
 Every portfolio task must satisfy this checklist before it is admitted.
+The three eventual tasks must additionally have **distinct root-cause
+mechanisms** (different bug classes, not three variants of one failure).
 Placeholders live in `tasks/slot_*/`; the fixture in `fixtures/` must never
 be presented as a task.
 
@@ -60,6 +62,15 @@ be presented as a task.
 
 ## 6. Provenance and originality
 - [ ] Author, date, and source recorded in `manifest.json → provenance`.
+- [ ] Task authored AND solved by the human owner (reference solution is
+      yours; the agent never sees it).
+- [ ] Broken starting state is deterministic (same failure on re-runs).
+- [ ] `debev audit-task` passes: broken FAILs, reference PASSes, partials FAIL.
+- [ ] Evidence artifacts are realistic and truthful and do not reveal the answer.
+- [ ] Same public instructions + repository snapshot in every condition.
+- [ ] Human diagnosis rubric accepts valid alternative repairs.
+- [ ] Run/task/evidence/oracle hashes recorded (automatic in run_meta.json).
+- [ ] Manually reviewed for ambiguity and accidental answer leakage.
 - [ ] Task is original and human-authored. Confirm no copying of benchmark
       tasks, prompts, hidden tests, datasets, or answer keys from
       `docs/related_work.md` sources.
