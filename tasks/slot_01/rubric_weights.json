@@ -1,0 +1,7 @@
+{
+  "functional": {
+    "clean_run": 1.0,
+    "resume_completes": 2.0,
+    "idempotent_rerun": 1.0
+  }
+}

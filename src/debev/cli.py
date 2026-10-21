@@ -568,6 +568,7 @@ def cmd_run_matrix(args) -> int:
         mode=args.mode,
         authorize_spend=args.authorize_spend,
         fresh=args.fresh,
+        smoke_task=Path(args.smoke_task) if args.smoke_task else None,
     )
 
 
@@ -693,6 +694,8 @@ def build_parser() -> argparse.ArgumentParser:
                     help="REQUIRED for execute: confirms explicit instruction for paid calls")
     rm.add_argument("--fresh", action="store_true",
                     help="ignore existing state and restart (completed cells re-run)")
+    rm.add_argument("--smoke-task", default=None,
+                    help="smoke mode target: validated draft task dir (default: plumbing fixture)")
     rm.set_defaults(func=cmd_run_matrix)
 
     g2 = sub.add_parser("report", help="generate pilot report over runs/")

@@ -1,5 +1,10 @@
 # Which Debugging Evidence Helps a Coding Agent? — evaluation pilot harness
 
+> **Variant notice (this branch):** the tasks in `tasks/slot_01–03` are
+> AI-authored synthetics (see `docs/autonomous_authoring.md`). This is an
+> autonomous-pilot variant for pipeline validation — not a completed
+> benchmark, and not human-authored ground truth.
+
 A small, reproducible pilot instrument for a focused question: when an agent
 repairs a realistic software failure, **which bounded evidence artifacts**
 help it diagnose and fix the problem — and when does extra evidence waste

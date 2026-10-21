@@ -743,6 +743,29 @@ class TestRunMatrixDriver(unittest.TestCase):
             meta = json.loads((Path(tmp) / "runs" / "smoke-loopback" / "run_meta.json").read_text())
             self.assertTrue(meta.get("plumbing_only"))
 
+    def test_smoke_on_audited_draft_task(self):
+        import shutil as _shutil
+        with tempfile.TemporaryDirectory() as tmp:
+            tasks_root = self._fixture_task(tmp, "t1")
+            proc = subprocess.run(
+                [sys.executable, "-m", "debev.cli", "run-matrix",
+                 "--plan", str(self._write_plan(tmp)),
+                 "--mode", "smoke", "--smoke-task", str(tasks_root / "t1"),
+                 "--tasks-root", str(tasks_root),
+                 "--runs-root", str(Path(tmp) / "runs"),
+                 "--state", str(Path(tmp) / "state.json")],
+                capture_output=True, text=True, cwd=ROOT,
+                env={"PATH": "/usr/bin:/bin", "PYTHONPATH": str(SRC)},
+            )
+            self.assertEqual(proc.returncode, 0, msg=proc.stdout + proc.stderr)
+            self.assertIn("draft task", proc.stdout)
+            self.assertIn("SMOKE PASSED", proc.stdout)
+
+    def _write_plan(self, tmp):
+        plan_path = Path(tmp) / "plan.json"
+        plan_path.write_text(json.dumps(self._mini_plan(["t1"])))
+        return plan_path
+
 
 if __name__ == "__main__":
     unittest.main()

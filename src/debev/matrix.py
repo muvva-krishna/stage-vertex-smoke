@@ -157,7 +157,8 @@ def _cell_transient_failure(runs_root: Path, run_id: str) -> bool:
 def run_matrix(plan_path: Path, tasks_root: Path, runs_root: Path,
                state_path: Path, mode: str,
                authorize_spend: bool = False, fresh: bool = False,
-               transport_factory: Callable[[dict], Any] | None = None) -> int:
+               transport_factory: Callable[[dict], Any] | None = None,
+               smoke_task: Path | None = None) -> int:
     """Execute the matrix. transport_factory(model_entry) overrides provider
     transport (loopback for smoke/tests). Returns process exit code."""
     from .cli import _run_once
@@ -206,7 +207,8 @@ def run_matrix(plan_path: Path, tasks_root: Path, runs_root: Path,
     state["currency"] = (budgeting.get("spend_cap", {}) or {}).get("currency")
 
     if mode == "smoke":
-        return _smoke(plan, tasks_root, runs_root, transport_factory)
+        return _smoke(plan, tasks_root, runs_root, transport_factory,
+                      smoke_task=smoke_task)
     cells = expand_matrix(plan)
     print(f"== matrix: {len(cells)} cells ==")
 
@@ -325,23 +327,22 @@ def _stamp_tier(run_dir: Path, tier: str, model_id: str) -> None:
 
 
 def _smoke(plan: dict, tasks_root: Path, runs_root: Path,
-           transport_factory: Callable[[dict], Any] | None) -> int:
-    """One plumbing-only attempt through the real model loop (loopback)."""
-    from .cli import _run_once
+           transport_factory: Callable[[dict], Any] | None,
+           smoke_task: Path | None = None) -> int:
+    """One plumbing-only attempt through the real model loop (loopback).
+
+    Default target is the plumbing fixture; smoke_task points at a
+    validated draft task instead. Loopback transport either way: no
+    provider calls, no cost, output never a model result.
+    """
+    from .cli import _run_once, audit_task_dir
     from .config import RunConfig, compute_environment_hash
     from .model_runner import LoopbackTransport
 
-    print("== smoke: loopback model loop on plumbing fixture ==")
-    from .cli import audit_task_dir
-    fixture = Path(__file__).resolve().parents[2] / "fixtures" / "plumbing_fixture"
-    rc, messages = audit_task_dir(fixture)
-    for m in messages:
-        print(f"  audit fixture: {m}")
-    if rc != 0:
-        print("SMOKE ABORTED: fixture audit failed")
-        return 1
-    script = [
-        json.dumps({"actions": [
+    if smoke_task is None:
+        target = Path(__file__).resolve().parents[2] / "fixtures" / "plumbing_fixture"
+        label, run_id = "plumbing fixture", "smoke-loopback"
+        script = [json.dumps({"actions": [
             {"op": "read", "path": "counter.py"},
             {"op": "test", "name": "smoke-repro",
              "cmd": [sys.executable, "-c",
@@ -349,8 +350,26 @@ def _smoke(plan: dict, tasks_root: Path, runs_root: Path,
             {"op": "verify", "name": "smoke-claim", "result": "FAIL",
              "detail": "loopback smoke (plumbing-only)"},
             {"op": "finish", "diagnosis": "loopback smoke (plumbing-only)",
-             "verification_summary": "loopback smoke (plumbing-only)"}]}),
-    ]
+             "verification_summary": "loopback smoke (plumbing-only)"}]})]
+    else:
+        target = Path(smoke_task)
+        label, run_id = "draft task", f"smoke-{target.name}"
+        script = [json.dumps({"actions": [
+            {"op": "read", "path": "TASK_INSTRUCTIONS.md"},
+            {"op": "test", "name": "smoke-compile",
+             "cmd": [sys.executable, "-c",
+                     "import compileall,sys; sys.exit(0 if compileall.compile_dir('.', quiet=1) else 1)"]},
+            {"op": "verify", "name": "smoke-claim", "result": "INCONCLUSIVE",
+             "detail": "loopback smoke on draft task (plumbing-only)"},
+            {"op": "finish", "diagnosis": "loopback smoke (plumbing-only)",
+             "verification_summary": "loopback smoke (plumbing-only)"}]})]
+    print(f"== smoke: loopback model loop on {label} ({target}) ==")
+    rc, messages = audit_task_dir(target)
+    for m in messages:
+        print(f"  audit {label}: {m}")
+    if rc != 0:
+        print(f"SMOKE ABORTED: {label} audit failed")
+        return 1
     model = plan["models"][0]
     transport = LoopbackTransport(script) if transport_factory is None \
         else transport_factory(model)
@@ -363,17 +382,19 @@ def _smoke(plan: dict, tasks_root: Path, runs_root: Path,
     config = RunConfig(model=model["model_id"], model_version=model["model_version"],
                        harness="debev-smoke", temperature=0.0, seed=0,
                        environment_hash=compute_environment_hash())
-    run_dir = _run_once(fixture, "symptom_only", runs_root, "smoke-loopback",
+    run_dir = _run_once(target, "symptom_only", runs_root, run_id,
                         config, runner, "model-loopback(smoke)", replayed=False)
     from .trajectory import read_jsonl
     events = read_jsonl(run_dir / "trajectory.jsonl")
     kinds = {e["type"] for e in events}
+    writes = [e["data"].get("path", "") for e in events if e["type"] == "file_write"]
     checks = {
         "file_read observed": "file_read" in kinds,
         "executed test observed": any(e["type"] == "test_run" and
                                       e.get("data", {}).get("via") == "toolkit"
                                       for e in events),
-        "no writes outside workspace": True,  # toolkit path-checks; writes land in workspace
+        "no writes outside workspace": all(".." not in p and not p.startswith("/")
+                                           for p in writes),
     }
     ok = all(checks.values())
     for k, v in checks.items():

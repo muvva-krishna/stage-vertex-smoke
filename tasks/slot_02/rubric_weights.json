@@ -1,0 +1,7 @@
+{
+  "functional": {
+    "dedup_case_variants": 2.0,
+    "distinct_kept": 1.0,
+    "repeat_import_stable": 1.0
+  }
+}

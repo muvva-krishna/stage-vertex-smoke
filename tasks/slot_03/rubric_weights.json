@@ -1,0 +1,7 @@
+{
+  "functional": {
+    "fresh_hit": 1.0,
+    "expired_miss": 2.0,
+    "prune_expired_only": 1.0
+  }
+}

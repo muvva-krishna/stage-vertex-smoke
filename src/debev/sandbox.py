@@ -4,9 +4,10 @@ Honest isolation model:
   - Always: agent/oracle subprocesses run with a scrubbed environment
     (small allowlist; secrets are never forwarded) and a timeout.
   - Best effort: if `bwrap` (bubblewrap) is installed, the subprocess is
-    confined so that only the given working directory is visible
-    read-write; the evaluator directory and the rest of the filesystem
-    are not mounted. Python itself is exposed read-only.
+    confined under a tmpfs root so the host filesystem is hidden: only the
+    given working directory is visible read-write, plus read-only
+    interpreter libraries. The evaluator directory and the rest of the
+    host filesystem are not mounted and not reachable.
   - Fallback: plain filesystem separation (workspace vs evaluator
     directories). This does NOT stop a malicious agent that reaches for
     parent paths — it only keeps honest agents out of evaluator files.
@@ -31,17 +32,19 @@ _BWRAP_PROBE: bool | None = None
 
 
 def _bwrap_prefix(workdir: Path, extra_mounts: list[tuple]) -> list[str]:
-    """Prefix exposing workdir at /work (rw), extra mounts, + libs (ro)."""
+    """Prefix hiding the host filesystem (tmpfs root) and exposing only
+    workdir at /work (rw), extra mounts, + interpreter libs (ro)."""
     prefix = [
         "bwrap",
         "--unshare-all",
         "--die-with-parent",
+        "--tmpfs", "/",
         "--ro-bind", "/usr", "/usr",
         "--ro-bind", "/lib", "/lib",
         "--ro-bind", "/lib64", "/lib64",
         "--ro-bind", "/etc", "/etc",
         "--bind", str(workdir), "/work",
-        "--dir", "/tmp",
+        "--tmpfs", "/tmp",
         "--chdir", "/work",
     ]
     for host, sb, mode in extra_mounts:
