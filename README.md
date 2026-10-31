@@ -1,33 +1,155 @@
-# Can stale debugging notes misdirect code localization?
+# Which Debugging Evidence Helps a Coding Agent? — evaluation pilot harness
 
-This repository is a small, reproducible experiment about **debugging evidence freshness**. It checks whether a simple file-localization baseline is misled by notes from an older code revision, and whether filtering evidence by revision metadata avoids that error.
+A small, reproducible pilot instrument for a focused question: when an agent
+repairs a realistic software failure, **which bounded evidence artifacts**
+help it diagnose and fix the problem — and when does extra evidence waste
+effort or mislead?
 
-The experiment is intentionally narrow: eight synthetic Python debugging cases, three evidence conditions, three transparent retrieval strategies, and 72 deterministic trials. It needs only Python 3.10+ and makes no model/API calls.
+This repo is the **harness + rubric + task slots**, not a benchmark claim.
+It is a three-task pilot scaffold with careful task infrastructure,
+controlled evidence conditions, executable ground truth, trajectory capture,
+and failure analysis. See `docs/related_work.md` for how it connects to
+DDBench, TRAIL, SWT-Bench, ConcurBugBench, and coding-agent-bench — and what
+was deliberately *not* copied.
 
-## Run it
+## Setup
+
+Requirements: Python 3.10+ only (no third-party dependencies).
 
 ```bash
-python3 experiments/staleness_probe.py
+git clone <this-repo> && cd debugging-evidence-pilot
+export PYTHONPATH=src
+python3 -m debev.cli validate fixtures/plumbing_fixture/manifest.json
+python3 -m unittest discover -s tests -v
 ```
 
-The script writes the complete trial data and summary to [`results/staleness_probe.json`](results/staleness_probe.json); a readable summary is in [`results/RESULTS.md`](results/RESULTS.md). The method, case definitions, scoring rule, and output are all in the repository; no credentials or external dataset are needed.
+## Architecture
 
-## What it measures
+See `docs/architecture.md`. In one picture: a versioned task manifest, a
+deterministic 5-condition evidence loader, an `AgentRunner` interface, an
+isolated per-attempt workspace (evaluator files stay outside it), a
+`GROUP PASS|FAIL` oracle protocol, a JSONL trajectory recorder (no
+chain-of-thought), a 100-point rubric with explicit human-grade
+placeholders, and a report generator. Full module map in the architecture
+doc.
 
-Each case has four candidate files and one known target file. The experiment compares:
+## Task authoring (human-authored, original)
 
-- `issue_only`: rank files using words in the symptom alone.
-- `all_evidence`: add every supplied debugging artifact, regardless of the code revision it describes.
-- `revision_gated`: add only artifacts tagged with the current code revision.
+Real tasks live in `tasks/slot_01|02|03/`. Follow `docs/task_authoring_spec.md`.
+The checklist covers realistic multi-file instructions, pinned repo
+snapshots, four evidence files within a shared token budget, evaluator-only
+ground truth (oracle, reference patch, hidden assertions, accepted
+diagnosis), constraints, and provenance. Suggested domain for one slot: a
+deterministic Python CLI maintenance problem such as safe recovery after an
+interrupted configuration migration.
 
-The conditions provide a current trace, an older note that points at a distractor file, or both. The ranker counts lexical overlap between the issue/evidence text and short candidate-file summaries. The primary metric is top-1 target-file accuracy; mean reciprocal rank is also reported. This is a controlled probe of one failure mode, not a model benchmark or a test of code repair.
+> The final task prompts, reference patches, hidden assertions, and accepted
+> diagnoses are **yours to author** and must be human-written and original.
+> This repo ships only placeholders. `debev validate` rejects manifests that
+> embed answers.
 
-## Result
+## Running a replay (dry-run plumbing check, no model involved)
 
-In this constructed sample, the unfiltered evidence ranker localized **3/8** targets with stale notes alone, compared with **6/8** for the issue-only baseline. With both current and stale evidence it reached **7/8**. Revision-gated evidence reached **6/8**, **8/8**, and **8/8** in those same conditions. On clean, current evidence, both evidence-using methods reached **8/8**. These counts are descriptive results for these eight toy cases; they do not estimate real-world agent performance.
+```bash
+export PYTHONPATH=src
+rm -rf /tmp/opencode/debev-demo && mkdir -p /tmp/opencode/debev-demo
+cp -r fixtures/plumbing_fixture /tmp/opencode/debev-demo/task
+python3 -m debev.cli replay \
+  --task-dir /tmp/opencode/debev-demo/task \
+  --condition combined \
+  --runs-root /tmp/opencode/debev-demo/runs \
+  --run-id-prefix demo \
+  --replay-file fixtures/replay_example.jsonl
+python3 -m debev.cli report \
+  --runs-root /tmp/opencode/debev-demo/runs \
+  --out /tmp/opencode/debev-demo/REPORT.md
+cat /tmp/opencode/debev-demo/REPORT.md
+```
 
-## Motivation and limits
+Output is labeled `replayed: true` end to end — replayed data is **never**
+described as a real model run.
 
-Recent coding-agent research measures which context agents retrieve and how debugging context changes repair outcomes. This probe takes a small adjacent step: it makes artifact revision provenance an explicit variable and measures the effect on a lexical file ranker. See [`docs/related_work.md`](docs/related_work.md) and [`docs/evaluation_protocol.md`](docs/evaluation_protocol.md) for the paper links, design, and limitations.
+## Connecting an agent
 
-The prior repository version was an unrun task-harness scaffold with empty task slots. Its scaffold files have been removed from the active project so the code, description, and reported result now describe the same experiment.
+`debev run` takes `--runner`:
+
+| `--runner` | What it is |
+|---|---|
+| `noop` (default) | no agent; verifies harness plumbing only |
+| `baseline` | bundled local-only investigation probe (`agents/fixture_agents.py`): really reads evidence/repo files and really executes import checks, but attempts no repair. For verifying tool-action capture — not a model result |
+| `scripted-fix` | fixture-specific scripted repair, plumbing-only; refuses non-fixture tasks |
+| `path/to/agent.py:Class` or `module:Class` | your agent: subclass `debev.runners.AgentRunner` (or use the `debev.toolkit.Toolkit` callbacks: `read`/`write`/`exec`/`test`/`verify`, which enforce the workspace boundary and record events) |
+
+```bash
+export PYTHONPATH=src
+python3 -m debev.cli run --task-dir tasks/slot_01 --condition symptom_only \
+  --runs-root results/runs --run-id-prefix s01-sym \
+  --runner ./my_agent.py:MyAgent --config configs/default.json
+```
+
+Policy decisions belong to the agent; the toolkit only binds tools to the
+attempt. Record model name/version, temperature, seed, limits, and
+environment hash in a run config (`configs/default.json` is the template).
+Agent commands run with a scrubbed environment and bwrap confinement when
+available — the recorded `isolation` level states what was actually used.
+
+## Scoring
+
+- `debev score --run-dir results/runs/<id>` prints the stored oracle +
+  rubric outcome.
+- `debev grade --run-dir … --diagnosis-pts 14 --reporting-pts 2.0 --grader "Name" --rationale "…"`
+  persists human grades (diagnosis 0–20, reporting-accuracy 0–2.5; machine
+  parts untouched). Ungraded components render as PENDING, never as zero.
+- `debev audit-task --task-dir tasks/slot_XX` checks the oracle FAILs the
+  broken start, PASSes `evaluator/reference_solution/`, and still FAILs each
+  `evaluator/partial_fixes/` probe. Admit no task without AUDIT PASSED.
+- `debev export-otel --run-dir … --out trace.json` exports the trajectory as
+  OTLP JSON (pinned shape, `debev.*` attributes; GenAI conventions
+  deliberately not used — see `docs/trajectory_schema.md`).
+- Rubric: 100 pts = 50 functional (machine) + 20 diagnosis (**human**,
+  placeholder) + 15 compatibility (machine) + 10 constraints (machine) +
+  5 verification/reporting (mixed). See `docs/rubric.md` for partial-credit
+  rules. Efficiency is reported separately; correctness pass rate is primary.
+- Failure taxonomy: `missed_evidence`, `misread_evidence`,
+  `wrong_causal_hypothesis`, `incomplete_repair`, `regression`,
+  `constraint_violation`, `inadequate_verification`, `inaccurate_final_report`
+  — each linked to trajectory event seqs with observed-vs-interpretation
+  separation.
+
+## CLI reference
+
+| Command | Purpose |
+|---|---|
+| `debev validate <manifest>` | schema + authorship-guardrail check |
+| `debev run --task-dir … --condition … [--conditions a,b --repetitions N --seed S] [--runner …] [--replay-from f]` | run attempt(s); randomized order by default |
+| `debev replay --task-dir … --replay-file …` | replay fixture events (labeled, not a model run) |
+| `debev score --run-dir …` | print stored score |
+| `debev grade --run-dir … --diagnosis-pts … --reporting-pts … --grader …` | persist a human grade |
+| `debev audit-task --task-dir …` | oracle soundness check (broken FAIL / reference PASS / partials FAIL) |
+| `debev export-otel --run-dir … --out …` | OTLP JSON trace export |
+| `debev report --runs-root … --out …` | pilot report (Markdown + JSON sidecar) |
+
+## What the experiment claims
+
+Conditions differ in size as well as content (`combined` carries more).
+The supported claim is **"which realistic evidence packet works best"**,
+with packet token counts reported alongside every outcome — not
+evidence-type attribution. See `docs/evaluation_protocol.md`.
+
+## Limitations
+
+- Three-task pilot: no population-level conclusions, no significance claims.
+- Isolation is bwrap confinement when the host provides a working `bwrap`,
+  otherwise filesystem separation only (recorded per run; reports must state
+  the recorded level). Use a `bwrap`-capable host or container for untrusted
+  agent code.
+- Evidence-token counting is a documented whitespace approximation, not a
+  model tokenizer.
+- Machine verification credit requires structured `verification`/`test_run`
+  events; bare shell commands earn nothing, and the evaluator's oracle run
+  never counts as agent verification.
+- No paid model APIs are called anywhere; the default runner is a no-op, the
+  bundled runners are local deterministic probes, and replay data is
+  synthetic fixture data.
+- DDBench's official code/data URL could not be verified (see
+  `docs/related_work.md`); nothing was reused from it.

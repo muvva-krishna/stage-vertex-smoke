@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0.0",
+  "task_id": "fixture-plumbing",
+  "title": "PLUMBING FIXTURE — counter off-by-one (not a benchmark task)",
+  "repo_snapshot": {
+    "kind": "local-fixture",
+    "ref": "fixtures/plumbing_fixture/repo",
+    "provenance": "synthetic fixture authored with the harness; carries no performance meaning"
+  },
+  "task_instructions_ref": "fixtures/plumbing_fixture/evidence/symptom.md",
+  "allowed_tools": ["read", "write", "exec", "test"],
+  "conditions": ["symptom_only", "repro_log", "state_snapshot", "code_note", "combined"],
+  "resource_limits": {
+    "max_tool_calls": 60,
+    "max_wall_seconds": 600,
+    "max_evidence_tokens": 2000
+  },
+  "oracle": {"entry_point": "oracle.py", "type": "script-groups"},
+  "rubric_version": "1.0.0",
+  "provenance": {
+    "author": "harness",
+    "created": "2026-10-21",
+    "source": "synthetic plumbing fixture"
+  }
+}
