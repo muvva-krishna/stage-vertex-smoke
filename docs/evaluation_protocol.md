@@ -1,85 +1,27 @@
-# Evaluation protocol
+# Experiment protocol
 
-## Matched conditions
+## Question
 
-The same task, repository snapshot, agent instructions, model, tool access,
-and resource limits are used across all five conditions. **Only the evidence
-packet changes** (see `src/debev/conditions.py`):
+On a small synthetic file-localization task, does filtering debugging artifacts to the current code revision prevent stale notes from lowering localization accuracy?
 
-1. `symptom_only` — `symptom.md` only.
-2. `repro_log` — symptom + reproduction log.
-3. `state_snapshot` — symptom + state snapshot.
-4. `code_note` — symptom + code-path/investigation note.
-5. `combined` — symptom + all three evidence artifacts.
+## Cases and conditions
 
-## What the design can and cannot claim
+`experiments/staleness_probe.py` defines eight synthetic cases. Each has four candidate file summaries, a symptom, a target file, a current-revision trace pointing to the target, and a previous-revision note pointing to a distractor. Every case runs under three evidence conditions:
 
-Conditions differ in **size as well as content**: `combined` carries roughly
-the sum of the single-artifact packets. A shared maximum budget plus recorded
-actual token counts keeps the comparison honest, but it does **not** isolate
-evidence *type* from evidence *amount*. The supported claim is therefore:
+1. `clean`: the current-revision trace is available.
+2. `stale_only`: only the previous-revision note is available.
+3. `fresh_plus_stale`: both artifacts are available.
 
-> **"Which realistic evidence packet works best"** — with packet size
-> (`evidence_tokens`, per artifact and per condition) reported alongside
-> every outcome.
+Each condition is scored by three methods: issue-only lexical ranking, unfiltered evidence ranking, and revision-gated evidence ranking. Revision gating compares an artifact's revision tag to the task's current revision. The lexical scorer counts term overlap in the issue once per distinct term and in evidence once per occurrence; score ties are broken by candidate path. All inputs and ranking outcomes are saved in `results/staleness_probe.json`.
 
-Do not attribute a `combined`-vs-single difference to a specific evidence
-type. If type-level attribution is wanted later, author a length-matched
-control (e.g. symptom + a size-matched distractor note with no diagnostic
-value) and pre-register it as an explicit sixth condition — do not
-retro-fit it onto this five-condition pilot.
+## Outcomes
 
-## Evidence budget
+Top-1 accuracy is the primary outcome. Mean reciprocal rank is secondary. There are eight trials per condition/method cell (72 total). These are deterministic, paired cases, not independent samples for statistical inference. There are no confidence intervals or significance tests.
 
-- One `max_evidence_tokens` value applies to every condition of a task.
-- The condition loader records the **actual** token count per artifact and
-  per condition (`token_counts`, `evidence_tokens` in `run_meta.json`).
-- Conditions exceeding the budget fail at load time (task-authoring error).
-- Shorter conditions are **never padded**.
+## Reproduction
 
-## Run order, repetition, limits
+Run `python3 experiments/staleness_probe.py` from the repository root. The script uses only the Python standard library and overwrites the JSON results file with the current run. The cases are embedded in the script, so the JSON records the full ranked file order for every trial.
 
-- `--repetitions N` repeats every task × condition cell N times.
-- Order is randomized with `--seed S` (default seed 0); use `--no-randomize`
-  only for debugging and record the choice.
-- Resource limits (`max_tool_calls`, `max_wall_seconds`,
-  `max_evidence_tokens`) come from the manifest; model/harness/temperature/
-  seed from the run config. Every run stores its config + environment hash
-  in `run_meta.json`.
-- Agent tool access is fixed per task (`allowed_tools`); the oracle,
-  evaluator directory, and answer data are never agent-accessible.
+## Limits
 
-## Reporting rules
-
-- Correctness pass rate is the primary outcome. Efficiency (tool calls,
-  tests run, tokens where available, wall-clock, retries) is reported
-  separately and never folded into scores.
-- Report per-task outcomes, raw attempt counts, and totals. A three-task
-  evaluation is labeled a **small pilot** in every report; no
-  population-level conclusions, no significance claims from tiny samples.
-- Replayed runs are labeled `replayed: true` everywhere and described as
-  fixture/replay data — never as model results.
-- Failure labels must link to observable trajectory event seqs and keep
-  `observed` (facts) separate from `interpretation` (evaluator hypothesis).
-- Do not call paid model APIs, use existing credentials, or incur external
-  costs without explicit instruction. Do not fabricate outputs, scores,
-  confidence intervals, or results.
-- Avoid logging secrets or environment variables. Environment hashes cover
-  interpreter/platform info only.
-
-## Isolation
-
-- Each attempt gets an isolated `workspace/` copy; evaluator checks run in
-  `evaluator/` outside it. Agent commands and oracle runs execute with a
-  scrubbed environment (small allowlist, no secrets forwarded) via
-  `src/debev/sandbox.py`.
-- If `bwrap` (bubblewrap) is installed *and* passes a live usability probe,
-  subprocesses are confined so only the working directory is visible
-  read-write (interpreter libraries read-only). Otherwise the setup is
-  **filesystem separation only**, which keeps honest agents out of
-  evaluator files but does not stop a process that reaches for parent paths.
-- The actual level (`bwrap-sandbox` vs `fs-separation`) is probed per run
-  and recorded in `run_meta.json` (`oracle_isolation`,
-  `sandbox_available`). Reports must state the recorded level — never claim
-  a container boundary that was not used. For untrusted agent code, run on
-  a host with `bwrap` (or a real container) and record that in the config.
+The cases, evidence, and file summaries are synthetic. The retrieval method is a hand-written lexical baseline, not a language model or autonomous software agent. Evidence freshness is represented by an idealized revision tag, and filtering trusts that tag. The experiment measures file localization only, not code changes, test outcomes, repair quality, or real-world prevalence. Results are a reproducible demonstration and should not be generalized beyond this setup.
