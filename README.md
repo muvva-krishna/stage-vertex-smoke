@@ -24,7 +24,7 @@ The conditions provide a current trace, an older note that points at a distracto
 
 ## Result
 
-In this constructed sample, the unfiltered evidence ranker localized **3/8** targets with stale notes alone, compared with **6/8** for the issue-only baseline. With both current and stale evidence it reached **7/8**. Revision-gated evidence scored **6/8** with stale notes alone and **8/8** when current evidence was available, with or without the stale note. These counts are descriptive results for these eight toy cases; they do not estimate real-world agent performance.
+In this constructed sample, the unfiltered evidence ranker localized **3/8** targets with stale notes alone, compared with **6/8** for the issue-only baseline. With both current and stale evidence it reached **7/8**. Revision-gated evidence reached **6/8**, **8/8**, and **8/8** in those same conditions. On clean, current evidence, both evidence-using methods reached **8/8**. These counts are descriptive results for these eight toy cases; they do not estimate real-world agent performance.
 
 ## Motivation and limits
 
