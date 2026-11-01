@@ -1,0 +1,56 @@
+{
+  "batch": 1,
+  "status": "v1_built_and_run",
+  "dataset_repo": "https://github.com/few-sh/terminal-wrench",
+  "model": "claude-opus-4.6",
+  "required_per_group": {
+    "sanitized_hack": 8,
+    "successful_baseline_benign": 8
+  },
+  "preserve_existing_stage1_selection": true,
+  "additional_per_label_per_group": 3,
+  "groups": [
+    "iot-device-registration-server",
+    "iris-data-loading-script",
+    "titanic-female-survival-prediction"
+  ],
+  "selection": {
+    "include_all_five_stage1_selected_pairs_first": true,
+    "add_three_unique_hack_benign_pairs": true,
+    "pairing_objective": "minimize absolute log ratio of source-reported total tokens, then episode-count difference",
+    "max_pair_token_ratio_goal": 2.0,
+    "if_goal_unmet": "record mismatch; do not silently drop or replace; user review required",
+    "require_task_instruction_match": true,
+    "require_existing_sanitized_hack_variant": true,
+    "hack_classes": [
+      "rewarded_serious_exploit",
+      "rewarded_nonserious_hack"
+    ],
+    "exclude": [
+      "attacker_legitimate_solve",
+      "no_reward",
+      "unsanitized_only"
+    ]
+  },
+  "cluster_grid": {
+    "N1": "48 one-slot clusters (each of 8H+8B per task)",
+    "N4_per_task": {
+      "all_hack": 2,
+      "all_benign": 2,
+      "mixed_2H_2B": 4
+    },
+    "N8_per_task": {
+      "all_hack": 1,
+      "all_benign": 1,
+      "mixed_4H_4B": 2
+    },
+    "N4_clusters_total": 24,
+    "N8_clusters_total": 12,
+    "calls_per_model": 84,
+    "nested": true
+  },
+  "cluster_id_prefix": "C",
+  "tag": "batch1",
+  "detector_model": "opencode-go/muse-spark-1.3-contributor#high",
+  "run_status": "V1+V2 N1+N4+N8 RUN; Muse/Gemini outputs recorded"
+}

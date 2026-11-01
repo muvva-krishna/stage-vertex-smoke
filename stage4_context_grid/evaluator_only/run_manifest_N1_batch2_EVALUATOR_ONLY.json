@@ -1,0 +1,166 @@
+{
+ "status": "NOT RUN",
+ "size": "N1",
+ "runs": [
+  {
+   "cluster_id": "D1-0001",
+   "input_file": "detector_inputs/N1/D1-0001.json",
+   "result_file": "results/N1/D1-0001.json"
+  },
+  {
+   "cluster_id": "D1-0002",
+   "input_file": "detector_inputs/N1/D1-0002.json",
+   "result_file": "results/N1/D1-0002.json"
+  },
+  {
+   "cluster_id": "D1-0003",
+   "input_file": "detector_inputs/N1/D1-0003.json",
+   "result_file": "results/N1/D1-0003.json"
+  },
+  {
+   "cluster_id": "D1-0004",
+   "input_file": "detector_inputs/N1/D1-0004.json",
+   "result_file": "results/N1/D1-0004.json"
+  },
+  {
+   "cluster_id": "D1-0005",
+   "input_file": "detector_inputs/N1/D1-0005.json",
+   "result_file": "results/N1/D1-0005.json"
+  },
+  {
+   "cluster_id": "D1-0006",
+   "input_file": "detector_inputs/N1/D1-0006.json",
+   "result_file": "results/N1/D1-0006.json"
+  },
+  {
+   "cluster_id": "D1-0007",
+   "input_file": "detector_inputs/N1/D1-0007.json",
+   "result_file": "results/N1/D1-0007.json"
+  },
+  {
+   "cluster_id": "D1-0008",
+   "input_file": "detector_inputs/N1/D1-0008.json",
+   "result_file": "results/N1/D1-0008.json"
+  },
+  {
+   "cluster_id": "D1-0009",
+   "input_file": "detector_inputs/N1/D1-0009.json",
+   "result_file": "results/N1/D1-0009.json"
+  },
+  {
+   "cluster_id": "D1-0010",
+   "input_file": "detector_inputs/N1/D1-0010.json",
+   "result_file": "results/N1/D1-0010.json"
+  },
+  {
+   "cluster_id": "D1-0011",
+   "input_file": "detector_inputs/N1/D1-0011.json",
+   "result_file": "results/N1/D1-0011.json"
+  },
+  {
+   "cluster_id": "D1-0012",
+   "input_file": "detector_inputs/N1/D1-0012.json",
+   "result_file": "results/N1/D1-0012.json"
+  },
+  {
+   "cluster_id": "D1-0013",
+   "input_file": "detector_inputs/N1/D1-0013.json",
+   "result_file": "results/N1/D1-0013.json"
+  },
+  {
+   "cluster_id": "D1-0014",
+   "input_file": "detector_inputs/N1/D1-0014.json",
+   "result_file": "results/N1/D1-0014.json"
+  },
+  {
+   "cluster_id": "D1-0015",
+   "input_file": "detector_inputs/N1/D1-0015.json",
+   "result_file": "results/N1/D1-0015.json"
+  },
+  {
+   "cluster_id": "D1-0016",
+   "input_file": "detector_inputs/N1/D1-0016.json",
+   "result_file": "results/N1/D1-0016.json"
+  },
+  {
+   "cluster_id": "D1-0017",
+   "input_file": "detector_inputs/N1/D1-0017.json",
+   "result_file": "results/N1/D1-0017.json"
+  },
+  {
+   "cluster_id": "D1-0018",
+   "input_file": "detector_inputs/N1/D1-0018.json",
+   "result_file": "results/N1/D1-0018.json"
+  },
+  {
+   "cluster_id": "D1-0019",
+   "input_file": "detector_inputs/N1/D1-0019.json",
+   "result_file": "results/N1/D1-0019.json"
+  },
+  {
+   "cluster_id": "D1-0020",
+   "input_file": "detector_inputs/N1/D1-0020.json",
+   "result_file": "results/N1/D1-0020.json"
+  },
+  {
+   "cluster_id": "D1-0021",
+   "input_file": "detector_inputs/N1/D1-0021.json",
+   "result_file": "results/N1/D1-0021.json"
+  },
+  {
+   "cluster_id": "D1-0022",
+   "input_file": "detector_inputs/N1/D1-0022.json",
+   "result_file": "results/N1/D1-0022.json"
+  },
+  {
+   "cluster_id": "D1-0023",
+   "input_file": "detector_inputs/N1/D1-0023.json",
+   "result_file": "results/N1/D1-0023.json"
+  },
+  {
+   "cluster_id": "D1-0024",
+   "input_file": "detector_inputs/N1/D1-0024.json",
+   "result_file": "results/N1/D1-0024.json"
+  },
+  {
+   "cluster_id": "D1-0025",
+   "input_file": "detector_inputs/N1/D1-0025.json",
+   "result_file": "results/N1/D1-0025.json"
+  },
+  {
+   "cluster_id": "D1-0026",
+   "input_file": "detector_inputs/N1/D1-0026.json",
+   "result_file": "results/N1/D1-0026.json"
+  },
+  {
+   "cluster_id": "D1-0027",
+   "input_file": "detector_inputs/N1/D1-0027.json",
+   "result_file": "results/N1/D1-0027.json"
+  },
+  {
+   "cluster_id": "D1-0028",
+   "input_file": "detector_inputs/N1/D1-0028.json",
+   "result_file": "results/N1/D1-0028.json"
+  },
+  {
+   "cluster_id": "D1-0029",
+   "input_file": "detector_inputs/N1/D1-0029.json",
+   "result_file": "results/N1/D1-0029.json"
+  },
+  {
+   "cluster_id": "D1-0030",
+   "input_file": "detector_inputs/N1/D1-0030.json",
+   "result_file": "results/N1/D1-0030.json"
+  },
+  {
+   "cluster_id": "D1-0031",
+   "input_file": "detector_inputs/N1/D1-0031.json",
+   "result_file": "results/N1/D1-0031.json"
+  },
+  {
+   "cluster_id": "D1-0032",
+   "input_file": "detector_inputs/N1/D1-0032.json",
+   "result_file": "results/N1/D1-0032.json"
+  }
+ ]
+}

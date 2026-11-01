@@ -1,0 +1,763 @@
+{
+ "note": "Evaluator-side launch ledger; do not include in agent snapshots.",
+ "status": "PROMPTS RENDERED, NOT RUN",
+ "model": "opencode/deepseek-v4.1-flash-free",
+ "runs": [
+  {
+   "cluster_id": "C1-0001",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0001/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0002",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0002/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0003",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0003/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0004",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0004/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0005",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0005/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0006",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0006/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0007",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0007/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0008",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0008/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0009",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0009/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0010",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0010/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0011",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0011/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0012",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0012/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0013",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0013/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0014",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0014/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0015",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0015/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0016",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0016/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0017",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0017/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0018",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0018/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0019",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0019/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0020",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0020/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0021",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0021/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0022",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0022/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0023",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0023/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0024",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0024/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0025",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0025/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0026",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0026/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0027",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0027/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0028",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0028/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0029",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0029/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0030",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0030/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0031",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0031/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0032",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0032/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0033",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0033/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0034",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0034/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0035",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0035/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0036",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0036/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0037",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0037/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0038",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0038/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0039",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0039/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0040",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0040/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0041",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0041/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0042",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0042/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0043",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0043/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0044",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0044/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0045",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0045/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0046",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0046/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0047",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0047/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0048",
+   "n": 1,
+   "prompt_file": "agent_snapshots/C1-0048/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0001",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0001/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0002",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0002/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0003",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0003/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0004",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0004/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0005",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0005/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0006",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0006/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0007",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0007/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0008",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0008/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0009",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0009/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0010",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0010/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0011",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0011/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0012",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0012/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0013",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0013/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0014",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0014/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0015",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0015/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0016",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0016/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0017",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0017/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0018",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0018/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0019",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0019/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0020",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0020/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0021",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0021/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0022",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0022/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0023",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0023/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0024",
+   "n": 4,
+   "prompt_file": "agent_snapshots/C4-0024/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0001",
+   "n": 8,
+   "prompt_file": "agent_snapshots/C8-0001/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0002",
+   "n": 8,
+   "prompt_file": "agent_snapshots/C8-0002/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0003",
+   "n": 8,
+   "prompt_file": "agent_snapshots/C8-0003/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0004",
+   "n": 8,
+   "prompt_file": "agent_snapshots/C8-0004/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0005",
+   "n": 8,
+   "prompt_file": "agent_snapshots/C8-0005/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0006",
+   "n": 8,
+   "prompt_file": "agent_snapshots/C8-0006/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0007",
+   "n": 8,
+   "prompt_file": "agent_snapshots/C8-0007/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0008",
+   "n": 8,
+   "prompt_file": "agent_snapshots/C8-0008/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0009",
+   "n": 8,
+   "prompt_file": "agent_snapshots/C8-0009/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0010",
+   "n": 8,
+   "prompt_file": "agent_snapshots/C8-0010/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0011",
+   "n": 8,
+   "prompt_file": "agent_snapshots/C8-0011/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0012",
+   "n": 8,
+   "prompt_file": "agent_snapshots/C8-0012/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode/deepseek-v4.1-flash-free",
+   "submission": "pass complete prompt.txt inline in one fresh subagent call",
+   "tools": "deny all"
+  }
+ ]
+}

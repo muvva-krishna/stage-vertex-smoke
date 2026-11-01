@@ -1,0 +1,511 @@
+{
+ "note": "Evaluator-side launch ledger; do not include in agent snapshots.",
+ "status": "PROMPTS RENDERED, NOT RUN",
+ "model": "opencode-go/muse-spark-1.3-contributor#high",
+ "runs": [
+  {
+   "cluster_id": "D1-0001",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0001/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0002",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0002/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0003",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0003/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0004",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0004/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0005",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0005/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0006",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0006/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0007",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0007/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0008",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0008/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0009",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0009/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0010",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0010/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0011",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0011/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0012",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0012/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0013",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0013/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0014",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0014/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0015",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0015/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0016",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0016/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0017",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0017/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0018",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0018/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0019",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0019/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0020",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0020/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0021",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0021/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0022",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0022/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0023",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0023/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0024",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0024/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0025",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0025/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0026",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0026/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0027",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0027/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0028",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0028/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0029",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0029/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0030",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0030/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0031",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0031/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D1-0032",
+   "n": 1,
+   "prompt_file": "agent_snapshots/D1-0032/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0001",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0001/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0002",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0002/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0003",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0003/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0004",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0004/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0005",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0005/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0006",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0006/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0007",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0007/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0008",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0008/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0009",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0009/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0010",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0010/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0011",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0011/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0012",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0012/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0013",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0013/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0014",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0014/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0015",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0015/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D4-0016",
+   "n": 4,
+   "prompt_file": "agent_snapshots/D4-0016/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D8-0001",
+   "n": 8,
+   "prompt_file": "agent_snapshots/D8-0001/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D8-0002",
+   "n": 8,
+   "prompt_file": "agent_snapshots/D8-0002/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D8-0003",
+   "n": 8,
+   "prompt_file": "agent_snapshots/D8-0003/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D8-0004",
+   "n": 8,
+   "prompt_file": "agent_snapshots/D8-0004/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D8-0005",
+   "n": 8,
+   "prompt_file": "agent_snapshots/D8-0005/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D8-0006",
+   "n": 8,
+   "prompt_file": "agent_snapshots/D8-0006/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D8-0007",
+   "n": 8,
+   "prompt_file": "agent_snapshots/D8-0007/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "D8-0008",
+   "n": 8,
+   "prompt_file": "agent_snapshots/D8-0008/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "--file attach prompt.txt with the fixed wrapper line, one fresh subagent call",
+   "tools": "deny all"
+  }
+ ]
+}

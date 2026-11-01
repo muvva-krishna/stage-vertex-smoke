@@ -1,0 +1,126 @@
+{
+ "status": "NOT RUN",
+ "size": "N4",
+ "runs": [
+  {
+   "cluster_id": "C4-0001",
+   "input_file": "detector_inputs/N4/C4-0001.json",
+   "result_file": "results/N4/C4-0001.json"
+  },
+  {
+   "cluster_id": "C4-0002",
+   "input_file": "detector_inputs/N4/C4-0002.json",
+   "result_file": "results/N4/C4-0002.json"
+  },
+  {
+   "cluster_id": "C4-0003",
+   "input_file": "detector_inputs/N4/C4-0003.json",
+   "result_file": "results/N4/C4-0003.json"
+  },
+  {
+   "cluster_id": "C4-0004",
+   "input_file": "detector_inputs/N4/C4-0004.json",
+   "result_file": "results/N4/C4-0004.json"
+  },
+  {
+   "cluster_id": "C4-0005",
+   "input_file": "detector_inputs/N4/C4-0005.json",
+   "result_file": "results/N4/C4-0005.json"
+  },
+  {
+   "cluster_id": "C4-0006",
+   "input_file": "detector_inputs/N4/C4-0006.json",
+   "result_file": "results/N4/C4-0006.json"
+  },
+  {
+   "cluster_id": "C4-0007",
+   "input_file": "detector_inputs/N4/C4-0007.json",
+   "result_file": "results/N4/C4-0007.json"
+  },
+  {
+   "cluster_id": "C4-0008",
+   "input_file": "detector_inputs/N4/C4-0008.json",
+   "result_file": "results/N4/C4-0008.json"
+  },
+  {
+   "cluster_id": "C4-0009",
+   "input_file": "detector_inputs/N4/C4-0009.json",
+   "result_file": "results/N4/C4-0009.json"
+  },
+  {
+   "cluster_id": "C4-0010",
+   "input_file": "detector_inputs/N4/C4-0010.json",
+   "result_file": "results/N4/C4-0010.json"
+  },
+  {
+   "cluster_id": "C4-0011",
+   "input_file": "detector_inputs/N4/C4-0011.json",
+   "result_file": "results/N4/C4-0011.json"
+  },
+  {
+   "cluster_id": "C4-0012",
+   "input_file": "detector_inputs/N4/C4-0012.json",
+   "result_file": "results/N4/C4-0012.json"
+  },
+  {
+   "cluster_id": "C4-0013",
+   "input_file": "detector_inputs/N4/C4-0013.json",
+   "result_file": "results/N4/C4-0013.json"
+  },
+  {
+   "cluster_id": "C4-0014",
+   "input_file": "detector_inputs/N4/C4-0014.json",
+   "result_file": "results/N4/C4-0014.json"
+  },
+  {
+   "cluster_id": "C4-0015",
+   "input_file": "detector_inputs/N4/C4-0015.json",
+   "result_file": "results/N4/C4-0015.json"
+  },
+  {
+   "cluster_id": "C4-0016",
+   "input_file": "detector_inputs/N4/C4-0016.json",
+   "result_file": "results/N4/C4-0016.json"
+  },
+  {
+   "cluster_id": "C4-0017",
+   "input_file": "detector_inputs/N4/C4-0017.json",
+   "result_file": "results/N4/C4-0017.json"
+  },
+  {
+   "cluster_id": "C4-0018",
+   "input_file": "detector_inputs/N4/C4-0018.json",
+   "result_file": "results/N4/C4-0018.json"
+  },
+  {
+   "cluster_id": "C4-0019",
+   "input_file": "detector_inputs/N4/C4-0019.json",
+   "result_file": "results/N4/C4-0019.json"
+  },
+  {
+   "cluster_id": "C4-0020",
+   "input_file": "detector_inputs/N4/C4-0020.json",
+   "result_file": "results/N4/C4-0020.json"
+  },
+  {
+   "cluster_id": "C4-0021",
+   "input_file": "detector_inputs/N4/C4-0021.json",
+   "result_file": "results/N4/C4-0021.json"
+  },
+  {
+   "cluster_id": "C4-0022",
+   "input_file": "detector_inputs/N4/C4-0022.json",
+   "result_file": "results/N4/C4-0022.json"
+  },
+  {
+   "cluster_id": "C4-0023",
+   "input_file": "detector_inputs/N4/C4-0023.json",
+   "result_file": "results/N4/C4-0023.json"
+  },
+  {
+   "cluster_id": "C4-0024",
+   "input_file": "detector_inputs/N4/C4-0024.json",
+   "result_file": "results/N4/C4-0024.json"
+  }
+ ]
+}

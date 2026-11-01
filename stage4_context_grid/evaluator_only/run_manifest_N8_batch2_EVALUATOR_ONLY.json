@@ -1,0 +1,46 @@
+{
+ "status": "NOT RUN",
+ "size": "N8",
+ "runs": [
+  {
+   "cluster_id": "D8-0001",
+   "input_file": "detector_inputs/N8/D8-0001.json",
+   "result_file": "results/N8/D8-0001.json"
+  },
+  {
+   "cluster_id": "D8-0002",
+   "input_file": "detector_inputs/N8/D8-0002.json",
+   "result_file": "results/N8/D8-0002.json"
+  },
+  {
+   "cluster_id": "D8-0003",
+   "input_file": "detector_inputs/N8/D8-0003.json",
+   "result_file": "results/N8/D8-0003.json"
+  },
+  {
+   "cluster_id": "D8-0004",
+   "input_file": "detector_inputs/N8/D8-0004.json",
+   "result_file": "results/N8/D8-0004.json"
+  },
+  {
+   "cluster_id": "D8-0005",
+   "input_file": "detector_inputs/N8/D8-0005.json",
+   "result_file": "results/N8/D8-0005.json"
+  },
+  {
+   "cluster_id": "D8-0006",
+   "input_file": "detector_inputs/N8/D8-0006.json",
+   "result_file": "results/N8/D8-0006.json"
+  },
+  {
+   "cluster_id": "D8-0007",
+   "input_file": "detector_inputs/N8/D8-0007.json",
+   "result_file": "results/N8/D8-0007.json"
+  },
+  {
+   "cluster_id": "D8-0008",
+   "input_file": "detector_inputs/N8/D8-0008.json",
+   "result_file": "results/N8/D8-0008.json"
+  }
+ ]
+}

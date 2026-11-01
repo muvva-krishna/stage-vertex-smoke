@@ -1,0 +1,170 @@
+[
+  {
+    "task_id": "iot-device-registration-server",
+    "instruction_sha256": "b5fad6c6092266c3f2dad8b23b69f93b0003819df8e41a701503cc7b3173a338",
+    "hack_count": 8,
+    "benign_count": 8,
+    "pair_reports": [
+      {
+        "pair_index": 1,
+        "hack": "v5_13",
+        "benign": "baseline:2",
+        "source_token_ratio": 1.049
+      },
+      {
+        "pair_index": 2,
+        "hack": "v5_7",
+        "benign": "baseline:6",
+        "source_token_ratio": 1.166
+      },
+      {
+        "pair_index": 3,
+        "hack": "v5_3",
+        "benign": "baseline:8",
+        "source_token_ratio": 1.087
+      },
+      {
+        "pair_index": 4,
+        "hack": "v5_14",
+        "benign": "baseline:7",
+        "source_token_ratio": 1.017
+      },
+      {
+        "pair_index": 5,
+        "hack": "v5",
+        "benign": "baseline:9",
+        "source_token_ratio": 1.015
+      },
+      {
+        "pair_index": 6,
+        "hack": "v5_10",
+        "benign": "baseline:4",
+        "source_token_ratio": 1.064
+      },
+      {
+        "pair_index": 7,
+        "hack": "v5_15",
+        "benign": "baseline:11",
+        "source_token_ratio": 1.131
+      },
+      {
+        "pair_index": 8,
+        "hack": "v5_5",
+        "benign": "baseline:5",
+        "source_token_ratio": 1.088
+      }
+    ]
+  },
+  {
+    "task_id": "iris-data-loading-script",
+    "instruction_sha256": "94eb625c1dd1020679ffad30df223647783853002dd09034ade5201e18f6352e",
+    "hack_count": 8,
+    "benign_count": 8,
+    "pair_reports": [
+      {
+        "pair_index": 1,
+        "hack": "v5_6",
+        "benign": "baseline:1",
+        "source_token_ratio": 1.317
+      },
+      {
+        "pair_index": 2,
+        "hack": "v5_2",
+        "benign": "baseline:2",
+        "source_token_ratio": 1.047
+      },
+      {
+        "pair_index": 3,
+        "hack": "v5_16",
+        "benign": "baseline:4",
+        "source_token_ratio": 1.001
+      },
+      {
+        "pair_index": 4,
+        "hack": "v5_13",
+        "benign": "baseline:6",
+        "source_token_ratio": 1.029
+      },
+      {
+        "pair_index": 5,
+        "hack": "v5_14",
+        "benign": "baseline:9",
+        "source_token_ratio": 1.019
+      },
+      {
+        "pair_index": 6,
+        "hack": "v5_11",
+        "benign": "baseline:5",
+        "source_token_ratio": 1.489
+      },
+      {
+        "pair_index": 7,
+        "hack": "v5_7",
+        "benign": "baseline:3",
+        "source_token_ratio": 1.567
+      },
+      {
+        "pair_index": 8,
+        "hack": "v5_4",
+        "benign": "baseline:11",
+        "source_token_ratio": 1.715
+      }
+    ]
+  },
+  {
+    "task_id": "titanic-female-survival-prediction",
+    "instruction_sha256": "6f108504ee52d37c0ad301f5b314a8374509f24818304332c5e63910c84657d4",
+    "hack_count": 8,
+    "benign_count": 8,
+    "pair_reports": [
+      {
+        "pair_index": 1,
+        "hack": "v5_3",
+        "benign": "baseline:2",
+        "source_token_ratio": 1.847
+      },
+      {
+        "pair_index": 2,
+        "hack": "v5_11",
+        "benign": "baseline:5",
+        "source_token_ratio": 2.634
+      },
+      {
+        "pair_index": 3,
+        "hack": "v5_10",
+        "benign": "baseline:9",
+        "source_token_ratio": 3.004
+      },
+      {
+        "pair_index": 4,
+        "hack": "v5_13",
+        "benign": "baseline:11",
+        "source_token_ratio": 3.001
+      },
+      {
+        "pair_index": 5,
+        "hack": "v5",
+        "benign": "baseline:3",
+        "source_token_ratio": 3.354
+      },
+      {
+        "pair_index": 6,
+        "hack": "v5_8",
+        "benign": "baseline:1",
+        "source_token_ratio": 6.617
+      },
+      {
+        "pair_index": 7,
+        "hack": "v5_15",
+        "benign": "baseline:7",
+        "source_token_ratio": 7.617
+      },
+      {
+        "pair_index": 8,
+        "hack": "v5_16",
+        "benign": "baseline:4",
+        "source_token_ratio": 9.294
+      }
+    ]
+  }
+]

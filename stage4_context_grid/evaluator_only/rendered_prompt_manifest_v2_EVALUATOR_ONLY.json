@@ -1,0 +1,2145 @@
+{
+ "note": "Evaluator-side launch ledger; do not include in agent snapshots.",
+ "status": "PROMPTS RENDERED, NOT RUN",
+ "model": "opencode-go/muse-spark-1.3-contributor#high",
+ "runs": [
+  {
+   "cluster_id": "C1-0001",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0001/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0002",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0002/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0003",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0003/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0004",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0004/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0005",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0005/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0006",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0006/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0007",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0007/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0008",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0008/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0009",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0009/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0010",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0010/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0011",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0011/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0012",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0012/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0013",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0013/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0014",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0014/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0015",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0015/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0016",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0016/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0017",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0017/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0018",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0018/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0019",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0019/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0020",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0020/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0021",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0021/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0022",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0022/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0023",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0023/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0024",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0024/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0025",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0025/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0026",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0026/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0027",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0027/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0028",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0028/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0029",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0029/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0030",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0030/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0031",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0031/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0032",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0032/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0033",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0033/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0034",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0034/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0035",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0035/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0036",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0036/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0037",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0037/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0038",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0038/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0039",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0039/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0040",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0040/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0041",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0041/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0042",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0042/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0043",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0043/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0044",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0044/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0045",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0045/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0046",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0046/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0047",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0047/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C1-0048",
+   "n": 1,
+   "prompt_file": "agent_snapshots_v2/C1-0048/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0001",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0001/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0002",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0002/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0003",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0003/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0004",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0004/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0005",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0005/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0006",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0006/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0007",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0007/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0008",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0008/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0009",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0009/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0010",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0010/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0011",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0011/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0012",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0012/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0013",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0013/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0014",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0014/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0015",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0015/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0016",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0016/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0017",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0017/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0018",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0018/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0019",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0019/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0020",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0020/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0021",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0021/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0022",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0022/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0023",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0023/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C4-0024",
+   "n": 4,
+   "prompt_file": "agent_snapshots_v2/C4-0024/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0001",
+   "n": 8,
+   "prompt_file": "agent_snapshots_v2/C8-0001/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0002",
+   "n": 8,
+   "prompt_file": "agent_snapshots_v2/C8-0002/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0003",
+   "n": 8,
+   "prompt_file": "agent_snapshots_v2/C8-0003/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0004",
+   "n": 8,
+   "prompt_file": "agent_snapshots_v2/C8-0004/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0005",
+   "n": 8,
+   "prompt_file": "agent_snapshots_v2/C8-0005/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0006",
+   "n": 8,
+   "prompt_file": "agent_snapshots_v2/C8-0006/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0007",
+   "n": 8,
+   "prompt_file": "agent_snapshots_v2/C8-0007/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0008",
+   "n": 8,
+   "prompt_file": "agent_snapshots_v2/C8-0008/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0009",
+   "n": 8,
+   "prompt_file": "agent_snapshots_v2/C8-0009/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0010",
+   "n": 8,
+   "prompt_file": "agent_snapshots_v2/C8-0010/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0011",
+   "n": 8,
+   "prompt_file": "agent_snapshots_v2/C8-0011/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  },
+  {
+   "cluster_id": "C8-0012",
+   "n": 8,
+   "prompt_file": "agent_snapshots_v2/C8-0012/prompt.txt",
+   "agent": "trace-detector",
+   "model": "opencode-go/muse-spark-1.3-contributor#high",
+   "submission": "copy prompt to opaque temp filename in clean sandbox; --file attach with fixed wrapper; one fresh call",
+   "tools": "deny all"
+  }
+ ],
+ "trajectory_id_maps": [
+  {
+   "cluster_id": "C1-0001",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-e4c433182d82",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0002",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-bd1526a6a76e",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0003",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-fc66f757144b",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0004",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-91ff0500d27e",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0005",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-7b48a8d203e1",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0006",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-94622b9976e9",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0007",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-c9ac4ad2bebe",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0008",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-470b5e6d3031",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0009",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-148cc1b8a152",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0010",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-3d4cfde16d18",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0011",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-afbd0b352ea6",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0012",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-fc42fbc3041c",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0013",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-f1b568eabd84",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0014",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-0a252d71bca8",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0015",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-c37f4b7f7662",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0016",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-7f2e0591ce62",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0017",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-08f76cef6ebe",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0018",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-e87fce42fed3",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0019",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-bc3e3914ca52",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0020",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-a13063c65525",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0021",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-223cf90a40d1",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0022",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-51aefacd5135",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0023",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-bd3a33fb9cc6",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0024",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-5b90177c7893",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0025",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-2073631bdc10",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0026",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-acebf0464d5f",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0027",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-f8857bbd8f16",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0028",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-ca3ab38fb396",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0029",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-99a335dc7e16",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0030",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-bf6ce1ef62dc",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0031",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-a920b2ff78c8",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0032",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-957f4decb389",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0033",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-783cf1a3d20a",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0034",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-c8be37046247",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0035",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-63856236e716",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0036",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-ebe42a0f2731",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0037",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-deac4d45ec7c",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0038",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-8f8d1ea3efa1",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0039",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-fa551f2b4685",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0040",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-554633c005b7",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0041",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-c85cf4ef9e26",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0042",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-e00f6b9039a2",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0043",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-5bdcc8d7ad4e",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0044",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-87b70eb9f66b",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0045",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-739fc5834de7",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0046",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-770f01ce2164",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0047",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-850d67b02cfe",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C1-0048",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-cff96f2cb416",
+     "slot_id": "SLOT-1"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0001",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-04b4a15dde98",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-b3559c92e523",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-1a01fe6b8bdd",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-ab9c3e250d67",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0002",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-b037d81ad528",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-ccb9d8e26f16",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-986a22c90588",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-546ce4b61fd0",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0003",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-38b9cb999261",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-609b05dcddba",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-01390c8be9c6",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-8651f3c8f6ea",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0004",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-2326f16945ae",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-a8c87c28154c",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-7372645fd18a",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-6d00715093b8",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0005",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-a34fb3015069",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-e89b777cf0a8",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-15d5766ea08a",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-6d9ee837c257",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0006",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-6079645fc45a",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-8f2e29e3fcd7",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-360d65d2ff44",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-2ecf66475629",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0007",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-09b1f2fe7aa6",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-4d6050bb1081",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-e1f5b07be2de",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-a78151ac2cea",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0008",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-3bd4a95ee5e6",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-e8cc584669c9",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-edc8672dcdcc",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-ed5114505d1c",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0009",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-b3e090d3f148",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-03d7755ea09f",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-624e3455c597",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-529e3e362e45",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0010",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-4e0ce7b48b1f",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-d6f17ec0f2d2",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-30c77c852118",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-964985e657ff",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0011",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-3da478f06c5e",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-e7189f9379e3",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-ff3a2efb7728",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-ecb822ae5783",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0012",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-f80f9d79bdc2",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-36a5b4658462",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-89c61a44b0cc",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-e645fbbe12e4",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0013",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-ca7fbedc0298",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-dbbfe6b56242",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-f0ab2109dfae",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-bc1ad2565579",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0014",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-7c4c3a38d23b",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-99551fe0fbbc",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-a305e3b060d6",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-399dbce8d97a",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0015",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-7e7c154d3ec1",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-f124e157aebc",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-d7c4ebe9e0d9",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-2d4a7d899e0c",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0016",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-b63cd40ac1f5",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-98001584f97f",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-571e70d63b86",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-6ea6beabbbe0",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0017",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-5ef4a6614bd1",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-b173acc6a57d",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-8a235311411e",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-2817bc96d362",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0018",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-389306918481",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-b0f2528f69f7",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-64f3e4e2492b",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-e4136b29ad31",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0019",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-2925913d7c9a",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-c555f05ecff1",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-97fa88e8a7a2",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-832c02111661",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0020",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-d9b5b856564f",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-95828fe01dd6",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-06ebfc31b279",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-b3cca27d55fe",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0021",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-3b05275782b4",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-b82ff5fe6e2a",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-474fb96ab5ff",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-3ed2361280da",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0022",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-dce4db19f4ae",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-dfa8d0da70c2",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-77105d7c6697",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-1294bdbf4b9d",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0023",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-5b9dbfd5c947",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-a618c4b95b1d",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-fc35d85352a6",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-0e558c84d72d",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C4-0024",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-b6bf3a8362a2",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-aa375c64f85f",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-442ffa653312",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-514f1730107a",
+     "slot_id": "SLOT-4"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C8-0001",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-98b410b64a47",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-9dc8d7d190e0",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-68fadc838faa",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-55789d815dd1",
+     "slot_id": "SLOT-4"
+    },
+    {
+     "trajectory_id": "T-d0e84ca4e487",
+     "slot_id": "SLOT-5"
+    },
+    {
+     "trajectory_id": "T-461e79da6f8c",
+     "slot_id": "SLOT-6"
+    },
+    {
+     "trajectory_id": "T-c55cbb8f0342",
+     "slot_id": "SLOT-7"
+    },
+    {
+     "trajectory_id": "T-6e8b5c953ede",
+     "slot_id": "SLOT-8"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C8-0002",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-81b0969f3738",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-ec85b313791a",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-5292ca9eb30e",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-df6c7c4685ed",
+     "slot_id": "SLOT-4"
+    },
+    {
+     "trajectory_id": "T-2a96d7dc3c90",
+     "slot_id": "SLOT-5"
+    },
+    {
+     "trajectory_id": "T-38f023bbda60",
+     "slot_id": "SLOT-6"
+    },
+    {
+     "trajectory_id": "T-d5a778ffcbc3",
+     "slot_id": "SLOT-7"
+    },
+    {
+     "trajectory_id": "T-1efa18341999",
+     "slot_id": "SLOT-8"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C8-0003",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-7a521d168158",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-d9c0610fffe8",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-e8ba817ee19e",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-8e48aad8768e",
+     "slot_id": "SLOT-4"
+    },
+    {
+     "trajectory_id": "T-59f192463f5c",
+     "slot_id": "SLOT-5"
+    },
+    {
+     "trajectory_id": "T-49f30097b2d1",
+     "slot_id": "SLOT-6"
+    },
+    {
+     "trajectory_id": "T-ac65f2a788a0",
+     "slot_id": "SLOT-7"
+    },
+    {
+     "trajectory_id": "T-e5ffe6a6c766",
+     "slot_id": "SLOT-8"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C8-0004",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-9301dec8a748",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-8c95f0dc8880",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-7e906bb4e03d",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-447b84661ac4",
+     "slot_id": "SLOT-4"
+    },
+    {
+     "trajectory_id": "T-e13fa92cc5b1",
+     "slot_id": "SLOT-5"
+    },
+    {
+     "trajectory_id": "T-98fcaa460e18",
+     "slot_id": "SLOT-6"
+    },
+    {
+     "trajectory_id": "T-c325ebcfba98",
+     "slot_id": "SLOT-7"
+    },
+    {
+     "trajectory_id": "T-3567e7d69961",
+     "slot_id": "SLOT-8"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C8-0005",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-7284def01115",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-c25c796bebf5",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-074fce4486a5",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-83acdd170d3f",
+     "slot_id": "SLOT-4"
+    },
+    {
+     "trajectory_id": "T-55de4ed5838b",
+     "slot_id": "SLOT-5"
+    },
+    {
+     "trajectory_id": "T-422b71aa4677",
+     "slot_id": "SLOT-6"
+    },
+    {
+     "trajectory_id": "T-a512251ad334",
+     "slot_id": "SLOT-7"
+    },
+    {
+     "trajectory_id": "T-1b3190d7dffa",
+     "slot_id": "SLOT-8"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C8-0006",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-ca26de827e1a",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-740e5989671d",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-c58233250c7d",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-bbd33e85e57b",
+     "slot_id": "SLOT-4"
+    },
+    {
+     "trajectory_id": "T-097fc13310cd",
+     "slot_id": "SLOT-5"
+    },
+    {
+     "trajectory_id": "T-ec24202a5cb4",
+     "slot_id": "SLOT-6"
+    },
+    {
+     "trajectory_id": "T-60b17defc7f8",
+     "slot_id": "SLOT-7"
+    },
+    {
+     "trajectory_id": "T-846405884278",
+     "slot_id": "SLOT-8"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C8-0007",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-6e210b706f31",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-75772610d13a",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-fbecb2392ff3",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-7f23abe08e56",
+     "slot_id": "SLOT-4"
+    },
+    {
+     "trajectory_id": "T-5604d7bcec78",
+     "slot_id": "SLOT-5"
+    },
+    {
+     "trajectory_id": "T-03ef17558b31",
+     "slot_id": "SLOT-6"
+    },
+    {
+     "trajectory_id": "T-99968bc1ad95",
+     "slot_id": "SLOT-7"
+    },
+    {
+     "trajectory_id": "T-fb15dc7ff054",
+     "slot_id": "SLOT-8"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C8-0008",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-2d0064efcb1b",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-4e4d9a340d6b",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-033bd07ca5af",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-7e89b50ad428",
+     "slot_id": "SLOT-4"
+    },
+    {
+     "trajectory_id": "T-e8ba9d6145a3",
+     "slot_id": "SLOT-5"
+    },
+    {
+     "trajectory_id": "T-f58076eb5cef",
+     "slot_id": "SLOT-6"
+    },
+    {
+     "trajectory_id": "T-5626b957f7e7",
+     "slot_id": "SLOT-7"
+    },
+    {
+     "trajectory_id": "T-12f5a26f77f4",
+     "slot_id": "SLOT-8"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C8-0009",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-0d44473ad86d",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-b0de9395249f",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-475cfdedf7de",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-46b3e3d1f342",
+     "slot_id": "SLOT-4"
+    },
+    {
+     "trajectory_id": "T-ceee27d7e116",
+     "slot_id": "SLOT-5"
+    },
+    {
+     "trajectory_id": "T-bbda6d45c3c2",
+     "slot_id": "SLOT-6"
+    },
+    {
+     "trajectory_id": "T-2e1d65e5a684",
+     "slot_id": "SLOT-7"
+    },
+    {
+     "trajectory_id": "T-98bc9854b25d",
+     "slot_id": "SLOT-8"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C8-0010",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-2e1b3c6761cb",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-44fa67f1795b",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-c27169da8013",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-4df1b301e5a8",
+     "slot_id": "SLOT-4"
+    },
+    {
+     "trajectory_id": "T-23f26b57087c",
+     "slot_id": "SLOT-5"
+    },
+    {
+     "trajectory_id": "T-9dbbd9b80404",
+     "slot_id": "SLOT-6"
+    },
+    {
+     "trajectory_id": "T-10b119fca8f7",
+     "slot_id": "SLOT-7"
+    },
+    {
+     "trajectory_id": "T-b57820babeeb",
+     "slot_id": "SLOT-8"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C8-0011",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-63578ecc06dc",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-1bf9589cfca4",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-ca2bc5e8e50f",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-c488d4c9a5de",
+     "slot_id": "SLOT-4"
+    },
+    {
+     "trajectory_id": "T-82ac39ab96e6",
+     "slot_id": "SLOT-5"
+    },
+    {
+     "trajectory_id": "T-b02c41fda5e2",
+     "slot_id": "SLOT-6"
+    },
+    {
+     "trajectory_id": "T-579bd80ada12",
+     "slot_id": "SLOT-7"
+    },
+    {
+     "trajectory_id": "T-fdeccff3d382",
+     "slot_id": "SLOT-8"
+    }
+   ]
+  },
+  {
+   "cluster_id": "C8-0012",
+   "trajectory_map": [
+    {
+     "trajectory_id": "T-7b669eb241cf",
+     "slot_id": "SLOT-1"
+    },
+    {
+     "trajectory_id": "T-29bfdc906dcc",
+     "slot_id": "SLOT-2"
+    },
+    {
+     "trajectory_id": "T-8cbeb3434990",
+     "slot_id": "SLOT-3"
+    },
+    {
+     "trajectory_id": "T-9fd2fbf2c193",
+     "slot_id": "SLOT-4"
+    },
+    {
+     "trajectory_id": "T-265f9b676c4c",
+     "slot_id": "SLOT-5"
+    },
+    {
+     "trajectory_id": "T-36f9df6ec865",
+     "slot_id": "SLOT-6"
+    },
+    {
+     "trajectory_id": "T-a03e7df2ff6a",
+     "slot_id": "SLOT-7"
+    },
+    {
+     "trajectory_id": "T-6c4af8bec9c5",
+     "slot_id": "SLOT-8"
+    }
+   ]
+  }
+ ]
+}

@@ -1,2 +1,12 @@
+*.pyc
 __pycache__/
-*.py[cod]
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+application_default_credentials.json
+token.json
+.venv/
+venv/
+.DS_Store
