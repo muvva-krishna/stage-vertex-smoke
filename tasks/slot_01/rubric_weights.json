@@ -1,0 +1,8 @@
+{
+  "functional": {
+    "fresh_migration": 0.20,
+    "resume_committed_target": 0.35,
+    "resume_partial_target": 0.30,
+    "completed_idempotence": 0.15
+  }
+}

@@ -116,6 +116,13 @@ available — the recorded `isolation` level states what was actually used.
   — each linked to trajectory event seqs with observed-vs-interpretation
   separation.
 
+## Latest pilot results
+
+See [`results/RESULTS_TEMPLATE.md`](results/RESULTS_TEMPLATE.md) for the
+current Muse Spark 1.3 Contributor smoke-run summary and
+[`results/REPORT.md`](results/REPORT.md) for per-run details. This is a
+one-task, one-run-per-condition exploratory pilot, not a benchmark conclusion.
+
 ## CLI reference
 
 | Command | Purpose |
